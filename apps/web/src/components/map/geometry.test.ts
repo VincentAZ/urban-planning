@@ -4,7 +4,9 @@ import type { Place, Road } from "@urban/core";
 import { buildingGeometry } from "@urban/core";
 import { clipLineToBounds, inBounds } from "./geometry";
 import {
+  distance,
   createAgents,
+  sampleAgents,
   createVehicleBuffers,
   updateVehicleBuffers,
 } from "./motion";
@@ -120,24 +122,109 @@ describe("illustrative network animation", () => {
     expect(createAgents([road()], 0)).toEqual([]);
     expect(createAgents([road()], Number.NaN)).toEqual([]);
   });
-  it("never creates a reversed agent on a one-way road", () => {
-    const agents = createAgents([road({ oneWay: true })], 2);
+  it("respects one-way direction and avoids outlets with no legal return", () => {
+    const loop = road({ oneWay: true, coordinates: [
+      [-112.07, 33.45], [-112.069, 33.45], [-112.069, 33.451], [-112.07, 33.45],
+    ] });
+    const agents = createAgents([loop], 2);
     expect(agents.length).toBeGreaterThan(1);
-    expect(agents.every((a) => !a.reverse)).toBe(true);
+    const buffers = createVehicleBuffers(agents);
+    updateVehicleBuffers(buffers, agents, 0);
+    for (let seconds = 1; seconds <= 120; seconds++) {
+      updateVehicleBuffers(buffers, agents, seconds);
+      expect(agents.every((agent) => !agent.edge.reverse)).toBe(true);
+    }
+    expect(createAgents([road({ oneWay: true })], 1)).toEqual([]);
+  });
+  it("stays on the road centerline and turns around at dead ends without teleporting", () => {
+    const agents = createAgents([road({ coordinates: [
+      [-112.07, 33.45], [-112.068, 33.45],
+    ] })], 1);
+    const agent = agents[0];
+    agent.offset = agent.edge.length - 1;
+    const buffers = createVehicleBuffers(agents);
+    updateVehicleBuffers(buffers, agents, 0);
+    expect(buffers.angles[0]).toBeCloseTo(-90);
+    expect(buffers.positions[1]).toBe(33.45);
+    const before = buffers.positions[0];
+    updateVehicleBuffers(buffers, agents, 0.2);
+    expect(agent.edge.reverse).toBe(true);
+    expect(buffers.angles[0]).toBeCloseTo(90);
+    expect(buffers.positions[1]).toBe(33.45);
+    expect(Math.abs(buffers.positions[0] - before)).toBeLessThan(0.00002);
+  });
+  it("roams connected streets through interior junctions without losing cars or jumping", () => {
+    const west: [number, number] = [-112.071, 33.45];
+    const junction: [number, number] = [-112.07, 33.45];
+    const east: [number, number] = [-112.069, 33.45];
+    const north: [number, number] = [-112.07, 33.451];
+    const streets = [
+      road({ id: "through", coordinates: [west, junction, east] }),
+      road({ id: "branch", coordinates: [junction, north] }),
+      road({ id: "closed", closed: true, coordinates: [junction, [-112.07, 33.449]] }),
+    ];
+    const agents = createAgents(streets, 2);
+    const identities = [...agents];
+    const buffers = createVehicleBuffers(agents);
+    updateVehicleBuffers(buffers, agents, 0);
+    const visited = new Set<string>();
+    for (let tick = 1; tick <= 2400; tick++) {
+      const before = [...buffers.positions];
+      updateVehicleBuffers(buffers, agents, tick / 10);
+      expect(agents.every((agent, i) => agent === identities[i])).toBe(true);
+      expect(buffers.count).toBe(identities.length);
+      for (let i = 0; i < agents.length; i++) {
+        const { edge, offset } = agents[i];
+        visited.add(edge.road.id);
+        expect(edge.road.closed).not.toBe(true);
+        expect(offset).toBeGreaterThanOrEqual(0);
+        expect(offset).toBeLessThanOrEqual(edge.length);
+        const pos: [number, number] = [buffers.positions[i * 3], buffers.positions[i * 3 + 1]];
+        expect(distance([before[i * 3], before[i * 3 + 1]], pos)).toBeLessThanOrEqual(1.11);
+        // Both streets are axis-aligned, so a car must be on one centerline.
+        expect(pos[0] === junction[0] || pos[1] === junction[1]).toBe(true);
+      }
+    }
+    expect(visited).toEqual(new Set(["through", "branch"]));
+  });
+  it("scales the sample with demand and enforces the display caps", () => {
+    const roads = [road()];
+    expect(createAgents(roads, 0.5).length).toBeLessThan(createAgents(roads, 1).length);
+    expect(createAgents(roads, 2).length).toBeGreaterThan(createAgents(roads, 1).length);
+    expect(createAgents(roads, 100).length).toBe(createAgents(roads, 3).length);
+    const network = Array.from({ length: 100 }, (_, i) => road({ id: String(i) }));
+    expect(createAgents(network, 0.5)).toHaveLength(109);
+    expect(createAgents(network, 1)).toHaveLength(217);
+    expect(createAgents(network, 2)).toHaveLength(434);
+    expect(createAgents(network, 3)).toHaveLength(650);
+    const sampledRoads = createAgents(network, 1).map((agent) => Number(agent.edge.road.id));
+    expect(Math.min(...sampledRoads)).toBe(0);
+    expect(Math.max(...sampledRoads)).toBe(99);
+    const pool = createAgents(network, 3);
+    const current = sampleAgents(pool, 1);
+    const buffers = createVehicleBuffers(current);
+    updateVehicleBuffers(buffers, current, 0);
+    updateVehicleBuffers(buffers, current, 5);
+    const position = current[0].offset;
+    const increased = sampleAgents(pool, 2);
+    expect(increased.slice(0, current.length)).toEqual(current);
+    expect(increased[0]).toBe(current[0]);
+    expect(increased[0].offset).toBe(position);
   });
   it("keeps typed geometry buffers stable between ticks and follows the actual road", () => {
     const agents = createAgents([road()], 1),
       buffers = createVehicleBuffers(agents);
     const positions = buffers.positions,
-      colors = buffers.colors;
+      angles = buffers.angles;
     updateVehicleBuffers(buffers, agents, 0);
     const before = [...positions];
     updateVehicleBuffers(buffers, agents, 3);
     expect(buffers.positions).toBe(positions);
-    expect(buffers.colors).toBe(colors);
+    expect(buffers.angles).toBe(angles);
     expect([...positions]).not.toEqual(before);
     expect([...positions].every(Number.isFinite)).toBe(true);
-    expect(buffers.startIndices[buffers.count]).toBe(buffers.count * 2);
+    expect(buffers.positions.length).toBe(buffers.count * 3);
+    expect([...angles].every(Number.isFinite)).toBe(true);
     for (let i = 0; i < positions.length; i += 3) {
       expect(positions[i]).toBeGreaterThan(-112.0701);
       expect(positions[i]).toBeLessThan(-112.0679);

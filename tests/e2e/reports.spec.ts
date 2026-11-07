@@ -214,10 +214,9 @@ test("reveal uses one camera with distinct geometry, keyboard control and honest
     });
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.getByRole("button", { name: "Satellite", exact: true }).click();
-    if (!process.env.VITE_MAPTILER_KEY)
-      await expect(
-        page.getByText("Aerial imagery is not configured.", { exact: false }),
-      ).toBeVisible();
+    await expect(page.locator(".city-map-attribution")).toContainText(
+      /Esri|MapTiler/,
+    );
     await page.getByRole("button", { name: "3D city", exact: true }).click();
     expect(await original?.evaluate((node) => node.isConnected)).toBe(true);
     await expect(canvas).toHaveCount(1);

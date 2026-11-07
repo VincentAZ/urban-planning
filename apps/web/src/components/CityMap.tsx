@@ -1,3 +1,4 @@
+import { carIconAtlas, carIconMapping } from "./map/car-icons";
 import { FloodLegend } from "./flood/FloodEvidence";
 import {
   floodMapParts,
@@ -13,7 +14,7 @@ import {
   type MutableRefObject,
 } from "react";
 import * as maplibregl from "maplibre-gl";
-import type { StyleSpecification } from "maplibre-gl";
+import { mapStyle, satelliteImagery } from "./map/basemap";
 import { MapLibreOverlay } from "@deck.gl/maplibre";
 import {
   AmbientLight,
@@ -21,7 +22,7 @@ import {
   LightingEffect,
   type Layer,
 } from "@deck.gl/core";
-import { PathLayer, PolygonLayer, TextLayer } from "@deck.gl/layers";
+import { IconLayer, PathLayer, PolygonLayer, TextLayer } from "@deck.gl/layers";
 import { Compass, Minus, Plus, RotateCcw, TriangleAlert } from "lucide-react";
 import {
   studyAreaPolygons,
@@ -49,6 +50,7 @@ maplibregl.setWorkerUrl(maplibreWorkerUrl);
 import "./map/city-map.css";
 import {
   createAgents,
+  sampleAgents,
   createVehicleBuffers,
   updateVehicleBuffers,
   footways,
@@ -222,46 +224,9 @@ function getStreetLabels(roads: Road[]): StreetLabel[] {
     };
   });
 }
-function styleFor(
-  view: CityMapProps["view"],
-  night: boolean,
-): StyleSpecification {
-  const key = import.meta.env.VITE_MAPTILER_KEY as string | undefined;
-  return {
-    version: 8,
-    sources:
-      view === "satellite" && key
-        ? {
-            satellite: {
-              type: "raster",
-              tiles: [
-                `https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=${encodeURIComponent(key)}`,
-              ],
-              tileSize: 256,
-              attribution: "© MapTiler © imagery providers",
-              maxzoom: 20,
-            },
-          }
-        : {},
-    layers: [
-      {
-        id: "background",
-        type: "background",
-        paint: { "background-color": night ? "#394a4a" : "#e9e7dc" },
-      },
-      ...(view === "satellite" && key
-        ? [
-            {
-              id: "satellite",
-              type: "raster" as const,
-              source: "satellite",
-              paint: { "raster-opacity": 0.85 },
-            },
-          ]
-        : []),
-    ],
-  };
-}
+const imagery = satelliteImagery(import.meta.env.VITE_MAPTILER_KEY);
+const styleFor = (view: CityMapProps["view"], night: boolean) =>
+  mapStyle(view, night, import.meta.env.VITE_MAPTILER_KEY);
 /** Real source geometry, scenario edits, and explicitly illustrative sampled activity. */
 export function CityMap(props: CityMapProps) {
   const {
@@ -359,9 +324,12 @@ export function CityMap(props: CityMapProps) {
     () => materializeBuildings(place, scenario),
     [place, scenario],
   );
+  // Commands clone the scenario, including road edits. Key the network by
+  // road content so changing density or unrelated assumptions keeps cars alive.
+  const roadEditsKey = JSON.stringify(scenario.roadEdits);
   const roads = useMemo(
     () => materializeRoads(place, scenario),
-    [place, scenario],
+    [place, roadEditsKey],
   );
   const parcels = useMemo(
     () => materializeParcels(place, scenario),
@@ -425,23 +393,18 @@ export function CityMap(props: CityMapProps) {
     [beforeRoads],
   );
   const showAgents = layers.includes("agents");
+  const agentPool = useMemo(() => createAgents(roads, 3), [roads]);
   const agents = useMemo(
-    () =>
-      showAgents
-        ? createAgents(roads, scenario.assumptions.vehicleMultiplier)
-        : [],
-    [roads, scenario.assumptions.vehicleMultiplier, showAgents],
+    () => showAgents ? sampleAgents(agentPool, scenario.assumptions.vehicleMultiplier) : [],
+    [agentPool, scenario.assumptions.vehicleMultiplier, showAgents],
   );
   const vehicleBuffers = useMemo(() => createVehicleBuffers(agents), [agents]);
+  const beforeAgentPool = useMemo(() => createAgents(beforeRoads, 3), [beforeRoads]);
   const beforeAgents = useMemo(
-    () =>
-      showAgents && props.revealScenario
-        ? createAgents(
-            beforeRoads,
-            props.revealScenario.assumptions.vehicleMultiplier,
-          )
-        : [],
-    [beforeRoads, showAgents, props.revealScenario],
+    () => showAgents && props.revealScenario
+      ? sampleAgents(beforeAgentPool, props.revealScenario.assumptions.vehicleMultiplier)
+      : [],
+    [beforeAgentPool, showAgents, props.revealScenario],
   );
   const beforeVehicleBuffers = useMemo(
     () => createVehicleBuffers(beforeAgents),
@@ -1008,25 +971,23 @@ export function CityMap(props: CityMapProps) {
       ): Layer[] =>
         buffers && buffers.count && propsRef.current.layers.includes("agents")
           ? [
-              new PathLayer({
+              new IconLayer({
                 id,
                 data: {
                   length: buffers.count,
-                  startIndices: buffers.startIndices,
                   attributes: {
-                    getPath: { value: buffers.positions, size: 3 },
-                    getColor: {
-                      value: buffers.colors,
-                      size: 4,
-                      normalized: true,
-                    },
+                    getPosition: { value: buffers.positions, size: 3 },
+                    getAngle: { value: buffers.angles, size: 1 },
                   },
                 },
-                _pathType: "open",
-                getWidth: 1.8,
-                widthMinPixels: 1.3,
-                capRounded: true,
-                jointRounded: true,
+                iconAtlas: carIconAtlas,
+                iconMapping: carIconMapping,
+                getIcon: (_, { index }) => buffers.icons[index],
+                getSize: 4.8,
+                sizeUnits: "meters",
+                sizeMinPixels: 0,
+                sizeMaxPixels: 48,
+                billboard: false,
                 pickable: false,
                 parameters: { depthWriteEnabled: false },
               }),
@@ -1175,7 +1136,7 @@ export function CityMap(props: CityMapProps) {
         data: studyAreaPolygons(place),
         getPolygon: (d) => d,
         getFillColor:
-          view === "satellite" && import.meta.env.VITE_MAPTILER_KEY
+          view === "satellite"
             ? [230, 229, 210, 0]
             : night
               ? [59, 77, 70, 255]
@@ -1725,9 +1686,8 @@ export function CityMap(props: CityMapProps) {
             : undefined,
         extentLabel: current.place.extentLabel,
         censusBoundaryVintage: current.place.geography?.boundaryVintage,
-        satellite:
-          current.view === "satellite" &&
-          Boolean(import.meta.env.VITE_MAPTILER_KEY),
+        satellite: current.view === "satellite",
+        imageryAttribution: imagery.attribution,
       });
     };
     return () => {
@@ -1973,15 +1933,6 @@ export function CityMap(props: CityMapProps) {
           </button>
         </div>
       )}
-      {view === "satellite" && !import.meta.env.VITE_MAPTILER_KEY && (
-        <div className="city-map-notice" role="status">
-          <TriangleAlert size={15} />
-          <span>
-            Aerial imagery is not configured. Real mapped geometry remains
-            visible.
-          </span>
-        </div>
-      )}
       <div
         className="city-map-navigation"
         role="group"
@@ -2093,6 +2044,11 @@ export function CityMap(props: CityMapProps) {
         >
           © OpenStreetMap
         </a>
+        {view === "satellite" && (
+          <a href={imagery.creditsUrl} target="_blank" rel="noreferrer">
+            {imagery.attribution}
+          </a>
+        )}
         <details className="city-map-credits">
           <summary>Map credits</summary>
           <div
@@ -2129,15 +2085,15 @@ export function CityMap(props: CityMapProps) {
                 · {place.geography.boundaryVintage} ZCTA · Public data
               </p>
             )}
-            {view === "satellite" && import.meta.env.VITE_MAPTILER_KEY && (
+            {view === "satellite" && (
               <p>
                 Imagery:{" "}
                 <a
-                  href="https://www.maptiler.com/copyright/"
+                  href={imagery.creditsUrl}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  © MapTiler & imagery providers
+                  {imagery.attribution}
                 </a>
                 . Provider terms apply to redistribution.
               </p>

@@ -475,9 +475,13 @@ export function AssumptionsEditor({
               "%",
             )}
             <p className="notice">
-              This coefficient scales estimated trip ends and illustrative map
-              agents. Household vehicle counts have separate references and
-              targets in People.
+              Change this percentage to show fewer or more moving cars: 50% is
+              lighter traffic, 100% is the default, 200% is heavier, and 0%
+              hides the cars. Save assumptions to apply. The map samples up to
+              12 cars per road and 650 overall, with no further increase above
+              300%. This also scales estimated trip ends; it does not change
+              demand in Traffic simulation runs. Household vehicle counts have
+              separate references and targets in People.
             </p>
             {field("averageTripMiles", "Average trip distance", 1, "mi", 0.1)}
             {field("parkingPerUnit", "Parking per home", 1, undefined, 0.1)}

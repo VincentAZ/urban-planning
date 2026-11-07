@@ -77,7 +77,7 @@ it("credits the captured Census boundary alongside OSM geometry for exact ZCTA e
   );
 });
 
-it("includes imagery provider credit and the terms caveat when an imagery layer is configured", () => {
+it.each([undefined, "Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community"])("includes the active imagery provider credit (%s) and terms caveat", (imageryAttribution) => {
   const context = {
     drawImage: vi.fn(),
     fillRect: vi.fn(),
@@ -95,11 +95,12 @@ it("includes imagery provider credit and the terms caveat when an imagery layer 
       revision: 1,
       extentLabel: "Reference area",
       satellite: true,
+      imageryAttribution,
     },
     () => output,
   );
   const text = context.fillText.mock.calls.map((call) => call[0]).join(" ");
-  expect(text).toContain("© MapTiler / imagery providers");
+  expect(text).toContain(imageryAttribution ?? "© MapTiler / imagery providers");
   expect(text).toContain("Redistribution is subject to");
 });
 

@@ -177,11 +177,17 @@ test("guest explores real geometry, inspects evidence, switches views and layers
     page.getByRole("checkbox", { name: "Buildings", exact: true }),
   ).not.toBeChecked();
   await page.getByRole("checkbox", { name: "Buildings", exact: true }).check();
+  const imageryTile = page.waitForResponse((response) =>
+    /World_Imagery\/MapServer\/tile\/|api\.maptiler\.com\/tiles\/satellite/.test(response.url()) &&
+    response.ok() && response.headers()["content-type"]?.startsWith("image/"),
+  );
   await page.getByRole("button", { name: "Satellite", exact: true }).click();
-  if (!process.env.VITE_MAPTILER_KEY)
-    await expect(
-      page.getByText("Aerial imagery is not configured.", { exact: false }),
-    ).toBeVisible();
+  await imageryTile;
+  await expect(page.locator(".city-map-error")).toHaveCount(0);
+  await page.screenshot({ path: testInfo.outputPath("satellite-view.png") });
+  await expect(page.locator(".city-map-attribution")).toContainText(
+    /Esri|MapTiler/,
+  );
   expect(errors).toEqual([]);
 });
 

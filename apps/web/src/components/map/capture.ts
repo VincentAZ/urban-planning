@@ -4,6 +4,7 @@ export interface MapCaptureMetadata {
   extentLabel: string;
   censusBoundaryVintage?: "2020";
   satellite: boolean;
+  imageryAttribution?: string;
   flood?: { hash: string; capturedAt: string; imported?: boolean };
   reveal?: { scenarioName: string; revision: number; percent: number };
 }
@@ -80,7 +81,7 @@ export function captureMapImage(
   }
   if (metadata.satellite)
     add(
-      "Imagery: © MapTiler / imagery providers. Redistribution is subject to the imagery provider’s terms.",
+      `Imagery: ${metadata.imageryAttribution ?? "© MapTiler / imagery providers"}. Redistribution is subject to the imagery provider’s terms.`,
       11,
     );
   const footerHeight = Math.ceil(
