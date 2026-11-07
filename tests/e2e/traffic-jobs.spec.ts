@@ -652,6 +652,14 @@ test("reviewed streets, signal timing and an incomplete count-check plan persist
     await isolated.restart();
     await isolated.connect(page);
     await page.goto("/");
+    // The saved capture drives the map with the executed SUMO vehicles.
+    await expect(page.locator(".city-map-activity")).toContainText(
+      /\d+ SUMO-simulated vehicles · 7:00–8:00/,
+      { timeout: 30000 },
+    );
+    await page.screenshot({
+      path: join(isolated.evidenceDirectory, "desktop-sumo-vehicles.png"),
+    });
     await page
       .getByRole("button", { name: "Mobility", exact: true })
       .first()
