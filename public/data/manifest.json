@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "datasets": [
+    {
+      "id": "phoenix-roosevelt",
+      "file": "/data/phoenix.json",
+      "sourceFile": "/data/phoenix-source.json",
+      "sha256": "ed56e0d05ce3168f13b5be12fe3109bbc4f840566b7284b2c4ef66082f44c902",
+      "sourceSha256": "128c96ac20a155520026a79d285cae6f321e3fa1c1f4f3e8249c2d7ca0fdd70e",
+      "vintage": "2026-11-05",
+      "preparedAt": "2026-11-05T18:53:05.286Z",
+      "retrievedAt": "2026-11-05T18:45:43.128Z",
+      "bounds": [
+        -112.081,
+        33.446,
+        -112.059,
+        33.465
+      ],
+      "extentLabel": "Roosevelt Row & downtown reference area · near 85004",
+      "attribution": "© OpenStreetMap contributors",
+      "license": "ODbL 1.0",
+      "snapshotFile": "/data/snapshots/55654735f5f3fb022694db8f4e2cca3bde31e0404fb8a91cb812eb22a797fd45.json",
+      "baselineIdentity": {
+        "version": 1,
+        "placeId": "phoenix-roosevelt",
+        "sha256": "55654735f5f3fb022694db8f4e2cca3bde31e0404fb8a91cb812eb22a797fd45"
+      }
+    }
+  ]
+}

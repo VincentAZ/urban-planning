@@ -1,0 +1,342 @@
+.parcel-browser h2,
+.parcel-inspector h2,
+.parcel-draft-editor h2 {
+  font-size: 22px;
+  line-height: 1.25;
+  letter-spacing: -0.7px;
+  margin: 12px 0;
+}
+.parcel-help {
+  color: #576e60;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 12px 0;
+}
+.parcel-actions {
+  display: grid;
+  gap: 7px;
+  margin: 14px 0;
+}
+.parcel-actions .button {
+  font-size: 12px;
+}
+.parcel-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #d5dece;
+  border-radius: 7px;
+  padding: 9px;
+  margin: 16px 0 10px;
+  color: #69806c;
+}
+.parcel-search input {
+  min-width: 0;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: none;
+  font: inherit;
+  font-size: 12px;
+}
+.parcel-search:focus-within {
+  outline: 2px solid #317a62;
+  outline-offset: 2px;
+}
+.parcel-list {
+  display: grid;
+  gap: 5px;
+}
+.parcel-list > button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 11px 9px;
+  background: #fcfcf7;
+  border: 1px solid #e1e6d9;
+  border-radius: 8px;
+  color: #315746;
+  text-align: left;
+  cursor: pointer;
+}
+.parcel-list > button:hover,
+.parcel-list > button[aria-pressed="true"] {
+  background: #e9f0e3;
+  border-color: #8cac8e;
+}
+.parcel-list > button > span:first-of-type {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.parcel-list strong {
+  display: block;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.parcel-list small {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #60745e;
+}
+.parcel-choice {
+  font-size: 10px;
+  white-space: nowrap;
+}
+.parcel-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 18px 0;
+}
+.parcel-stat-grid > div {
+  padding: 12px 10px;
+  border: 1px solid #dce5d3;
+  background: #f6f8ef;
+  border-radius: 9px;
+  overflow-wrap: anywhere;
+}
+.parcel-stat-grid span {
+  display: block;
+  font-size: 10px;
+  color: #63785e;
+  margin-bottom: 8px;
+}
+.parcel-stat-grid strong {
+  font-size: 19px;
+  font-weight: 650;
+  color: #315b42;
+}
+.parcel-stat-grid small {
+  font-size: 11px;
+  font-weight: 450;
+}
+.parcel-context,
+.parcel-coordinates {
+  border-top: 1px solid var(--line);
+  margin: 14px 0;
+  padding-top: 12px;
+}
+.parcel-context summary,
+.parcel-coordinates summary {
+  cursor: pointer;
+  color: #225c4e;
+  font-size: 12px;
+  font-weight: 650;
+}
+.parcel-context p,
+.parcel-coordinates p,
+.parcel-source p {
+  color: #5f7366;
+  font-size: 11px;
+  line-height: 1.65;
+  margin: 10px 0;
+}
+.parcel-context table {
+  width: 100%;
+  font-size: 10px;
+  border-collapse: collapse;
+}
+.parcel-context th,
+.parcel-context td {
+  border-bottom: 1px solid #e0e6d9;
+  text-align: left;
+  padding: 7px 4px;
+}
+.parcel-caveats {
+  padding: 10px;
+  border: 1px solid #e2dac5;
+  border-radius: 7px;
+  background: #faf5e8;
+}
+.parcel-caveats p {
+  font-size: 11px;
+  color: #6a5a35;
+  line-height: 1.55;
+  margin: 0 0 7px;
+}
+.parcel-caveats p:last-child {
+  margin-bottom: 0;
+}
+.parcel-source {
+  border-top: 1px solid var(--line);
+  margin-top: 18px;
+  padding-top: 14px;
+}
+.parcel-source strong {
+  display: block;
+  font-size: 12px;
+  margin-top: 8px;
+}
+.parcel-source small {
+  overflow-wrap: anywhere;
+  font-size: 11px;
+}
+.parcel-remove {
+  border: 1px solid #e7cdb9;
+  background: #fff4e8;
+  border-radius: 8px;
+  padding: 11px;
+}
+.parcel-remove p {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.parcel-remove .button {
+  margin: 5px 4px 0 0;
+  font-size: 11px;
+}
+.parcel-ring-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 10px 0 15px;
+}
+.parcel-ring-actions .button,
+.parcel-ring-actions .text-button {
+  font-size: 11px;
+  padding: 6px 8px;
+}
+.parcel-draw-modes {
+  display: flex;
+  border: 1px solid #cbd9c3;
+  border-radius: 7px;
+  padding: 3px;
+  gap: 3px;
+  margin: 12px 0;
+}
+.parcel-draw-modes button {
+  flex: 1;
+  border: 0;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 9px 4px;
+  background: transparent;
+  color: #275d4d;
+  cursor: pointer;
+  font-size: 11px;
+}
+.parcel-draw-modes button[aria-pressed="true"] {
+  background: #e2eddd;
+  font-weight: 650;
+}
+.parcel-draft-summary {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #43644f;
+}
+.parcel-draft-summary span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.parcel-draft-summary span:last-child {
+  background: #f9edd5;
+  color: #7b5320;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 10px;
+}
+.parcel-vertices {
+  list-style: none;
+  margin: 10px 0;
+  padding: 0;
+  max-height: 190px;
+  overflow: auto;
+  border: 1px solid #dce4d5;
+  border-radius: 7px;
+}
+.parcel-vertices li {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e4e9df;
+}
+.parcel-vertices li:last-child {
+  border-bottom: 0;
+}
+.parcel-vertices li > button:first-child {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  color: #345f4e;
+  font-size: 11px;
+  cursor: pointer;
+}
+.parcel-vertices li > button[aria-pressed="true"] {
+  background: #e7efe1;
+}
+.parcel-vertices li > button:first-child > span {
+  background: #2b6b55;
+  color: #fffef4;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.parcel-vertices small {
+  display: block;
+  font-size: 10px;
+  color: #627664;
+  margin-top: 3px;
+}
+.parcel-vertices .icon-button {
+  margin-right: 5px;
+}
+.parcel-coordinates textarea {
+  width: 100%;
+  resize: vertical;
+  border: 1px solid #c2d0ba;
+  border-radius: 7px;
+  background: #fff;
+  padding: 9px;
+  color: #345044;
+  font: 11px/1.7 monospace;
+}
+.parcel-validation {
+  color: #8b432b;
+  background: #fff2e6;
+  border-radius: 7px;
+  padding: 10px;
+  font-size: 12px;
+  line-height: 1.55;
+  margin: 12px 0;
+}
+.parcel-preview {
+  display: grid;
+  gap: 7px;
+  background: #edf4e5;
+  border: 1px solid #cfdfc2;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+.parcel-preview strong {
+  color: #285b40;
+  font-size: 13px;
+}
+.parcel-preview span {
+  color: #5a7158;
+  font-size: 11px;
+  line-height: 1.5;
+}
+@media (max-width: 760px) {
+  .parcel-vertices {
+    max-height: 140px;
+  }
+}

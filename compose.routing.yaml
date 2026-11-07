@@ -1,0 +1,32 @@
+name: urban-planning-routing
+services:
+  routing:
+    image: ghcr.io/valhalla/valhalla@sha256:18cb42988e03c70dc4bc4ca095a259ec4db5e5df928be65956fc1c64c280b47a
+    platform: linux/amd64
+    container_name: urban-planning-routing
+    labels:
+      urban-planning.routing: runtime
+    command: ["valhalla_service", "/data/valhalla.json", "1"]
+    ports:
+      - "127.0.0.1:8002:8002"
+    volumes:
+      - ./.local/routing/active:/data:ro
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    cpus: 2
+    mem_limit: 2g
+    memswap_limit: 2g
+    pids_limit: 128
+    restart: "no"
+    networks: [routing]
+    logging:
+      options:
+        max-size: "5m"
+        max-file: "2"
+networks:
+  routing:
+    labels:
+      urban-planning.routing: runtime

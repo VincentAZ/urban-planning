@@ -1,0 +1,143 @@
+.media-workbench {
+  display: grid;
+  gap: 18px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #42574b;
+}
+.media-workbench p {
+  margin: 0;
+}
+.media-workbench label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  min-width: 0;
+}
+.media-workbench input,
+.media-workbench select,
+.media-workbench textarea {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fffef8;
+  color: #203b30;
+  font: inherit;
+}
+.media-workbench textarea {
+  min-height: 82px;
+  resize: vertical;
+}
+.media-toolbar,
+.media-actions {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.media-toolbar > label {
+  flex: 1;
+  min-width: 220px;
+}
+.media-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.media-settings {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  min-width: 0;
+}
+.media-settings legend {
+  padding: 0 8px;
+  color: #244e3b;
+  font-weight: 700;
+}
+.media-stops {
+  display: grid;
+  gap: 16px;
+  padding: 0;
+  list-style: none;
+}
+.media-stops > li {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+.media-stops strong {
+  display: block;
+  margin-bottom: 10px;
+}
+.media-layers {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.media-layers label {
+  flex-direction: row;
+  align-items: center;
+}
+.media-layers input {
+  width: 18px;
+  height: 18px;
+}
+.media-binding {
+  background: #edf3e9;
+  border-radius: 8px;
+  padding: 12px;
+  overflow-wrap: anywhere;
+}
+.media-job {
+  border: 1px solid #b4c9b4;
+  border-radius: 12px;
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+.media-job h3 {
+  margin: 0;
+}
+.media-job progress {
+  width: 100%;
+}
+.media-workbench details summary {
+  cursor: pointer;
+  font-weight: 650;
+}
+.media-workbench details li {
+  overflow-wrap: anywhere;
+  margin: 8px 0;
+}
+.media-preview {
+  display: grid;
+  gap: 8px;
+}
+.media-preview-frame {
+  position: relative;
+  overflow: hidden;
+  background: #e7e7d9;
+  width: 100%;
+}
+@media (max-width: 650px) {
+  .media-fields {
+    grid-template-columns: 1fr;
+  }
+  .media-settings,
+  .media-job {
+    padding: 12px;
+  }
+  .media-toolbar {
+    align-items: stretch;
+  }
+  .media-actions > .button {
+    flex: 1;
+    min-width: 160px;
+  }
+}

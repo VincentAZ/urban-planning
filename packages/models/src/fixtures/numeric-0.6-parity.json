@@ -1,0 +1,5354 @@
+[
+  {
+    "id": "parity-0-false",
+    "metrics": [
+      {
+        "id": "housing.units",
+        "baseline": 108,
+        "value": 151,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.occupiedUnits",
+        "baseline": 99.36,
+        "value": 138.92000000000002,
+        "delta": 39.56000000000002,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residents",
+        "baseline": 238.464,
+        "value": 390.08736,
+        "delta": 151.62336,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.density",
+        "baseline": 0.039276060218319746,
+        "value": 0.05491375086079891,
+        "delta": 0.015637690642479163,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residential",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.multifamily",
+        "baseline": 48,
+        "value": 91,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.mixed-use",
+        "baseline": 60,
+        "value": 60,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.jobsHousingBalance",
+        "baseline": 2.999194847020934,
+        "value": 2.1451194932335156,
+        "delta": -0.8540753537874184,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.incomeRequired",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.jobs",
+        "baseline": 298,
+        "value": 298,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.payroll",
+        "baseline": 17880000,
+        "value": 17880000,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.indirectJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.inducedJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.output",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailCaptured",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailGap",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.businessPotential",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.dailyTrips",
+        "baseline": 1816.7874412549145,
+        "value": 2195.8458412549144,
+        "delta": 379.0583999999999,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.vmt",
+        "baseline": 9083.937206274572,
+        "value": 10979.229206274573,
+        "delta": 1895.2920000000013,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingDemand",
+        "baseline": 356.3329079435994,
+        "value": 410.0829079435994,
+        "delta": 53.75,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingSupply",
+        "baseline": 394,
+        "value": 394,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.parkingBalance",
+        "baseline": 37.66709205640058,
+        "value": -16.082907943599423,
+        "delta": -53.75,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.roadMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.laneMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.bikeMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.commuteTime",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.peakDelay",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.los",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.transitRidership",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "fiscal.propertyTax",
+        "baseline": 359134.58135560754,
+        "value": 359134.58135560754,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.salesTax",
+        "baseline": 83823.95237012913,
+        "value": 83823.95237012913,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.serviceCost",
+        "baseline": 375556.8,
+        "value": 557504.8319999999,
+        "delta": 181948.03199999995,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netAnnual",
+        "baseline": 67401.73372573667,
+        "value": -126891.29827426327,
+        "delta": -194293.03199999995,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netPerAcre",
+        "baseline": 24.511801413251728,
+        "value": -46.1462062240809,
+        "delta": -70.65800763733263,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.net20Years",
+        "baseline": 759024.8897366123,
+        "value": -3569780.9244347033,
+        "delta": -4328805.814171316,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.npv",
+        "baseline": 610957.8084935498,
+        "value": -2558160.7337190076,
+        "delta": -3169118.5422125575,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.incentivePayback",
+        "baseline": 0,
+        "value": null,
+        "delta": null,
+        "status": "incomplete"
+      },
+      {
+        "id": "fiscal.fees",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.floorArea",
+        "baseline": 243533.47317806375,
+        "value": 243533.47317806375,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.footprint",
+        "baseline": 5975,
+        "value": 5975,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpace",
+        "baseline": 0.8030924897682873,
+        "value": 0.8030924897682873,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpacePerResident",
+        "baseline": 13.628891572732153,
+        "value": 8.33146708470636,
+        "delta": -5.2974244880257935,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.far",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.lotCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.heightConflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.impervious",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walkProxy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.lowIncome",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.noCar",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.ghg",
+        "baseline": 1326.2548321160878,
+        "value": 1602.9674641160877,
+        "delta": 276.712632,
+        "status": "incomplete"
+      },
+      {
+        "id": "environment.canopy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.runoff",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.heat",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.flood",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.conflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.highInjury",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.emergencyCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      }
+    ],
+    "flows": [
+      {
+        "year": 1,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 83823.95237012913,
+        "serviceCost": 557504.8319999999,
+        "abatementCost": 0,
+        "grantCost": 12345,
+        "netRevenue": -126891.29827426327,
+        "discountedNet": -123554.99832452745
+      },
+      {
+        "year": 2,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 84913.6637509408,
+        "serviceCost": 564752.3948159999,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -120704.14970945154,
+        "discountedNet": -113775.23773159727
+      },
+      {
+        "year": 3,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 86017.54137970303,
+        "serviceCost": 572094.1759486079,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -126942.05321329727,
+        "discountedNet": -116169.96121931395
+      },
+      {
+        "year": 4,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 87135.76941763915,
+        "serviceCost": 579531.4002359397,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -133261.04946269293,
+        "discountedNet": -118400.71643925463
+      },
+      {
+        "year": 5,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 88268.53442006846,
+        "serviceCost": 587065.3084390068,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -139662.19266333082,
+        "discountedNet": -120473.83423774269
+      },
+      {
+        "year": 6,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 89416.02536752934,
+        "serviceCost": 594697.1574487138,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -146146.55072557693,
+        "discountedNet": -122395.43540128977
+      },
+      {
+        "year": 7,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 90578.4336973072,
+        "serviceCost": 602428.220495547,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -152715.20544263232,
+        "discountedNet": -124171.43719846066
+      },
+      {
+        "year": 8,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 91755.95333537219,
+        "serviceCost": 610259.7873619891,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -159369.2526710094,
+        "discountedNet": -125807.55972420565
+      },
+      {
+        "year": 9,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 92948.78072873202,
+        "serviceCost": 618193.1645976949,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -166109.80251335533,
+        "discountedNet": -127309.33205253094
+      },
+      {
+        "year": 10,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 94157.11487820552,
+        "serviceCost": 626229.6757374649,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -172937.97950365185,
+        "discountedNet": -128682.09820320188
+      },
+      {
+        "year": 11,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 95381.1573716222,
+        "serviceCost": 634370.6615220519,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -179854.92279482214,
+        "discountedNet": -129931.0229280072
+      },
+      {
+        "year": 12,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 96621.11241745329,
+        "serviceCost": 642617.4801218385,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -186861.7863487777,
+        "discountedNet": -131061.09732195058
+      },
+      {
+        "year": 13,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 97877.18687888017,
+        "serviceCost": 650971.5073634224,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -193959.73912893469,
+        "discountedNet": -132077.1442645752
+      },
+      {
+        "year": 14,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 99149.59030830559,
+        "serviceCost": 659434.1369591467,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -201149.9652952336,
+        "discountedNet": -132983.82369647617
+      },
+      {
+        "year": 15,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 100438.53498231356,
+        "serviceCost": 668006.7807396157,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -208433.66440169455,
+        "discountedNet": -133785.6377359055
+      },
+      {
+        "year": 16,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 101744.23593708362,
+        "serviceCost": 676690.8688892305,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -215812.0515965394,
+        "discountedNet": -134486.93564022874
+      },
+      {
+        "year": 17,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 103066.91100426568,
+        "serviceCost": 685487.8501847904,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -223286.35782491718,
+        "discountedNet": -135091.91861685514
+      },
+      {
+        "year": 18,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 104406.78084732113,
+        "serviceCost": 694399.1922371926,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -230857.83003426396,
+        "discountedNet": -135604.64448812287
+      },
+      {
+        "year": 19,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 105764.06899833631,
+        "serviceCost": 703426.3817362762,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -238527.73138233233,
+        "discountedNet": -136029.03221449233
+      },
+      {
+        "year": 20,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 107139.00189531466,
+        "serviceCost": 712570.9246988477,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -246297.3414479255,
+        "discountedNet": -136368.86628026929
+      }
+    ]
+  },
+  {
+    "id": "parity-0-true",
+    "metrics": [
+      {
+        "id": "housing.units",
+        "baseline": 108,
+        "value": 151,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.occupiedUnits",
+        "baseline": 99.36,
+        "value": 138.92000000000002,
+        "delta": 39.56000000000002,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residents",
+        "baseline": 238.464,
+        "value": 390.08736,
+        "delta": 151.62336,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.density",
+        "baseline": 0.039276060218319746,
+        "value": 0.05491375086079891,
+        "delta": 0.015637690642479163,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residential",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.multifamily",
+        "baseline": 48,
+        "value": 91,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.mixed-use",
+        "baseline": 60,
+        "value": 60,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.jobsHousingBalance",
+        "baseline": 2.999194847020934,
+        "value": 5.384393895767348,
+        "delta": 2.3851990487464136,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.incomeRequired",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.jobs",
+        "baseline": 298,
+        "value": 748,
+        "delta": 450,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.payroll",
+        "baseline": 17880000,
+        "value": 44880000,
+        "delta": 27000000,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.indirectJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.inducedJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.output",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailCaptured",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailGap",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.businessPotential",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.dailyTrips",
+        "baseline": 1816.7874412549145,
+        "value": 4257.880939144865,
+        "delta": 2441.0934978899504,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.vmt",
+        "baseline": 9083.937206274572,
+        "value": 21289.404695724326,
+        "delta": 12205.467489449755,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingDemand",
+        "baseline": 356.3329079435994,
+        "value": 732.2758919889043,
+        "delta": 375.94298404530485,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingSupply",
+        "baseline": 394,
+        "value": 694,
+        "delta": 300,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.parkingBalance",
+        "baseline": 37.66709205640058,
+        "value": -38.27589198890428,
+        "delta": -75.94298404530485,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.roadMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.laneMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.bikeMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.commuteTime",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.peakDelay",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.los",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.transitRidership",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "fiscal.propertyTax",
+        "baseline": 359134.58135560754,
+        "value": 616888.9685918514,
+        "delta": 257754.38723624387,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.salesTax",
+        "baseline": 83823.95237012913,
+        "value": 83823.95237012913,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.serviceCost",
+        "baseline": 375556.8,
+        "value": 692504.8319999999,
+        "delta": 316948.03199999995,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netAnnual",
+        "baseline": 67401.73372573667,
+        "value": -63420.42010235544,
+        "delta": -130822.15382809212,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netPerAcre",
+        "baseline": 24.511801413251728,
+        "value": -23.06392813899304,
+        "delta": -47.575729552244766,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.net20Years",
+        "baseline": 759024.8897366123,
+        "value": -1712785.0924847429,
+        "delta": -2471809.982221355,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.npv",
+        "baseline": 610957.8084935498,
+        "value": -1192121.7245468704,
+        "delta": -1803079.5330404202,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.incentivePayback",
+        "baseline": 0,
+        "value": null,
+        "delta": null,
+        "status": "incomplete"
+      },
+      {
+        "id": "fiscal.fees",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.floorArea",
+        "baseline": 243533.47317806375,
+        "value": 372410.66679618566,
+        "delta": 128877.1936181219,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.footprint",
+        "baseline": 5975,
+        "value": 7970.513845631969,
+        "delta": 1995.5138456319692,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpace",
+        "baseline": 0.8030924897682873,
+        "value": 0.8030924897682873,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpacePerResident",
+        "baseline": 13.628891572732153,
+        "value": 8.33146708470636,
+        "delta": -5.2974244880257935,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.far",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.lotCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.heightConflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.impervious",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walkProxy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.lowIncome",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.noCar",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.ghg",
+        "baseline": 1326.2548321160878,
+        "value": 3108.253085575752,
+        "delta": 1781.998253459664,
+        "status": "incomplete"
+      },
+      {
+        "id": "environment.canopy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.runoff",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.heat",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.flood",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.conflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.highInjury",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.emergencyCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      }
+    ],
+    "flows": [
+      {
+        "year": 1,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 83823.95237012913,
+        "serviceCost": 692504.8319999999,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 12345,
+        "netRevenue": -63420.42010235544,
+        "discountedNet": -61932.7865071412
+      },
+      {
+        "year": 2,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 84913.6637509408,
+        "serviceCost": 701507.3948159999,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -58988.27153754376,
+        "discountedNet": -55602.10343815983
+      },
+      {
+        "year": 3,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 86017.54137970303,
+        "serviceCost": 710626.9909486079,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -67003.99004138962,
+        "discountedNet": -61318.14262975988
+      },
+      {
+        "year": 4,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 87135.76941763915,
+        "serviceCost": 719865.1418309396,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -75123.91288578513,
+        "discountedNet": -66746.6235877666
+      },
+      {
+        "year": 5,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 88268.53442006846,
+        "serviceCost": 729223.3886747417,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -24065.88566282182,
+        "discountedNet": -20759.44437673501
+      },
+      {
+        "year": 6,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 89416.02536752934,
+        "serviceCost": 738703.2927275134,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -32398.298768132576,
+        "discountedNet": -27133.065161644463
+      },
+      {
+        "year": 7,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 90578.4336973072,
+        "serviceCost": 748306.4355329709,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -40839.03324381227,
+        "discountedNet": -33205.87126201278
+      },
+      {
+        "year": 8,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 91755.95333537219,
+        "serviceCost": 758034.4191948995,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -49389.497267675935,
+        "discountedNet": -38988.52522122627
+      },
+      {
+        "year": 9,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 92948.78072873202,
+        "serviceCost": 767888.8666444331,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -58051.1173238497,
+        "discountedNet": -44491.34764824138
+      },
+      {
+        "year": 10,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 94157.11487820552,
+        "serviceCost": 777871.4219108106,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -66825.33844075364,
+        "discountedNet": -49724.32769467898
+      },
+      {
+        "year": 11,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 95381.1573716222,
+        "serviceCost": 787983.7503956512,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -75713.62443217763,
+        "discountedNet": -54697.133218212985
+      },
+      {
+        "year": 12,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 96621.11241745329,
+        "serviceCost": 798227.5391507946,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -84717.45814148989,
+        "discountedNet": -59419.120641531365
+      },
+      {
+        "year": 13,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 97877.18687888017,
+        "serviceCost": 808604.4971597549,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -93838.3416890233,
+        "discountedNet": -63899.344515878074
+      },
+      {
+        "year": 14,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 99149.59030830559,
+        "serviceCost": 819116.3556228315,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -103077.79672267451,
+        "discountedNet": -68146.56679791221
+      },
+      {
+        "year": 15,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 100438.53498231356,
+        "serviceCost": 829764.8682459283,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -112437.36467176338,
+        "discountedNet": -72169.26584837292
+      },
+      {
+        "year": 16,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 101744.23593708362,
+        "serviceCost": 840551.8115331252,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -121918.60700419021,
+        "discountedNet": -75975.64516078116
+      },
+      {
+        "year": 17,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 103066.91100426568,
+        "serviceCost": 851478.9850830557,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -131523.1054869386,
+        "discountedNet": -79573.64182817447
+      },
+      {
+        "year": 18,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 104406.78084732113,
+        "serviceCost": 862548.2118891354,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -141252.46244996286,
+        "discountedNet": -82970.93475562958
+      },
+      {
+        "year": 19,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 105764.06899833631,
+        "serviceCost": 873761.3386436942,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -151108.30105350644,
+        "discountedNet": -86174.95262610434
+      },
+      {
+        "year": 20,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 107139.00189531466,
+        "serviceCost": 885120.2360460621,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -161092.265558896,
+        "discountedNet": -89192.88162690702
+      }
+    ]
+  },
+  {
+    "id": "parity-5-false",
+    "metrics": [
+      {
+        "id": "housing.units",
+        "baseline": 108,
+        "value": 151,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.occupiedUnits",
+        "baseline": 99.36,
+        "value": 138.92000000000002,
+        "delta": 39.56000000000002,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residents",
+        "baseline": 250.62806058704643,
+        "value": 416.1109121089611,
+        "delta": 165.48285152191465,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.density",
+        "baseline": 0.039276060218319746,
+        "value": 0.05491375086079891,
+        "delta": 0.015637690642479163,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residential",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.multifamily",
+        "baseline": 48,
+        "value": 91,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.mixed-use",
+        "baseline": 60,
+        "value": 60,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.jobsHousingBalance",
+        "baseline": 3.152183926427134,
+        "value": 2.2882249476427807,
+        "delta": -0.8639589787843533,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.incomeRequired",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.jobs",
+        "baseline": 313.20099492980006,
+        "value": 317.88020972653516,
+        "delta": 4.679214796735096,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.payroll",
+        "baseline": 18792059.695788004,
+        "value": 19072812.58359211,
+        "delta": 280752.8878041059,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.indirectJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.inducedJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.output",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailCaptured",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailGap",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.businessPotential",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.dailyTrips",
+        "baseline": 1909.4618596543785,
+        "value": 2342.335357534403,
+        "delta": 432.8734978800246,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.vmt",
+        "baseline": 9547.309298271892,
+        "value": 11711.676787672015,
+        "delta": 2164.3674894001233,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingDemand",
+        "baseline": 356.3329079435994,
+        "value": 410.0829079435994,
+        "delta": 53.75,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingSupply",
+        "baseline": 394,
+        "value": 394,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.parkingBalance",
+        "baseline": 37.66709205640058,
+        "value": -16.082907943599423,
+        "delta": -53.75,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.roadMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.laneMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.bikeMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.commuteTime",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.peakDelay",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.los",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.transitRidership",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "fiscal.propertyTax",
+        "baseline": 359134.58135560754,
+        "value": 359134.58135560754,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.salesTax",
+        "baseline": 88099.81638010945,
+        "value": 89416.02536752934,
+        "delta": 1316.2089874198864,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.serviceCost",
+        "baseline": 394713.9711833957,
+        "value": 594697.1574487138,
+        "delta": 199983.18626531807,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netAnnual",
+        "baseline": 52520.426552321296,
+        "value": -158491.55072557693,
+        "delta": -211011.97727789823,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netPerAcre",
+        "baseline": 19.099957740377874,
+        "value": -57.638182318450355,
+        "delta": -76.73814005882824,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.net20Years",
+        "baseline": 431353.3276373824,
+        "value": -4286277.529181314,
+        "delta": -4717630.8568186965,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.npv",
+        "baseline": 369575.29808409733,
+        "value": -3084441.3495301036,
+        "delta": -3454016.647614201,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.incentivePayback",
+        "baseline": 0,
+        "value": null,
+        "delta": null,
+        "status": "incomplete"
+      },
+      {
+        "id": "fiscal.fees",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.floorArea",
+        "baseline": 243533.47317806375,
+        "value": 243533.47317806375,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.footprint",
+        "baseline": 5975,
+        "value": 5975,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpace",
+        "baseline": 0.8030924897682873,
+        "value": 0.8030924897682873,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpacePerResident",
+        "baseline": 12.96742269156742,
+        "value": 7.8104176204563664,
+        "delta": -5.157005071111053,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.far",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.lotCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.heightConflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.impervious",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walkProxy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.lowIncome",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.noCar",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.ghg",
+        "baseline": 1393.9071575476962,
+        "value": 1709.9048110001143,
+        "delta": 315.99765345241804,
+        "status": "incomplete"
+      },
+      {
+        "id": "environment.canopy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.runoff",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.heat",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.flood",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.conflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.highInjury",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.emergencyCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      }
+    ],
+    "flows": [
+      {
+        "year": 1,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 89416.02536752934,
+        "serviceCost": 594697.1574487138,
+        "abatementCost": 0,
+        "grantCost": 12345,
+        "netRevenue": -158491.55072557693,
+        "discountedNet": -154234.85507337566
+      },
+      {
+        "year": 2,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 90578.4336973072,
+        "serviceCost": 602428.220495547,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -152715.20544263232,
+        "discountedNet": -143948.72791274608
+      },
+      {
+        "year": 3,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 91755.95333537219,
+        "serviceCost": 610259.7873619891,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -159369.2526710094,
+        "discountedNet": -145845.4423392205
+      },
+      {
+        "year": 4,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 92948.78072873202,
+        "serviceCost": 618193.1645976949,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -166109.80251335533,
+        "discountedNet": -147586.40806494915
+      },
+      {
+        "year": 5,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 94157.11487820552,
+        "serviceCost": 626229.6757374649,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -172937.97950365185,
+        "discountedNet": -149177.82027349857
+      },
+      {
+        "year": 6,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 95381.1573716222,
+        "serviceCost": 634370.6615220519,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -179854.92279482214,
+        "discountedNet": -150625.66632771766
+      },
+      {
+        "year": 7,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 96621.11241745329,
+        "serviceCost": 642617.4801218385,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -186861.7863487777,
+        "discountedNet": -151935.7322746465
+      },
+      {
+        "year": 8,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 97877.18687888017,
+        "serviceCost": 650971.5073634224,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -193959.73912893469,
+        "discountedNet": -153113.609153503
+      },
+      {
+        "year": 9,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 99149.59030830559,
+        "serviceCost": 659434.1369591467,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -201149.9652952336,
+        "discountedNet": -154164.69911260685
+      },
+      {
+        "year": 10,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 100438.53498231356,
+        "serviceCost": 668006.7807396157,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -208433.66440169455,
+        "discountedNet": -155094.22134092703
+      },
+      {
+        "year": 11,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 101744.23593708362,
+        "serviceCost": 676690.8688892305,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -215812.0515965394,
+        "discountedNet": -155907.2178197699
+      },
+      {
+        "year": 12,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 103066.91100426568,
+        "serviceCost": 685487.8501847904,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -223286.35782491718,
+        "discountedNet": -156608.55889996566
+      },
+      {
+        "year": 13,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 104406.78084732113,
+        "serviceCost": 694399.1922371926,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -230857.83003426396,
+        "discountedNet": -157202.94870974927
+      },
+      {
+        "year": 14,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 105764.06899833631,
+        "serviceCost": 703426.3817362762,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -238527.73138233233,
+        "discountedNet": -157694.9303983805
+      },
+      {
+        "year": 15,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 107139.00189531466,
+        "serviceCost": 712570.9246988477,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -246297.3414479255,
+        "discountedNet": -158088.8912203997
+      },
+      {
+        "year": 16,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 108531.80891995375,
+        "serviceCost": 721834.3467199326,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -254167.95644437132,
+        "discountedNet": -158389.0674652701
+      },
+      {
+        "year": 17,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 109942.72243591314,
+        "serviceCost": 731218.1932272917,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -262140.88943577104,
+        "discountedNet": -158599.54923701723
+      },
+      {
+        "year": 18,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 111371.97782757998,
+        "serviceCost": 740724.0297392462,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -270217.4705560587,
+        "discountedNet": -158724.28508834043
+      },
+      {
+        "year": 19,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 112819.81353933852,
+        "serviceCost": 750353.4421258564,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -278399.04723091034,
+        "discountedNet": -158767.08651354117
+      },
+      {
+        "year": 20,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 114286.47111534992,
+        "serviceCost": 760108.0368734926,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -286686.9844025352,
+        "discountedNet": -158731.63230447957
+      }
+    ]
+  },
+  {
+    "id": "parity-5-true",
+    "metrics": [
+      {
+        "id": "housing.units",
+        "baseline": 108,
+        "value": 151,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.occupiedUnits",
+        "baseline": 99.36,
+        "value": 138.92000000000002,
+        "delta": 39.56000000000002,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residents",
+        "baseline": 250.62806058704643,
+        "value": 416.1109121089611,
+        "delta": 165.48285152191465,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.density",
+        "baseline": 0.039276060218319746,
+        "value": 0.05491375086079891,
+        "delta": 0.015637690642479163,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residential",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.multifamily",
+        "baseline": 48,
+        "value": 91,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.mixed-use",
+        "baseline": 60,
+        "value": 60,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.jobsHousingBalance",
+        "baseline": 3.152183926427134,
+        "value": 5.743598190727517,
+        "delta": 2.591414264300383,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.incomeRequired",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.jobs",
+        "baseline": 313.20099492980006,
+        "value": 797.9006606558668,
+        "delta": 484.6996657260667,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.payroll",
+        "baseline": 18792059.695788004,
+        "value": 47874039.63935201,
+        "delta": 29081979.943564005,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.indirectJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.inducedJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.output",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailCaptured",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailGap",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.businessPotential",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.dailyTrips",
+        "baseline": 1909.4618596543785,
+        "value": 4541.9331742482755,
+        "delta": 2632.4713145938968,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.vmt",
+        "baseline": 9547.309298271892,
+        "value": 22709.665871241377,
+        "delta": 13162.356572969486,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingDemand",
+        "baseline": 356.3329079435994,
+        "value": 732.2758919889043,
+        "delta": 375.94298404530485,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingSupply",
+        "baseline": 394,
+        "value": 694,
+        "delta": 300,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.parkingBalance",
+        "baseline": 37.66709205640058,
+        "value": -38.27589198890428,
+        "delta": -75.94298404530485,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.roadMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.laneMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.bikeMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.commuteTime",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.peakDelay",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.los",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.transitRidership",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "fiscal.propertyTax",
+        "baseline": 359134.58135560754,
+        "value": 616888.9685918514,
+        "delta": 257754.38723624387,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.salesTax",
+        "baseline": 88099.81638010945,
+        "value": 89416.02536752934,
+        "delta": 1316.2089874198864,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.serviceCost",
+        "baseline": 394713.9711833957,
+        "value": 738703.2927275134,
+        "delta": 343989.32154411764,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netAnnual",
+        "baseline": 52520.426552321296,
+        "value": -104026.80783246868,
+        "delta": -156547.23438478998,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netPerAcre",
+        "baseline": 19.099957740377874,
+        "value": -37.831140451366814,
+        "delta": -56.93109819174469,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.net20Years",
+        "baseline": 431353.3276373824,
+        "value": -2633484.6655174578,
+        "delta": -3064837.99315484,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.npv",
+        "baseline": 369575.29808409733,
+        "value": -1868393.3705849294,
+        "delta": -2237968.668669027,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.incentivePayback",
+        "baseline": 0,
+        "value": null,
+        "delta": null,
+        "status": "incomplete"
+      },
+      {
+        "id": "fiscal.fees",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.floorArea",
+        "baseline": 243533.47317806375,
+        "value": 372410.66679618566,
+        "delta": 128877.1936181219,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.footprint",
+        "baseline": 5975,
+        "value": 7970.513845631969,
+        "delta": 1995.5138456319692,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpace",
+        "baseline": 0.8030924897682873,
+        "value": 0.8030924897682873,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpacePerResident",
+        "baseline": 12.96742269156742,
+        "value": 7.8104176204563664,
+        "delta": -5.157005071111053,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.far",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.lotCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.heightConflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.impervious",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walkProxy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.lowIncome",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.noCar",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.ghg",
+        "baseline": 1393.9071575476962,
+        "value": 3315.6112172012413,
+        "delta": 1921.704059653545,
+        "status": "incomplete"
+      },
+      {
+        "id": "environment.canopy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.runoff",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.heat",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.flood",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.conflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.highInjury",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.emergencyCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      }
+    ],
+    "flows": [
+      {
+        "year": 1,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 89416.02536752934,
+        "serviceCost": 738703.2927275134,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 12345,
+        "netRevenue": -104026.80783246868,
+        "discountedNet": -101356.46391501813
+      },
+      {
+        "year": 2,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 90578.4336973072,
+        "serviceCost": 748306.4355329709,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -100122.54230814838,
+        "discountedNet": -94375.0987917319
+      },
+      {
+        "year": 3,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 91755.95333537219,
+        "serviceCost": 758034.4191948995,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -108673.00633201204,
+        "discountedNet": -99451.19534157391
+      },
+      {
+        "year": 4,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 92948.78072873202,
+        "serviceCost": 767888.8666444331,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -117334.6263881858,
+        "discountedNet": -104250.29581792948
+      },
+      {
+        "year": 5,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 94157.11487820552,
+        "serviceCost": 777871.4219108106,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -66825.33844075364,
+        "discountedNet": -57644.12395843883
+      },
+      {
+        "year": 6,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 95381.1573716222,
+        "serviceCost": 787983.7503956512,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -75713.62443217763,
+        "discountedNet": -63408.968478407645
+      },
+      {
+        "year": 7,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 96621.11241745329,
+        "serviceCost": 798227.5391507946,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -84717.45814148989,
+        "discountedNet": -68883.04607743131
+      },
+      {
+        "year": 8,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 97877.18687888017,
+        "serviceCost": 808604.4971597549,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -93838.3416890233,
+        "discountedNet": -74076.85346202135
+      },
+      {
+        "year": 9,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 99149.59030830559,
+        "serviceCost": 819116.3556228315,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -103077.79672267451,
+        "discountedNet": -79000.54814137278
+      },
+      {
+        "year": 10,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 100438.53498231356,
+        "serviceCost": 829764.8682459283,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -112437.36467176338,
+        "discountedNet": -83663.95885928313
+      },
+      {
+        "year": 11,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 101744.23593708362,
+        "serviceCost": 840551.8115331252,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -121918.60700419021,
+        "discountedNet": -88076.59571310987
+      },
+      {
+        "year": 12,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 103066.91100426568,
+        "serviceCost": 851478.9850830557,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -131523.1054869386,
+        "discountedNet": -92247.65996903673
+      },
+      {
+        "year": 13,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 104406.78084732113,
+        "serviceCost": 862548.2118891354,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -141252.46244996286,
+        "discountedNet": -96186.0535826382
+      },
+      {
+        "year": 14,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 105764.06899833631,
+        "serviceCost": 873761.3386436942,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -151108.30105350644,
+        "discountedNet": -99900.38843347349
+      },
+      {
+        "year": 15,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 107139.00189531466,
+        "serviceCost": 885120.2360460621,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -161092.265558896,
+        "discountedNet": -103398.99528218214
+      },
+      {
+        "year": 16,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 108531.80891995375,
+        "serviceCost": 896626.7991146608,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -171206.02160285565,
+        "discountedNet": -106689.93245830426
+      },
+      {
+        "year": 17,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 109942.72243591314,
+        "serviceCost": 908282.9475031513,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -181451.25647538668,
+        "discountedNet": -109780.99428680641
+      },
+      {
+        "year": 18,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 111371.97782757998,
+        "serviceCost": 920090.625820692,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -191829.67940126068,
+        "discountedNet": -112679.71926106076
+      },
+      {
+        "year": 19,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 112819.81353933852,
+        "serviceCost": 932051.8039563609,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -202343.02182517096,
+        "discountedNet": -115393.39796979529
+      },
+      {
+        "year": 20,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 114286.47111534992,
+        "serviceCost": 944168.4774077936,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -212993.0377005923,
+        "discountedNet": -117929.08078531382
+      }
+    ]
+  },
+  {
+    "id": "parity-10-false",
+    "metrics": [
+      {
+        "id": "housing.units",
+        "baseline": 108,
+        "value": 151,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.occupiedUnits",
+        "baseline": 99.36,
+        "value": 138.92000000000002,
+        "delta": 39.56000000000002,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residents",
+        "baseline": 263.41261051405746,
+        "value": 443.87055037146445,
+        "delta": 180.45793985740698,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.density",
+        "baseline": 0.039276060218319746,
+        "value": 0.05491375086079891,
+        "delta": 0.015637690642479163,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residential",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.multifamily",
+        "baseline": 48,
+        "value": 91,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.mixed-use",
+        "baseline": 60,
+        "value": 60,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.jobsHousingBalance",
+        "baseline": 3.312976986438597,
+        "value": 2.4408772693227423,
+        "delta": -0.8720997171158547,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.incomeRequired",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.jobs",
+        "baseline": 329.177393372539,
+        "value": 339.0866702543154,
+        "delta": 9.909276881776407,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.payroll",
+        "baseline": 19750643.60235234,
+        "value": 20345200.215258922,
+        "delta": 594556.6129065827,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.indirectJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.inducedJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.output",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailCaptured",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailGap",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.businessPotential",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.dailyTrips",
+        "baseline": 2006.8636047793873,
+        "value": 2498.5974990030704,
+        "delta": 491.73389422368314,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.vmt",
+        "baseline": 10034.318023896936,
+        "value": 12492.987495015352,
+        "delta": 2458.6694711184155,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingDemand",
+        "baseline": 356.3329079435994,
+        "value": 410.0829079435994,
+        "delta": 53.75,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingSupply",
+        "baseline": 394,
+        "value": 394,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.parkingBalance",
+        "baseline": 37.66709205640058,
+        "value": -16.082907943599423,
+        "delta": -53.75,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.roadMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.laneMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.bikeMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.commuteTime",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.peakDelay",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.los",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.transitRidership",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "fiscal.propertyTax",
+        "baseline": 359134.58135560754,
+        "value": 359134.58135560754,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.salesTax",
+        "baseline": 92593.79242745962,
+        "value": 95381.1573716222,
+        "delta": 2787.3649441625894,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.serviceCost",
+        "baseline": 414848.35062863067,
+        "value": 634370.6615220519,
+        "delta": 219522.31089342124,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netAnnual",
+        "baseline": 36880.023154436494,
+        "value": -192199.92279482214,
+        "delta": -229079.94594925863,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netPerAcre",
+        "baseline": 13.412055650617354,
+        "value": -69.89681242264668,
+        "delta": -83.30886807326402,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.net20Years",
+        "baseline": 86967.22273912525,
+        "value": -5050573.13651421,
+        "delta": -5137540.359253336,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.npv",
+        "baseline": 115879.85372539471,
+        "value": -3645831.2573456797,
+        "delta": -3761711.1110710744,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.incentivePayback",
+        "baseline": 0,
+        "value": null,
+        "delta": null,
+        "status": "incomplete"
+      },
+      {
+        "id": "fiscal.fees",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.floorArea",
+        "baseline": 243533.47317806375,
+        "value": 243533.47317806375,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.footprint",
+        "baseline": 5975,
+        "value": 5975,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpace",
+        "baseline": 0.8030924897682873,
+        "value": 0.8030924897682873,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpacePerResident",
+        "baseline": 12.338057747719555,
+        "value": 7.3219545592293835,
+        "delta": -5.016103188490171,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.far",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.lotCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.heightConflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.impervious",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walkProxy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.lowIncome",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.noCar",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.ghg",
+        "baseline": 1465.0104314889527,
+        "value": 1823.9761742722415,
+        "delta": 358.96574278328876,
+        "status": "incomplete"
+      },
+      {
+        "id": "environment.canopy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.runoff",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.heat",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.flood",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.conflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.highInjury",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.emergencyCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      }
+    ],
+    "flows": [
+      {
+        "year": 1,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 95381.1573716222,
+        "serviceCost": 634370.6615220519,
+        "abatementCost": 0,
+        "grantCost": 12345,
+        "netRevenue": -192199.92279482214,
+        "discountedNet": -186961.42989788557
+      },
+      {
+        "year": 2,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 96621.11241745329,
+        "serviceCost": 642617.4801218385,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -186861.7863487777,
+        "discountedNet": -176135.1553857835
+      },
+      {
+        "year": 3,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 97877.18687888017,
+        "serviceCost": 650971.5073634224,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -193959.73912893469,
+        "discountedNet": -177500.63751415923
+      },
+      {
+        "year": 4,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 99149.59030830559,
+        "serviceCost": 659434.1369591467,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -201149.9652952336,
+        "discountedNet": -178719.13885350534
+      },
+      {
+        "year": 5,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 100438.53498231356,
+        "serviceCost": 668006.7807396157,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -208433.66440169455,
+        "discountedNet": -179796.70987428253
+      },
+      {
+        "year": 6,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 101744.23593708362,
+        "serviceCost": 676690.8688892305,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -215812.0515965394,
+        "discountedNet": -180739.19561470224
+      },
+      {
+        "year": 7,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 103066.91100426568,
+        "serviceCost": 685487.8501847904,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -223286.35782491718,
+        "discountedNet": -181552.24214621476
+      },
+      {
+        "year": 8,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 104406.78084732113,
+        "serviceCost": 694399.1922371926,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -230857.83003426396,
+        "discountedNet": -182241.30284272498
+      },
+      {
+        "year": 9,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 105764.06899833631,
+        "serviceCost": 703426.3817362762,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -238527.73138233233,
+        "discountedNet": -182811.64445938548
+      },
+      {
+        "year": 10,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 107139.00189531466,
+        "serviceCost": 712570.9246988477,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -246297.3414479255,
+        "discountedNet": -183268.35302664226
+      },
+      {
+        "year": 11,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 108531.80891995375,
+        "serviceCost": 721834.3467199326,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -254167.95644437132,
+        "discountedNet": -183616.33956504127
+      },
+      {
+        "year": 12,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 109942.72243591314,
+        "serviceCost": 731218.1932272917,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -262140.88943577104,
+        "discountedNet": -183860.34562614042
+      },
+      {
+        "year": 13,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 111371.97782757998,
+        "serviceCost": 740724.0297392462,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -270217.4705560587,
+        "discountedNet": -184004.94866471514
+      },
+      {
+        "year": 14,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 112819.81353933852,
+        "serviceCost": 750353.4421258564,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -278399.04723091034,
+        "discountedNet": -184054.5672472935
+      },
+      {
+        "year": 15,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 114286.47111534992,
+        "serviceCost": 760108.0368734926,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -286686.9844025352,
+        "discountedNet": -184013.46610190358
+      },
+      {
+        "year": 16,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 115772.19523984945,
+        "serviceCost": 769989.4413528478,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -295082.66475739086,
+        "discountedNet": -183885.76101377825
+      },
+      {
+        "year": 17,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 117277.23377796747,
+        "serviceCost": 779999.3040904348,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -303587.4889568598,
+        "discountedNet": -183675.42357161792
+      },
+      {
+        "year": 18,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 118801.83781708103,
+        "serviceCost": 790139.2950436103,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -312202.8758709217,
+        "discountedNet": -183386.28576887495
+      },
+      {
+        "year": 19,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 120346.26170870308,
+        "serviceCost": 800411.1058791772,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -320930.2628148666,
+        "discountedNet": -183022.044464397
+      },
+      {
+        "year": 20,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 121910.7631109162,
+        "serviceCost": 810816.4502556064,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -329771.1057890827,
+        "discountedNet": -182586.26570663185
+      }
+    ]
+  },
+  {
+    "id": "parity-10-true",
+    "metrics": [
+      {
+        "id": "housing.units",
+        "baseline": 108,
+        "value": 151,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.occupiedUnits",
+        "baseline": 99.36,
+        "value": 138.92000000000002,
+        "delta": 39.56000000000002,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residents",
+        "baseline": 263.41261051405746,
+        "value": 443.87055037146445,
+        "delta": 180.45793985740698,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.density",
+        "baseline": 0.039276060218319746,
+        "value": 0.05491375086079891,
+        "delta": 0.015637690642479163,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residential",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.multifamily",
+        "baseline": 48,
+        "value": 91,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.mixed-use",
+        "baseline": 60,
+        "value": 60,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.jobsHousingBalance",
+        "baseline": 3.312976986438597,
+        "value": 6.126765763266481,
+        "delta": 2.813788776827884,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.incomeRequired",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.jobs",
+        "baseline": 329.177393372539,
+        "value": 851.1302998329796,
+        "delta": 521.9529064604407,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.payroll",
+        "baseline": 19750643.60235234,
+        "value": 51067817.989978775,
+        "delta": 31317174.387626436,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.indirectJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.inducedJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.output",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailCaptured",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailGap",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.businessPotential",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.dailyTrips",
+        "baseline": 2006.8636047793873,
+        "value": 4844.935134207884,
+        "delta": 2838.0715294284973,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.vmt",
+        "baseline": 10034.318023896936,
+        "value": 24224.675671039422,
+        "delta": 14190.357647142486,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingDemand",
+        "baseline": 356.3329079435994,
+        "value": 732.2758919889043,
+        "delta": 375.94298404530485,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingSupply",
+        "baseline": 394,
+        "value": 694,
+        "delta": 300,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.parkingBalance",
+        "baseline": 37.66709205640058,
+        "value": -38.27589198890428,
+        "delta": -75.94298404530485,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.roadMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.laneMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.bikeMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.commuteTime",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.peakDelay",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.los",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.transitRidership",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "fiscal.propertyTax",
+        "baseline": 359134.58135560754,
+        "value": 616888.9685918514,
+        "delta": 257754.38723624387,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.salesTax",
+        "baseline": 92593.79242745962,
+        "value": 95381.1573716222,
+        "delta": 2787.3649441625894,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.serviceCost",
+        "baseline": 414848.35062863067,
+        "value": 787983.7503956512,
+        "delta": 373135.39976702054,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netAnnual",
+        "baseline": 36880.023154436494,
+        "value": -147342.13349651374,
+        "delta": -184222.15665095023,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netPerAcre",
+        "baseline": 13.412055650617354,
+        "value": -53.58350470282204,
+        "delta": -66.9955603534394,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.net20Years",
+        "baseline": 86967.22273912525,
+        "value": -3615606.0526676956,
+        "delta": -3702573.2754068207,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.npv",
+        "baseline": 115879.85372539471,
+        "value": -2589780.5272113965,
+        "delta": -2705660.380936791,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.incentivePayback",
+        "baseline": 0,
+        "value": null,
+        "delta": null,
+        "status": "incomplete"
+      },
+      {
+        "id": "fiscal.fees",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.floorArea",
+        "baseline": 243533.47317806375,
+        "value": 372410.66679618566,
+        "delta": 128877.1936181219,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.footprint",
+        "baseline": 5975,
+        "value": 7970.513845631969,
+        "delta": 1995.5138456319692,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpace",
+        "baseline": 0.8030924897682873,
+        "value": 0.8030924897682873,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpacePerResident",
+        "baseline": 12.338057747719555,
+        "value": 7.3219545592293835,
+        "delta": -5.016103188490171,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.far",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.lotCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.heightConflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.impervious",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walkProxy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.lowIncome",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.noCar",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.ghg",
+        "baseline": 1465.0104314889527,
+        "value": 3536.8026479717555,
+        "delta": 2071.792216482803,
+        "status": "incomplete"
+      },
+      {
+        "id": "environment.canopy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.runoff",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.heat",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.flood",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.conflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.highInjury",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.emergencyCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      }
+    ],
+    "flows": [
+      {
+        "year": 1,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 95381.1573716222,
+        "serviceCost": 787983.7503956512,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 12345,
+        "netRevenue": -147342.13349651374,
+        "discountedNet": -143410.17815195507
+      },
+      {
+        "year": 2,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 96621.11241745329,
+        "serviceCost": 798227.5391507946,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -144000.967205826,
+        "discountedNet": -135734.7225995155
+      },
+      {
+        "year": 3,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 97877.18687888017,
+        "serviceCost": 808604.4971597549,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -153121.8507533594,
+        "discountedNet": -140128.18458165618
+      },
+      {
+        "year": 4,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 99149.59030830559,
+        "serviceCost": 819116.3556228315,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -162361.3057870106,
+        "discountedNet": -144255.9172744375
+      },
+      {
+        "year": 5,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 100438.53498231356,
+        "serviceCost": 829764.8682459283,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -112437.36467176338,
+        "discountedNet": -96989.45845886876
+      },
+      {
+        "year": 6,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 101744.23593708362,
+        "serviceCost": 840551.8115331252,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -121918.60700419021,
+        "discountedNet": -102104.91396281081
+      },
+      {
+        "year": 7,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 103066.91100426568,
+        "serviceCost": 851478.9850830557,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -131523.1054869386,
+        "discountedNet": -106940.32061694624
+      },
+      {
+        "year": 8,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 104406.78084732113,
+        "serviceCost": 862548.2118891354,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -141252.46244996286,
+        "discountedNet": -111505.9982275831
+      },
+      {
+        "year": 9,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 105764.06899833631,
+        "serviceCost": 873761.3386436942,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -151108.30105350644,
+        "discountedNet": -115811.9303234254
+      },
+      {
+        "year": 10,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 107139.00189531466,
+        "serviceCost": 885120.2360460621,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -161092.265558896,
+        "discountedNet": -119867.77453930178
+      },
+      {
+        "year": 11,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 108531.80891995375,
+        "serviceCost": 896626.7991146608,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -171206.02160285565,
+        "discountedNet": -123682.87268773021
+      },
+      {
+        "year": 12,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 109942.72243591314,
+        "serviceCost": 908282.9475031513,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -181451.25647538668,
+        "discountedNet": -127266.26052757108
+      },
+      {
+        "year": 13,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 111371.97782757998,
+        "serviceCost": 920090.625820692,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -191829.67940126068,
+        "discountedNet": -130626.6772387501
+      },
+      {
+        "year": 14,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 112819.81353933852,
+        "serviceCost": 932051.8039563609,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -202343.02182517096,
+        "discountedNet": -133772.57461176594
+      },
+      {
+        "year": 15,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 114286.47111534992,
+        "serviceCost": 944168.4774077936,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -212993.0377005923,
+        "discountedNet": -136712.12596044462
+      },
+      {
+        "year": 16,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 115772.19523984945,
+        "serviceCost": 956442.6676140948,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -223781.503782394,
+        "discountedNet": -139453.23476614882
+      },
+      {
+        "year": 17,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 117277.23377796747,
+        "serviceCost": 968876.4222930779,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -234710.219923259,
+        "discountedNet": -142003.54306141468
+      },
+      {
+        "year": 18,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 118801.83781708103,
+        "serviceCost": 981471.8157828877,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -245781.0093739553,
+        "discountedNet": -144370.4395607483
+      },
+      {
+        "year": 19,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 120346.26170870308,
+        "serviceCost": 994230.9493880653,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -256995.71908751072,
+        "discountedNet": -146561.06754608997
+      },
+      {
+        "year": 20,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 121910.7631109162,
+        "serviceCost": 1007155.95173011,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -268356.2200273423,
+        "discountedNet": -148582.3325142327
+      }
+    ]
+  },
+  {
+    "id": "parity-20-false",
+    "metrics": [
+      {
+        "id": "housing.units",
+        "baseline": 108,
+        "value": 151,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.occupiedUnits",
+        "baseline": 99.36,
+        "value": 138.92000000000002,
+        "delta": 39.56000000000002,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residents",
+        "baseline": 290.971397686152,
+        "value": 505.0690837228532,
+        "delta": 214.0976860367012,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.density",
+        "baseline": 0.039276060218319746,
+        "value": 0.05491375086079891,
+        "delta": 0.015637690642479163,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residential",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.multifamily",
+        "baseline": 48,
+        "value": 91,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.mixed-use",
+        "baseline": 60,
+        "value": 60,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.jobsHousingBalance",
+        "baseline": 3.6595876801982103,
+        "value": 2.777412569644612,
+        "delta": -0.8821751105535984,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.incomeRequired",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.jobs",
+        "baseline": 363.61663190449417,
+        "value": 385.83815417502956,
+        "delta": 22.221522270535388,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.payroll",
+        "baseline": 21816997.91426965,
+        "value": 23150289.250501774,
+        "delta": 1333291.3362321258,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.indirectJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.inducedJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.output",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailCaptured",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailGap",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.businessPotential",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.dailyTrips",
+        "baseline": 2216.8259405217987,
+        "value": 2843.0909605460106,
+        "delta": 626.2650200242119,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.vmt",
+        "baseline": 11084.129702608992,
+        "value": 14215.454802730053,
+        "delta": 3131.325100121061,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingDemand",
+        "baseline": 356.3329079435994,
+        "value": 410.0829079435994,
+        "delta": 53.75,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingSupply",
+        "baseline": 394,
+        "value": 394,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.parkingBalance",
+        "baseline": 37.66709205640058,
+        "value": -16.082907943599423,
+        "delta": -53.75,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.roadMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.laneMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.bikeMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.commuteTime",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.peakDelay",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.los",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.transitRidership",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "fiscal.propertyTax",
+        "baseline": 359134.58135560754,
+        "value": 359134.58135560754,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.salesTax",
+        "baseline": 102281.15179110435,
+        "value": 108531.80891995375,
+        "delta": 6250.6571288494015,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.serviceCost",
+        "baseline": 458250.66679473064,
+        "value": 721834.3467199326,
+        "delta": 263583.679925202,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netAnnual",
+        "baseline": 3165.0663519812515,
+        "value": -266512.9564443713,
+        "delta": -269678.02279635257,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netPerAcre",
+        "baseline": 1.1510308947721597,
+        "value": -96.922027095107,
+        "delta": -98.07305798987916,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.net20Years",
+        "baseline": -655402.5457785351,
+        "value": -6735529.178569786,
+        "delta": -6080126.632791251,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.npv",
+        "baseline": -430994.20891483757,
+        "value": -4883464.063353519,
+        "delta": -4452469.854438681,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.incentivePayback",
+        "baseline": 0,
+        "value": null,
+        "delta": null,
+        "status": "incomplete"
+      },
+      {
+        "id": "fiscal.fees",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.floorArea",
+        "baseline": 243533.47317806375,
+        "value": 243533.47317806375,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.footprint",
+        "baseline": 5975,
+        "value": 5975,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpace",
+        "baseline": 0.8030924897682873,
+        "value": 0.8030924897682873,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpacePerResident",
+        "baseline": 11.169482725259202,
+        "value": 6.434763292269487,
+        "delta": -4.734719432989715,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.far",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.lotCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.heightConflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.impervious",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walkProxy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.lowIncome",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.noCar",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.ghg",
+        "baseline": 1618.2829365809132,
+        "value": 2075.456401198588,
+        "delta": 457.1734646176749,
+        "status": "incomplete"
+      },
+      {
+        "id": "environment.canopy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.runoff",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.heat",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.flood",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.conflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.highInjury",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.emergencyCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      }
+    ],
+    "flows": [
+      {
+        "year": 1,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 108531.80891995375,
+        "serviceCost": 721834.3467199326,
+        "abatementCost": 0,
+        "grantCost": 12345,
+        "netRevenue": -266512.9564443713,
+        "discountedNet": -259110.0062566712
+      },
+      {
+        "year": 2,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 109942.72243591314,
+        "serviceCost": 731218.1932272917,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -262140.88943577104,
+        "discountedNet": -247092.9299988416
+      },
+      {
+        "year": 3,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 111371.97782757998,
+        "serviceCost": 740724.0297392462,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -270217.4705560587,
+        "discountedNet": -247287.26439088507
+      },
+      {
+        "year": 4,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 112819.81353933852,
+        "serviceCost": 750353.4421258564,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -278399.04723091034,
+        "discountedNet": -247353.94761673195
+      },
+      {
+        "year": 5,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 114286.47111534992,
+        "serviceCost": 760108.0368734926,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -286686.9844025352,
+        "discountedNet": -247298.71111423266
+      },
+      {
+        "year": 6,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 115772.19523984945,
+        "serviceCost": 769989.4413528478,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -295082.66475739086,
+        "discountedNet": -247127.08615457543
+      },
+      {
+        "year": 7,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 117277.23377796747,
+        "serviceCost": 779999.3040904348,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -303587.4889568598,
+        "discountedNet": -246844.41022086682
+      },
+      {
+        "year": 8,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 118801.83781708103,
+        "serviceCost": 790139.2950436103,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -312202.8758709217,
+        "discountedNet": -246455.83319187295
+      },
+      {
+        "year": 9,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 120346.26170870308,
+        "serviceCost": 800411.1058791772,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -320930.2628148666,
+        "discountedNet": -245966.3233367514
+      },
+      {
+        "year": 10,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 121910.7631109162,
+        "serviceCost": 810816.4502556064,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -329771.1057890827,
+        "discountedNet": -245380.6731264206
+      },
+      {
+        "year": 11,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 123495.60303135813,
+        "serviceCost": 821357.0641089294,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -338726.87972196366,
+        "discountedNet": -244703.50486705633
+      },
+      {
+        "year": 12,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 125101.04587076577,
+        "serviceCost": 832034.7059423453,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -347799.078715972,
+        "discountedNet": -243939.27616103477
+      },
+      {
+        "year": 13,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 126727.3594670857,
+        "serviceCost": 842851.1571195957,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -356989.21629690245,
+        "discountedNet": -243092.28520049
+      },
+      {
+        "year": 14,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 128374.81514015779,
+        "serviceCost": 853808.2221621503,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -366298.825666385,
+        "discountedNet": -242166.67589849728
+      },
+      {
+        "year": 15,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 130043.68773697985,
+        "serviceCost": 864907.7290502582,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -375729.45995767077,
+        "discountedNet": -241166.44286274753
+      },
+      {
+        "year": 16,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 131734.25567756058,
+        "serviceCost": 876151.5295279116,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -385282.69249474345,
+        "discountedNet": -240095.43621643365
+      },
+      {
+        "year": 17,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 133446.80100136882,
+        "serviceCost": 887541.4994117742,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -394960.1170547978,
+        "discountedNet": -238957.36627092844
+      },
+      {
+        "year": 18,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 135181.60941438662,
+        "serviceCost": 899079.5389041272,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -404763.34813413303,
+        "discountedNet": -237755.80805470177
+      },
+      {
+        "year": 19,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 136938.97033677364,
+        "serviceCost": 910767.5729098808,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -414694.0212174996,
+        "discountedNet": -236494.20570278782
+      },
+      {
+        "year": 20,
+        "propertyRevenue": 359134.58135560754,
+        "salesRevenue": 138719.1769511517,
+        "serviceCost": 922607.5513577092,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -424753.79305095,
+        "discountedNet": -235175.87671099097
+      }
+    ]
+  },
+  {
+    "id": "parity-20-true",
+    "metrics": [
+      {
+        "id": "housing.units",
+        "baseline": 108,
+        "value": 151,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.occupiedUnits",
+        "baseline": 99.36,
+        "value": 138.92000000000002,
+        "delta": 39.56000000000002,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residents",
+        "baseline": 290.971397686152,
+        "value": 505.0690837228532,
+        "delta": 214.0976860367012,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.density",
+        "baseline": 0.039276060218319746,
+        "value": 0.05491375086079891,
+        "delta": 0.015637690642479163,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.residential",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.multifamily",
+        "baseline": 48,
+        "value": 91,
+        "delta": 43,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.mixed-use",
+        "baseline": 60,
+        "value": 60,
+        "delta": 0,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.jobsHousingBalance",
+        "baseline": 3.6595876801982103,
+        "value": 6.97149195333614,
+        "delta": 3.31190427313793,
+        "status": "incomplete"
+      },
+      {
+        "id": "housing.incomeRequired",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.jobs",
+        "baseline": 363.61663190449417,
+        "value": 968.4796621574567,
+        "delta": 604.8630302529625,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.payroll",
+        "baseline": 21816997.91426965,
+        "value": 58108779.7294474,
+        "delta": 36291781.81517775,
+        "status": "incomplete"
+      },
+      {
+        "id": "economy.indirectJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.inducedJobs",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.output",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailCaptured",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.retailGap",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "economy.businessPotential",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.dailyTrips",
+        "baseline": 2216.8259405217987,
+        "value": 5512.929269317772,
+        "delta": 3296.1033287959735,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.vmt",
+        "baseline": 11084.129702608992,
+        "value": 27564.64634658886,
+        "delta": 16480.516643979867,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingDemand",
+        "baseline": 356.3329079435994,
+        "value": 732.2758919889043,
+        "delta": 375.94298404530485,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.parkingSupply",
+        "baseline": 394,
+        "value": 694,
+        "delta": 300,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.parkingBalance",
+        "baseline": 37.66709205640058,
+        "value": -38.27589198890428,
+        "delta": -75.94298404530485,
+        "status": "incomplete"
+      },
+      {
+        "id": "mobility.roadMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.laneMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.bikeMiles",
+        "baseline": 0,
+        "value": 0,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "mobility.commuteTime",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.peakDelay",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.los",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "mobility.transitRidership",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "fiscal.propertyTax",
+        "baseline": 359134.58135560754,
+        "value": 616888.9685918514,
+        "delta": 257754.38723624387,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.salesTax",
+        "baseline": 102281.15179110435,
+        "value": 108531.80891995375,
+        "delta": 6250.6571288494015,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.serviceCost",
+        "baseline": 458250.66679473064,
+        "value": 896626.7991146608,
+        "delta": 438376.1323199302,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netAnnual",
+        "baseline": 3165.0663519812515,
+        "value": -242834.53066719175,
+        "delta": -245999.597019173,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.netPerAcre",
+        "baseline": 1.1510308947721597,
+        "value": -88.3109597182596,
+        "delta": -89.46199061303176,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.net20Years",
+        "baseline": -655402.5457785351,
+        "value": -5780777.9435353335,
+        "delta": -5125375.397756798,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.npv",
+        "baseline": -430994.20891483757,
+        "value": -4180141.163275649,
+        "delta": -3749146.954360811,
+        "status": "ready"
+      },
+      {
+        "id": "fiscal.incentivePayback",
+        "baseline": 0,
+        "value": null,
+        "delta": null,
+        "status": "incomplete"
+      },
+      {
+        "id": "fiscal.fees",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.floorArea",
+        "baseline": 243533.47317806375,
+        "value": 372410.66679618566,
+        "delta": 128877.1936181219,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.footprint",
+        "baseline": 5975,
+        "value": 7970.513845631969,
+        "delta": 1995.5138456319692,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpace",
+        "baseline": 0.8030924897682873,
+        "value": 0.8030924897682873,
+        "delta": 0,
+        "status": "ready"
+      },
+      {
+        "id": "land.openSpacePerResident",
+        "baseline": 11.169482725259202,
+        "value": 6.434763292269487,
+        "delta": -4.734719432989715,
+        "status": "incomplete"
+      },
+      {
+        "id": "land.far",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.lotCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.heightConflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "land.impervious",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.car45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.transit45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk15",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk30",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walk45",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.walkProxy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.lowIncome",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "access.noCar",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.ghg",
+        "baseline": 1618.2829365809132,
+        "value": 4024.438366601974,
+        "delta": 2406.155430021061,
+        "status": "incomplete"
+      },
+      {
+        "id": "environment.canopy",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.runoff",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.heat",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "environment.flood",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.conflicts",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.highInjury",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      },
+      {
+        "id": "safety.emergencyCoverage",
+        "baseline": null,
+        "value": null,
+        "delta": null,
+        "status": "unavailable"
+      }
+    ],
+    "flows": [
+      {
+        "year": 1,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 108531.80891995375,
+        "serviceCost": 896626.7991146608,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 12345,
+        "netRevenue": -242834.53066719175,
+        "discountedNet": -236121.24336620557
+      },
+      {
+        "year": 2,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 109942.72243591314,
+        "serviceCost": 908282.9475031513,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -240734.76553972278,
+        "discountedNet": -226915.6051840162
+      },
+      {
+        "year": 3,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 111371.97782757998,
+        "serviceCost": 920090.625820692,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -251113.1884655968,
+        "discountedNet": -229804.13997786894
+      },
+      {
+        "year": 4,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 112819.81353933852,
+        "serviceCost": 932051.8039563609,
+        "abatementCost": 59283.509064336096,
+        "grantCost": 0,
+        "netRevenue": -261626.53088950706,
+        "discountedNet": -232451.7840864409
+      },
+      {
+        "year": 5,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 114286.47111534992,
+        "serviceCost": 944168.4774077936,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -212993.0377005923,
+        "discountedNet": -183729.66533319833
+      },
+      {
+        "year": 6,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 115772.19523984945,
+        "serviceCost": 956442.6676140948,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -223781.503782394,
+        "discountedNet": -187413.4863547486
+      },
+      {
+        "year": 7,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 117277.23377796747,
+        "serviceCost": 968876.4222930779,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -234710.219923259,
+        "discountedNet": -190840.88744513356
+      },
+      {
+        "year": 8,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 118801.83781708103,
+        "serviceCost": 981471.8157828877,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -245781.0093739553,
+        "discountedNet": -194021.79841880026
+      },
+      {
+        "year": 9,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 120346.26170870308,
+        "serviceCost": 994230.9493880653,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -256995.71908751072,
+        "discountedNet": -196965.81924935058
+      },
+      {
+        "year": 10,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 121910.7631109162,
+        "serviceCost": 1007155.95173011,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -268356.2200273423,
+        "discountedNet": -199682.23034703205
+      },
+      {
+        "year": 11,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 123495.60303135813,
+        "serviceCost": 1020248.9791026015,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -279864.407479392,
+        "discountedNet": -202180.0025258185
+      },
+      {
+        "year": 12,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 125101.04587076577,
+        "serviceCost": 1033512.2158309352,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -291522.20136831794,
+        "discountedNet": -204467.80666930252
+      },
+      {
+        "year": 13,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 126727.3594670857,
+        "serviceCost": 1046947.8746367372,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -303331.54657780007,
+        "discountedNet": -206554.02310435587
+      },
+      {
+        "year": 14,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 128374.81514015779,
+        "serviceCost": 1060558.1970070146,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -315294.4132750054,
+        "discountedNet": -208446.75069124042
+      },
+      {
+        "year": 15,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 130043.68773697985,
+        "serviceCost": 1074345.4535681058,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -327412.7972392746,
+        "discountedNet": -210153.81563860737
+      },
+      {
+        "year": 16,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 131734.25567756058,
+        "serviceCost": 1088311.944464491,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -339688.720195079,
+        "discountedNet": -211682.7800515651
+      },
+      {
+        "year": 17,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 133446.80100136882,
+        "serviceCost": 1102459.9997425291,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -352124.2301493089,
+        "discountedNet": -213040.95022076098
+      },
+      {
+        "year": 18,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 135181.60941438662,
+        "serviceCost": 1116791.979739182,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -364721.40173294395,
+        "discountedNet": -214235.3846601831
+      },
+      {
+        "year": 19,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 136938.97033677364,
+        "serviceCost": 1131310.2754757914,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -377482.33654716634,
+        "discountedNet": -215272.90190116523
+      },
+      {
+        "year": 20,
+        "propertyRevenue": 616888.9685918514,
+        "salesRevenue": 138719.1769511517,
+        "serviceCost": 1146017.3090569766,
+        "abatementCost": 0,
+        "grantCost": 0,
+        "netRevenue": -390409.1635139735,
+        "discountedNet": -216160.08804985526
+      }
+    ]
+  }
+]

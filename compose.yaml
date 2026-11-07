@@ -1,0 +1,18 @@
+services:
+  database:
+    image: postgis/postgis:17-3.5
+    environment:
+      POSTGRES_DB: urban_planning
+      POSTGRES_USER: urban
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-urban-local-development-only}
+    ports:
+      - "127.0.0.1:54329:5432"
+    volumes:
+      - urban_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U urban -d urban_planning"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  urban_postgres:

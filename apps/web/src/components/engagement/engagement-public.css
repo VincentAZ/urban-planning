@@ -1,0 +1,339 @@
+.engagement-config {
+  min-width: 0;
+  padding: 18px;
+  margin: 14px 0 22px;
+  border: 1px solid #dbe5d4;
+  border-radius: 12px;
+  background: #f8faf2;
+}
+.engagement-config > legend {
+  font-weight: 650;
+  color: #315c45;
+  font-size: 14px;
+  padding: 0 7px;
+}
+.engagement-config > p {
+  line-height: 1.65;
+  margin: 6px 0 14px;
+}
+.engagement-methods {
+  display: grid;
+  gap: 8px;
+  margin: 15px 0 20px;
+}
+.engagement-methods label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px;
+  background: #fffef9;
+  border: 1px solid #dfe7d7;
+  border-radius: 7px;
+  font-size: 12px;
+}
+.engagement-config input[type="checkbox"],
+.engagement-public input[type="radio"] {
+  accent-color: #28614b;
+}
+.engagement-config textarea,
+.engagement-public textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dce4d4;
+  border-radius: 7px;
+  background: #fffefb;
+  resize: vertical;
+  color: #294333;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.engagement-survey-heading,
+.engagement-question-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.engagement-survey-heading {
+  padding-top: 14px;
+  margin: 17px 0 10px;
+  border-top: 1px solid #dfe7d8;
+}
+.engagement-survey-heading strong {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 13px;
+}
+.engagement-survey-heading > span {
+  font-size: 11px;
+  color: #697b60;
+  white-space: nowrap;
+}
+.engagement-question-editor {
+  border: 1px solid #dce5d3;
+  background: #fffef9;
+  border-radius: 9px;
+  padding: 14px;
+  margin-bottom: 13px;
+}
+.engagement-question-top {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.engagement-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  margin: 11px 0;
+}
+.engagement-options-editor {
+  padding-top: 7px;
+}
+.engagement-options-editor > div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.engagement-options-editor .field {
+  flex: 1;
+  min-width: 0;
+}
+.engagement-options-editor .field > span {
+  font-size: 10px;
+}
+.engagement-public {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.engagement-introduction {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.engagement-collection {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px;
+  margin: 18px 0;
+  border: 1px solid #d7e5cd;
+  border-radius: 9px;
+  background: #f2f7ea;
+  color: #476540;
+}
+.engagement-collection.is-closed {
+  background: #f5f2e8;
+  border-color: #e3dcc6;
+  color: #78653e;
+}
+.engagement-collection > strong {
+  font-size: 12px;
+}
+.engagement-collection > span {
+  font-size: 10px;
+}
+.engagement-collection > button {
+  font-size: 10px;
+  align-self: flex-start;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 6px;
+}
+.engagement-public fieldset {
+  min-width: 0;
+}
+.engagement-public fieldset:disabled {
+  opacity: 0.7;
+}
+.engagement-public .error-message {
+  margin: 14px 0;
+  overflow-wrap: anywhere;
+}
+.engagement-public .shared-feedback-success {
+  margin-bottom: 18px;
+}
+.engagement-pin-controls {
+  margin: 14px 0;
+}
+.engagement-pin-controls > div:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.engagement-pin-controls button {
+  font-size: 10px;
+}
+.public-engagement-location {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px;
+  color: #386448;
+  font-size: 10px;
+  background: #f1f6ea;
+  padding: 9px;
+  border-radius: 6px;
+}
+.public-engagement-location > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  flex: 1;
+}
+.engagement-coordinates {
+  padding: 11px;
+  margin-top: 12px;
+  border: 1px solid #dce6d4;
+  border-radius: 8px;
+}
+.engagement-coordinates > legend {
+  font-size: 10px;
+  padding: 0 4px;
+}
+.engagement-survey {
+  border-top: 1px solid #dce5d3;
+  padding-top: 23px;
+  margin-top: 24px;
+}
+.engagement-survey > h3 {
+  font-size: 17px;
+  margin: 0 0 7px;
+  letter-spacing: -0.3px;
+}
+.engagement-survey > p {
+  margin-bottom: 17px;
+}
+.engagement-survey > fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.engagement-survey-question {
+  border: 0;
+  padding: 0;
+  margin: 0 0 21px;
+}
+.engagement-survey-question > legend {
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 9px;
+  overflow-wrap: anywhere;
+}
+.engagement-survey-question > legend span {
+  font-size: 10px;
+  font-weight: 400;
+}
+.engagement-survey-question > label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  margin-bottom: 7px;
+  border: 1px solid #dde6d4;
+  border-radius: 6px;
+  background: #fafbf5;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.engagement-survey-question > label input {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.engagement-own-history {
+  margin-top: 22px;
+  border-top: 1px solid #dce5d3;
+  padding-top: 16px;
+}
+.engagement-own-history > summary {
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #315b41;
+}
+.engagement-own-history > p {
+  color: #6d7f64;
+  font-size: 10px;
+  margin: 12px 0;
+}
+.engagement-own-history article {
+  padding: 13px 0;
+  border-bottom: 1px solid #e1e7d9;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.engagement-own-history article strong,
+.engagement-own-history time {
+  display: block;
+}
+.engagement-own-history time {
+  color: #718368;
+  font-size: 9px;
+  margin: 4px 0 8px;
+}
+.engagement-own-history article p,
+.engagement-own-history dd {
+  white-space: pre-wrap;
+  margin: 7px 0;
+}
+.engagement-own-history dt {
+  font-weight: 600;
+  margin-top: 9px;
+}
+.engagement-public .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.shared-pin-banner {
+  position: absolute;
+  top: 125px;
+  left: 20px;
+  right: 20px;
+  z-index: 3;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 11px 13px;
+  border: 1px solid #e6cb79;
+  border-radius: 8px;
+  background: #fff9df;
+  color: #62532b;
+  font-size: 12px;
+  box-shadow: 0 4px 18px #334b2a20;
+}
+.shared-pin-banner > span {
+  flex: 1;
+}
+.shared-pin-banner.error {
+  background: #fff1eb;
+  border-color: #e8bda9;
+}
+.shared-collection-badge {
+  color: #386a48;
+}
+@media (max-width: 1000px) {
+  .shared-pin-banner {
+    top: 165px;
+    left: 15px;
+    right: 15px;
+  }
+}
+@media (max-width: 750px) {
+  .shared-pin-banner {
+    top: 112px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 480px) {
+  .engagement-config {
+    padding: 13px;
+  }
+  .engagement-question-editor {
+    padding: 11px;
+  }
+}

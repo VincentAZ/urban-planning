@@ -1,0 +1,248 @@
+.flood-panel,
+.flood-building {
+  padding: 16px;
+  background: #f0f5f3;
+  border: 1px solid #d7e3de;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+.flood-panel h3 {
+  margin: 8px 0;
+}
+.flood-panel p,
+.flood-building p {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.flood-workbench {
+  display: grid;
+  gap: 20px;
+  padding: 2px 4px 20px;
+}
+.flood-evidence {
+  min-width: 0;
+}
+.flood-evidence > p {
+  line-height: 1.6;
+}
+.flood-method {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  margin: 16px 0;
+  border: 1px solid #d7e3de;
+  border-radius: 10px;
+  background: #f6f9f7;
+  line-height: 1.6;
+}
+.flood-method h3,
+.flood-method p {
+  margin: 0;
+}
+.flood-method code {
+  overflow-wrap: anywhere;
+}
+.flood-method button {
+  justify-self: start;
+}
+.flood-totals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+.flood-totals > div {
+  display: grid;
+  gap: 8px;
+  background: #edf4f1;
+  border: 1px solid #d7e3dd;
+  padding: 18px;
+  border-radius: 12px;
+  min-width: 0;
+}
+.flood-totals strong {
+  font-size: 28px;
+  overflow-wrap: anywhere;
+}
+.flood-totals small {
+  line-height: 1.5;
+}
+.flood-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  font-size: 11px;
+  padding: 12px 0;
+}
+.flood-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.flood-legend i {
+  width: 13px;
+  height: 13px;
+  border: 1px solid #657b77;
+  flex-shrink: 0;
+}
+.flood-sources {
+  margin: 16px 0;
+  padding: 14px;
+  background: #faf8f1;
+  border: 1px solid #e3dfd3;
+  border-radius: 10px;
+}
+.flood-sources summary,
+.flood-workbench summary {
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.flood-sources pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 10px;
+  max-height: 240px;
+  overflow: auto;
+}
+.flood-sources p,
+.flood-sources li {
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.flood-table-heading,
+.flood-attached {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.flood-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.flood-filters label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.flood-filters input,
+.flood-filters select {
+  width: 100%;
+  min-width: 0;
+}
+.flood-buildings {
+  display: grid;
+  gap: 10px;
+}
+.flood-buildings article {
+  border: 1px solid #dce4de;
+  padding: 14px;
+  border-radius: 9px;
+  min-width: 0;
+}
+.flood-buildings article > div {
+  display: grid;
+  gap: 6px;
+}
+.flood-buildings article span {
+  font-size: 12px;
+}
+.flood-buildings .text-button {
+  text-align: left;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.flood-buildings dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0;
+}
+.flood-buildings dt {
+  font-size: 11px;
+  color: #64776f;
+}
+.flood-buildings dd {
+  margin: 4px 0;
+  font-size: 14px;
+}
+.flood-buildings details {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.flood-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 20px 0;
+}
+.flood-pagination span {
+  font-size: 12px;
+}
+.flood-choice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #ddd;
+}
+.flood-choice h3 {
+  font-size: 15px;
+}
+.flood-choice p {
+  font-size: 12px;
+}
+.flood-choice small {
+  font-size: 11px;
+}
+.flood-map-legend {
+  position: absolute;
+  left: 14px;
+  bottom: 80px;
+  max-width: 300px;
+  padding: 8px 12px;
+  background: #fffffff0;
+  border: 1px solid #d9e3dc;
+  border-radius: 9px;
+  pointer-events: none;
+  z-index: 3;
+}
+.flood-map-legend .flood-legend {
+  padding: 0;
+  font-size: 9px;
+  gap: 5px 12px;
+}
+@media (max-width: 750px) {
+  .flood-totals,
+  .flood-filters {
+    grid-template-columns: 1fr;
+  }
+  .flood-choice {
+    display: grid;
+  }
+  .flood-choice button {
+    width: 100%;
+  }
+  .flood-totals strong {
+    font-size: 25px;
+  }
+  .flood-map-legend {
+    left: 10px;
+    right: 80px;
+    bottom: 80px;
+    max-width: none;
+  }
+  .flood-workbench {
+    padding: 0 0 16px;
+  }
+  .flood-buildings article {
+    padding: 12px;
+  }
+}

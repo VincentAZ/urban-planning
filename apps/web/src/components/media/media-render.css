@@ -1,0 +1,88 @@
+.media-render-output,
+.media-render-output * {
+  box-sizing: border-box;
+}
+.media-render-output {
+  position: relative;
+  overflow: hidden;
+  background: #f8f7ef;
+  color: #203b30;
+  font-family: UrbanMedia;
+  font-weight: 400;
+  isolation: isolate;
+}
+.media-render-output .city-map-export {
+  min-height: 0;
+  border-radius: 0;
+}
+.media-render-map,
+.media-render-callout,
+.media-render-credits {
+  position: absolute;
+}
+.media-render-callout {
+  display: flex;
+  gap: calc(32px * var(--media-scale));
+  padding: calc(18px * var(--media-scale)) calc(30px * var(--media-scale));
+  border-top: calc(2px * var(--media-scale)) solid #9bb6a7;
+  overflow: hidden;
+}
+.media-render-story {
+  flex: 1;
+  min-width: 0;
+  overflow: visible;
+}
+.media-render-story h1 {
+  font-size: calc(26px * var(--media-scale));
+  line-height: 1.2;
+  margin: 0 0 calc(12px * var(--media-scale));
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.media-render-story p {
+  font-size: calc(19px * var(--media-scale));
+  line-height: 1.5;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.media-render-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: calc(12px * var(--media-scale));
+  width: 46%;
+  flex-shrink: 0;
+}
+.media-render-metrics > div {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--media-scale));
+  overflow-wrap: anywhere;
+}
+.media-render-metrics span {
+  font-size: calc(14px * var(--media-scale));
+  line-height: 1.3;
+}
+.media-render-metrics strong {
+  font-size: calc(24px * var(--media-scale));
+  line-height: 1.15;
+}
+.media-render-metrics small {
+  font-size: calc(11px * var(--media-scale));
+  line-height: 1.3;
+  color: #52685b;
+}
+.media-render-credits {
+  border-top: 1px solid #bdc9ba;
+  padding: calc(10px * var(--media-scale)) calc(30px * var(--media-scale));
+  font-size: calc(10px * var(--media-scale));
+  line-height: 1.35;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.media-render-credits strong {
+  font-size: calc(12px * var(--media-scale));
+}
+.media-render-credits p {
+  margin: calc(4px * var(--media-scale)) 0 0;
+}

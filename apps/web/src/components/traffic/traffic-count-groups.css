@@ -1,0 +1,130 @@
+.traffic-series-toolbar {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+.traffic-series-toolbar .traffic-muted {
+  margin: 0;
+}
+.traffic-series-list {
+  display: grid;
+  gap: 12px;
+}
+.traffic-count-series {
+  border: 1px solid var(--line, #d8dfd0);
+  border-radius: 12px;
+  padding: 14px;
+  background: #fffefa;
+  min-width: 0;
+}
+.traffic-count-series > summary {
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.traffic-count-series > summary > strong {
+  margin-right: 10px;
+  color: var(--ink, #183f3c);
+}
+.traffic-count-series > summary > small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted, #65776e);
+}
+.traffic-interval-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  list-style: none;
+  margin: 12px 0;
+  padding: 0;
+}
+.traffic-interval-button {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 44px;
+  text-align: left;
+  padding: 12px;
+  border: 1px solid var(--line, #d8dfd0);
+  border-radius: 8px;
+  background: #fffefa;
+  color: var(--ink, #183f3c);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.traffic-interval-button[aria-pressed="true"] {
+  border-color: #296e5c;
+  background: #eaf2e9;
+}
+.traffic-interval-button small {
+  color: var(--muted, #65776e);
+}
+.traffic-interval-action {
+  color: #205f51;
+  font-weight: 600;
+}
+.traffic-interval-button:focus-visible,
+.traffic-count-series > summary:focus-visible {
+  outline: 3px solid #2b806a;
+  outline-offset: 3px;
+}
+.traffic-series-apply {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid var(--line, #d8dfd0);
+  border-radius: 12px;
+  background: #f3f6ef;
+}
+.traffic-series-apply fieldset {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.traffic-series-preview {
+  display: grid;
+  gap: 10px;
+  overflow-wrap: anywhere;
+}
+.traffic-series-preview > p {
+  margin: 0;
+}
+.traffic-series-preview ul {
+  padding-left: 20px;
+}
+.traffic-series-preview details {
+  max-height: 260px;
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid var(--line, #d8dfd0);
+  border-radius: 8px;
+}
+.traffic-count-map {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.traffic-count-map .traffic-network-map {
+  min-width: 0;
+}
+@media (max-width: 650px) {
+  .traffic-interval-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .traffic-count-series {
+    padding: 12px;
+  }
+  .traffic-count-series > summary > span {
+    display: block;
+    margin-top: 6px;
+  }
+  .traffic-series-apply {
+    padding: 12px;
+  }
+  .traffic-series-apply .button {
+    width: 100%;
+    white-space: normal;
+    min-height: 44px;
+  }
+}

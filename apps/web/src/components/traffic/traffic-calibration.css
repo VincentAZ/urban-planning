@@ -1,0 +1,81 @@
+.traffic-validation-groups {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0 24px;
+}
+.traffic-validation-group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 240px);
+  gap: 8px 18px;
+  background: #f6f6ef;
+  border: 1px solid #dce1d4;
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 0;
+}
+.traffic-validation-group p {
+  margin: 4px 0;
+}
+.traffic-validation-group small {
+  color: #795a2d;
+}
+.traffic-validation-group details {
+  grid-column: 1 / -1;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.traffic-validation-group summary,
+.traffic-validation-readiness summary {
+  cursor: pointer;
+  padding: 6px 0;
+}
+.traffic-validation-group ul {
+  max-height: 240px;
+  overflow: auto;
+  padding-left: 20px;
+}
+.traffic-validation-group li {
+  margin-bottom: 8px;
+}
+.traffic-validation-readiness {
+  margin: 16px 0;
+  padding: 12px;
+  background: #faf1dc;
+  border-radius: 10px;
+  font-size: 12px;
+}
+.traffic-count-steps {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 16px;
+}
+.traffic-count-steps a {
+  padding: 9px 12px;
+  background: #eff3e9;
+  border-radius: 20px;
+  color: #285f4c;
+  text-decoration: none;
+  font-size: 12px;
+}
+.traffic-count-steps a:focus-visible {
+  outline: 3px solid #559b79;
+  outline-offset: 3px;
+}
+.traffic-calibration fieldset {
+  min-width: 0;
+}
+.traffic-workbench .traffic-calibration > fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .traffic-validation-group {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 12px;
+  }
+  .traffic-validation-group details {
+    grid-column: 1;
+  }
+}

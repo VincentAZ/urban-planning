@@ -1,0 +1,311 @@
+.fiscal-workbench {
+  display: grid;
+  gap: 20px;
+  color: #25483e;
+  overflow-wrap: break-word;
+}
+.modal:has(> .fiscal-dialog-body) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.modal:has(> .fiscal-dialog-body) > .modal-heading {
+  flex: 0 0 auto;
+  margin-bottom: 12px;
+}
+.modal:has(> .fiscal-dialog-body) > .fiscal-dialog-body {
+  min-height: 0;
+  grid-auto-rows: max-content;
+  align-content: start;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-right: 3px;
+}
+.fiscal-workbench > p,
+.fiscal-workbench p {
+  line-height: 1.55;
+}
+.fiscal-workbench fieldset {
+  min-width: 0;
+  border: 1px solid #dce4d5;
+  border-radius: 10px;
+  padding: 16px;
+}
+.fiscal-workbench legend {
+  padding: 0 7px;
+  font-weight: 650;
+}
+.fiscal-workbench button:focus-visible,
+.fiscal-workbench summary:focus-visible,
+.fiscal-workbench input:focus-visible,
+.fiscal-workbench select:focus-visible,
+.fiscal-workbench textarea:focus-visible {
+  outline: 3px solid #357f71;
+  outline-offset: 3px;
+}
+.fiscal-tabs,
+.fiscal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.fiscal-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: #fffef9;
+  padding-top: 8px;
+  border-bottom: 1px solid #dce4d5;
+  padding-bottom: 12px;
+}
+.fiscal-tabs button[aria-pressed="true"] {
+  background: #265a4c;
+  color: #fffef7;
+}
+.fiscal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 20px;
+}
+.fiscal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.fiscal-field > label {
+  font-size: 13px;
+  font-weight: 650;
+}
+.fiscal-field > small,
+.fiscal-muted {
+  color: #63736b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.fiscal-field input,
+.fiscal-field textarea,
+.fiscal-field select {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 11px;
+  border: 1px solid #cbd6c5;
+  border-radius: 7px;
+  background: #fffef9;
+  color: #25483e;
+  font: inherit;
+}
+.fiscal-field textarea {
+  min-height: 78px;
+  resize: vertical;
+}
+.fiscal-section {
+  display: grid;
+  gap: 15px;
+}
+.fiscal-section h3,
+.fiscal-section h4 {
+  margin: 0;
+}
+.fiscal-source,
+.fiscal-case,
+.fiscal-library-item {
+  border: 1px solid #dce4d5;
+  border-radius: 10px;
+  padding: 15px;
+  display: grid;
+  gap: 12px;
+  background: #fafbf5;
+}
+.fiscal-section-title {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 14px;
+}
+.fiscal-section-title p {
+  margin: 5px 0 0;
+}
+.fiscal-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.fiscal-summary > div {
+  border: 1px solid #d7e3d0;
+  background: #f0f5e8;
+  border-radius: 10px;
+  padding: 14px;
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+.fiscal-summary strong {
+  font-size: clamp(18px, 2.1vw, 25px);
+  overflow-wrap: anywhere;
+}
+.fiscal-summary span {
+  font-size: 12px;
+  color: #516a5e;
+}
+.fiscal-workbench .check-row {
+  gap: 12px;
+  align-items: start;
+  line-height: 1.5;
+}
+.fiscal-workbench .check-row input {
+  margin-top: 5px;
+  flex: 0 0 auto;
+}
+.fiscal-table-scroll {
+  overflow-x: auto;
+  border: 1px solid #dce4d5;
+  border-radius: 8px;
+}
+.fiscal-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+  min-width: 600px;
+}
+.fiscal-table th,
+.fiscal-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e9dd;
+  text-align: right;
+  vertical-align: top;
+}
+.fiscal-table th:first-child,
+.fiscal-table td:first-child {
+  text-align: left;
+}
+.fiscal-table th {
+  background: #edf3e6;
+  color: #345648;
+}
+.fiscal-table caption {
+  text-align: left;
+  font-weight: 650;
+  padding: 12px;
+}
+.fiscal-table td {
+  font-variant-numeric: tabular-nums;
+}
+.fiscal-table tr:last-child td {
+  border-bottom: 0;
+}
+.fiscal-workbench details > summary {
+  cursor: pointer;
+  padding: 9px 0;
+  font-weight: 650;
+}
+.fiscal-workbench details[open] > summary {
+  margin-bottom: 10px;
+}
+.fiscal-workbench .fiscal-footer {
+  position: sticky;
+  bottom: 0;
+  padding: 12px 0;
+  background: #fffef9;
+  border-top: 1px solid #dce4d5;
+  z-index: 2;
+}
+.fiscal-panel {
+  border: 1px solid #d8e3d0;
+  border-radius: 12px;
+  padding: 15px;
+  background: #f3f7ed;
+  margin: 12px 0;
+}
+.fiscal-panel h3 {
+  margin: 0 0 8px;
+}
+.fiscal-panel p {
+  line-height: 1.5;
+  font-size: 13px;
+}
+.fiscal-mobile-rows {
+  display: none;
+}
+.fiscal-case-grid {
+  display: grid;
+  grid-template-columns: minmax(110px, 1fr) repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: end;
+}
+.fiscal-error {
+  color: #8b392c;
+  background: #fff2e9;
+  border: 1px solid #eacbb7;
+  border-radius: 8px;
+  padding: 12px;
+  line-height: 1.5;
+}
+@media (max-width: 600px) {
+  .fiscal-grid,
+  .fiscal-summary {
+    grid-template-columns: 1fr;
+  }
+  .fiscal-summary > div {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+  .fiscal-summary strong {
+    font-size: 22px;
+  }
+  .fiscal-workbench fieldset {
+    padding: 12px;
+  }
+  .fiscal-tabs button {
+    flex: 0 0 auto;
+    min-height: 40px;
+  }
+  .fiscal-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-height: 64px;
+    align-items: center;
+    scrollbar-width: thin;
+  }
+  .modal:has(> .fiscal-dialog-body) > .modal-heading h2 {
+    font-size: 18px;
+  }
+  .modal:has(> .fiscal-dialog-body) > .modal-heading p {
+    display: none;
+  }
+  .fiscal-case-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fiscal-case-grid > span {
+    grid-column: 1 / -1;
+  }
+  .fiscal-table-desktop {
+    display: none;
+  }
+  .fiscal-mobile-rows {
+    display: grid;
+    gap: 10px;
+  }
+  .fiscal-mobile-row {
+    border: 1px solid #dce4d5;
+    border-radius: 9px;
+    padding: 12px;
+  }
+  .fiscal-mobile-row dl {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    margin: 8px 0 0;
+    gap: 8px;
+    font-size: 12px;
+  }
+  .fiscal-mobile-row dd {
+    margin: 0;
+    text-align: right;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+  }
+  .fiscal-workbench .fiscal-footer {
+    padding-bottom: 6px;
+  }
+}

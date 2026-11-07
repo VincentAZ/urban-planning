@@ -1,0 +1,563 @@
+.tour-overlay {
+  position: fixed;
+  inset: 0;
+  background: #163d36a6;
+  z-index: 140;
+}
+.tour-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 141;
+  background: #fafbf6;
+  color: #24453b;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  font-size: 15px;
+}
+.tour-dialog:fullscreen {
+  width: 100vw;
+  height: 100dvh;
+}
+.tour-dialog button,
+.tour-dialog input,
+.tour-dialog select,
+.tour-dialog textarea {
+  font: inherit;
+}
+.tour-dialog button,
+.tour-dialog select {
+  min-height: 42px;
+}
+.tour-dialog :focus-visible {
+  outline: 3px solid #287765;
+  outline-offset: 3px;
+}
+.tour-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 19px 28px;
+  border-bottom: 1px solid #dce4d5;
+  background: #fffef9;
+  flex-shrink: 0;
+}
+.tour-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #667957;
+}
+.tour-header h2 {
+  font-size: clamp(20px, 2.4vw, 32px);
+  line-height: 1.15;
+  margin: 4px 0 7px;
+  overflow-wrap: anywhere;
+}
+.tour-header p {
+  margin: 0;
+  font-size: 12px;
+  color: #65765f;
+}
+.tour-header-actions,
+.tour-field-actions,
+.tour-footer > div,
+.tour-stop-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.tour-header-actions {
+  flex-shrink: 0;
+}
+.tour-body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 32%);
+}
+.tour-stage {
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  background: #e9e7dc;
+}
+.tour-stage > .city-map {
+  height: 100%;
+}
+.tour-map-label {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  max-width: calc(100% - 90px);
+  padding: 9px 12px;
+  border: 1px solid #d9e0d1;
+  background: #fffef4ed;
+  border-radius: 7px;
+  font-size: 12px;
+  pointer-events: none;
+}
+.tour-map-label span:first-child {
+  font-weight: 700;
+}
+.tour-camera-notice {
+  position: absolute;
+  left: 20px;
+  bottom: 48px;
+  max-width: calc(100% - 110px);
+  background: #fffef4f5;
+  border: 1px solid #d9e0d1;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 12px;
+}
+.tour-story {
+  min-width: 0;
+  overflow: auto;
+  padding: 30px;
+  background: #fffef9;
+  border-left: 1px solid #dce4d5;
+  scrollbar-gutter: stable;
+}
+.tour-story > h2 {
+  font-size: clamp(27px, 2.8vw, 42px);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  margin: 15px 0 20px;
+  overflow-wrap: anywhere;
+}
+.tour-callout {
+  font-size: clamp(17px, 1.4vw, 22px);
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.tour-evidence-note {
+  padding: 13px 0;
+  margin: 15px 0;
+  border-top: 1px solid #e2e7d9;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #65765f;
+}
+.tour-narration {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+}
+.tour-narration .field {
+  width: 100%;
+  margin: 0;
+}
+.tour-dialog details {
+  width: 100%;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.tour-dialog summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 8px 0;
+}
+.tour-dialog details p {
+  white-space: pre-wrap;
+}
+.tour-dialog details ul {
+  padding-left: 19px;
+}
+.tour-metrics > h3 {
+  margin: 30px 0 16px;
+  font-size: 16px;
+}
+.tour-metric {
+  background: #f6f8f0;
+  border: 1px solid #dce5d3;
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 14px;
+  min-width: 0;
+}
+.tour-metric h4 {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+.tour-metric > strong {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.tour-metric > strong small {
+  font-size: 12px;
+  font-weight: 400;
+}
+.tour-metric table {
+  width: 100%;
+  table-layout: fixed;
+  margin: 15px 0;
+  border-collapse: collapse;
+}
+.tour-metric th,
+.tour-metric td {
+  text-align: left;
+  padding: 7px 4px 7px 0;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.tour-metric th {
+  color: #65765f;
+  font-weight: 500;
+}
+.tour-metric td {
+  border-top: 1px solid #dce5d3;
+}
+.tour-metric-status {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #796b46;
+}
+.tour-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 14px 26px;
+  flex-shrink: 0;
+  background: #fffef9;
+  border-top: 1px solid #dce4d5;
+}
+.tour-footer p {
+  font-size: 13px;
+  margin: 0;
+}
+.tour-footer select {
+  max-width: 260px;
+  border: 1px solid #d3ddcb;
+  border-radius: 6px;
+  background: #fffef9;
+  color: #24453b;
+  padding: 7px;
+}
+.tour-navigation {
+  flex-wrap: nowrap !important;
+  min-width: 0;
+}
+.tour-navigation label {
+  min-width: 0;
+}
+.tour-navigation select {
+  width: 100%;
+}
+.tour-editing .tour-body {
+  grid-template-columns: 230px minmax(0, 1fr) 360px;
+}
+.tour-editing .tour-story {
+  padding: 22px;
+}
+.tour-outline {
+  min-width: 0;
+  padding: 22px 17px;
+  border-right: 1px solid #dce4d5;
+  overflow: auto;
+  background: #f5f7ed;
+}
+.tour-outline ol {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+.tour-outline li {
+  margin-bottom: 8px;
+}
+.tour-outline li button {
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  text-align: left;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: #24453b;
+  overflow-wrap: anywhere;
+}
+.tour-outline li button.active {
+  background: #fffef9;
+  border-color: #b8cbaa;
+  box-shadow: 0 3px 10px #193b3010;
+}
+.tour-outline li button span {
+  color: #6e855f;
+  font-size: 11px;
+}
+.tour-stop-actions {
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.tour-stop-actions > span {
+  margin-right: auto;
+  color: #65765f;
+  font-size: 12px;
+}
+.tour-dialog .field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+  min-width: 0;
+}
+.tour-dialog .field > span {
+  font-size: 12px;
+  font-weight: 600;
+}
+.tour-dialog .field input,
+.tour-dialog .field select,
+.tour-dialog textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 10px;
+  color: #24453b;
+  background: #fff;
+  border: 1px solid #ccd9c4;
+  border-radius: 5px;
+}
+.tour-dialog textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+.tour-dialog fieldset {
+  border: 0;
+  border-top: 1px solid #dde6d5;
+  margin: 24px 0 0;
+  padding: 18px 0 0;
+  min-width: 0;
+}
+.tour-dialog legend {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 9px 0 0;
+}
+.tour-number-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 12px;
+}
+.tour-field-actions .button {
+  font-size: 12px;
+}
+.tour-metric-picker > label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 8px 0;
+  font-size: 13px;
+}
+.tour-metric-picker input {
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.tour-empty {
+  padding: 40px 0;
+  line-height: 1.6;
+}
+.tour-confirm {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 28px;
+  background: #fcf3d9;
+  border-bottom: 1px solid #e9d59f;
+  flex-shrink: 0;
+}
+.tour-confirm span {
+  margin-right: auto;
+}
+.tour-message {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 10px 28px;
+}
+@media (min-width: 1800px) {
+  .tour-header,
+  .tour-footer {
+    padding-inline: 40px;
+  }
+  .tour-story {
+    padding: 44px;
+  }
+  .tour-dialog {
+    font-size: 18px;
+  }
+  .tour-story > h2 {
+    font-size: 48px;
+  }
+  .tour-callout {
+    font-size: 24px;
+  }
+}
+@media (max-width: 1100px) {
+  .tour-editing .tour-body {
+    grid-template-columns: 190px minmax(0, 1fr) 310px;
+  }
+  .tour-story {
+    padding: 22px;
+  }
+  .tour-header {
+    padding: 15px 20px;
+  }
+  .tour-header-actions .button {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .tour-footer {
+    padding: 12px 20px;
+  }
+}
+@media (max-width: 800px) {
+  .tour-header {
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .tour-header h2 {
+    font-size: 21px;
+  }
+  .tour-header-actions {
+    gap: 6px;
+    max-width: 145px;
+    justify-content: flex-end;
+  }
+  .tour-header-actions .button span {
+    display: none;
+  }
+  .tour-body,
+  .tour-editing .tour-body {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+  }
+  .tour-stage {
+    flex: 0 0 42dvh;
+    min-height: 260px;
+    order: 0;
+  }
+  .tour-story {
+    overflow: visible;
+    border-left: 0;
+    order: 2;
+    padding: 24px;
+  }
+  .tour-outline {
+    overflow: visible;
+    order: 1;
+    padding: 18px 24px;
+    border-right: 0;
+  }
+  .tour-outline ol {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin: 12px 0;
+    padding: 3px;
+  }
+  .tour-outline li {
+    flex: 0 0 160px;
+  }
+  .tour-outline .full-width {
+    width: auto;
+  }
+  .tour-callout {
+    font-size: 19px;
+  }
+  .tour-story > h2 {
+    font-size: 31px;
+  }
+  .tour-footer {
+    flex-wrap: wrap;
+    gap: 9px;
+    padding: 10px 14px;
+  }
+  .tour-navigation {
+    flex: 1;
+  }
+  .tour-navigation label {
+    flex: 1;
+  }
+  .tour-navigation select {
+    max-width: none;
+  }
+  .tour-playback {
+    width: 100%;
+    justify-content: space-between;
+    gap: 6px !important;
+  }
+  .tour-playback .button,
+  .tour-playback select {
+    font-size: 12px;
+    padding-inline: 8px;
+  }
+  .tour-footer > p {
+    font-size: 12px;
+  }
+  .tour-confirm {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 430px) {
+  .tour-header {
+    padding: 12px;
+  }
+  .tour-header-actions {
+    max-width: 120px;
+  }
+  .tour-header h2 {
+    font-size: 19px;
+  }
+  .tour-header p {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+  .tour-eyebrow {
+    font-size: 9px;
+  }
+  .tour-story,
+  .tour-editing .tour-story,
+  .tour-outline {
+    padding: 20px;
+  }
+  .tour-footer .button {
+    font-size: 12px;
+  }
+}
+
+.tour-source {
+  margin-block: 10px;
+}
+.tour-source p {
+  margin-block: 5px;
+}
+.tour-coverage {
+  margin-top: 26px;
+  border-top: 1px solid #dde6d5;
+  padding-top: 12px;
+}
+
+.tour-outline li button span {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
