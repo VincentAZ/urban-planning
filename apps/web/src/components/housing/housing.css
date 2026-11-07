@@ -1,0 +1,436 @@
+.housing-dialog-body button,
+.housing-panel button,
+.housing-published button,
+.housing-confirm button {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #b8cabe;
+  border-radius: 10px;
+  background: #fff;
+  color: #203f31;
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.35;
+  cursor: pointer;
+}
+.housing-dialog-body button:enabled:hover,
+.housing-panel button:enabled:hover,
+.housing-published button:enabled:hover,
+.housing-confirm button:enabled:hover {
+  background: #edf4ef;
+  border-color: #648e76;
+}
+.housing-dialog-body button.housing-primary {
+  background: #20523f;
+  border-color: #20523f;
+  color: #fff;
+}
+.housing-dialog-body button.housing-primary:enabled:hover {
+  background: #163f2e;
+  border-color: #163f2e;
+}
+.housing-dialog-body button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.housing-dialog-body :is(button, input, select, summary):focus-visible,
+.housing-published :is(button, summary, a):focus-visible,
+.housing-panel button:focus-visible {
+  outline: 3px solid #8aaf94;
+  outline-offset: 3px;
+}
+.housing-dialog-body summary {
+  cursor: pointer;
+  padding: 10px 0;
+  font-weight: 600;
+}
+.housing-dialog-body .check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 14px 0;
+  line-height: 1.5;
+}
+.housing-dialog-body input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  margin-top: 3px;
+  accent-color: #20523f;
+}
+.housing-panel {
+  padding: 1rem;
+  border: 1px solid var(--border, #dce4df);
+  border-radius: 14px;
+  background: #f1f7f2;
+  margin-bottom: 1rem;
+}
+.housing-panel > div,
+.housing-result-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.housing-panel p {
+  margin: 0.65rem 0;
+}
+.modal:has(> .housing-dialog-body) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: calc(100dvh - 32px);
+}
+.modal:has(> .housing-dialog-body) > .modal-heading {
+  flex: none;
+  margin-bottom: 8px;
+}
+.housing-dialog-body {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.housing-tabs {
+  display: flex;
+  gap: 5px;
+  flex: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-height: 58px;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid #dce4df;
+}
+.housing-tabs button {
+  flex: 0 0 auto;
+  min-height: 44px;
+  white-space: nowrap;
+}
+.housing-tabs button[aria-current] {
+  background: #173e35;
+  color: white;
+}
+.housing-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  grid-auto-rows: max-content;
+  align-content: start;
+  gap: 16px;
+  padding: 12px 4px 20px;
+}
+.housing-work-fields {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.housing-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.housing-field {
+  display: grid;
+  align-content: start;
+  gap: 5px;
+  min-width: 0;
+  font-weight: 600;
+}
+.housing-field small {
+  font-weight: 400;
+  line-height: 1.4;
+  color: #53655c;
+}
+.housing-field input,
+.housing-field select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #b8cabe;
+  border-radius: 10px;
+  background: #fff;
+  color: #20362b;
+  font: inherit;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.housing-field :is(input, select):disabled {
+  background: #edf1ee;
+  color: #65766b;
+}
+.housing-search-primary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 12px;
+}
+.housing-search-filters {
+  margin-top: 10px;
+  color: #425e4e;
+}
+.housing-search-filters .housing-fields {
+  padding: 8px 0 12px;
+}
+.housing-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.housing-actions > .housing-field {
+  flex: 1;
+  min-width: 180px;
+}
+.housing-card {
+  border: 1px solid #d4dfd6;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+  min-width: 0;
+  margin: 12px 0;
+}
+.housing-card h4 {
+  margin: 0 0 12px;
+}
+.housing-area-list {
+  list-style: none;
+  padding: 0;
+}
+.housing-area-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid #e1e7e2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.housing-area-list small,
+.housing-group-list small {
+  display: block;
+  margin-top: 5px;
+  font-weight: 400;
+}
+.housing-table-scroll {
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid #dce4df;
+  border-radius: 10px;
+  margin: 12px 0;
+}
+.housing-table-scroll table {
+  min-width: 570px;
+  width: 100%;
+  border-collapse: collapse;
+}
+.housing-table-scroll td,
+.housing-table-scroll th {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #e5ebe6;
+  white-space: nowrap;
+}
+.housing-table-scroll caption {
+  text-align: left;
+  padding: 10px;
+  font-weight: 600;
+}
+.housing-area-evidence pre,
+.housing-results pre {
+  max-height: 300px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.housing-group-layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 16px;
+}
+.housing-group-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  max-height: 420px;
+  overflow: auto;
+}
+.housing-group-list button {
+  text-align: left;
+  flex: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.housing-group-list [aria-pressed="true"] {
+  border-color: #276b52;
+  background: #eef6ef;
+}
+.housing-group-editor {
+  min-width: 0;
+}
+.housing-cost {
+  margin: 14px 0;
+  border: 1px solid #dce4df;
+  border-radius: 10px;
+  padding: 14px;
+  min-width: 0;
+}
+.housing-cost legend {
+  font-weight: 700;
+}
+.housing-cost details {
+  margin-top: 12px;
+}
+.housing-capacity {
+  background: #edf4ef;
+  border-radius: 8px;
+  padding: 12px;
+}
+.housing-summary {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+.housing-summary > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(100px, 1fr);
+  gap: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e7ece8;
+}
+.housing-summary dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.housing-summary dt {
+  color: #53655c;
+}
+.housing-band-cards {
+  display: grid;
+  gap: 12px;
+}
+.housing-comparison {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+.housing-comparison dd {
+  margin: 6px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.housing-comparison small {
+  font-size: 0.8rem;
+  color: #53655c;
+}
+.housing-group-results summary {
+  cursor: pointer;
+  font-weight: 650;
+}
+.housing-footer {
+  flex: none;
+  background: #f4f8f5;
+  border-top: 1px solid #cfdcd2;
+  padding: 10px 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.housing-footer > div:first-child {
+  font-size: 0.85rem;
+  color: #526359;
+}
+.housing-confirm {
+  padding: 16px;
+  background: #fff4dc;
+  border: 1px solid #c8a767;
+  border-radius: 10px;
+  flex: none;
+}
+.housing-confirm button {
+  margin-right: 8px;
+}
+.housing-published {
+  min-width: 0;
+}
+.housing-published code {
+  overflow-wrap: anywhere;
+}
+.housing-empty {
+  padding: 2rem;
+  color: #53655c;
+}
+.housing-results > section,
+.housing-area-evidence {
+  min-width: 0;
+}
+.housing-intro {
+  margin: 0;
+  color: #435b4e;
+  line-height: 1.5;
+}
+@media (max-width: 650px) {
+  .modal:has(> .housing-dialog-body) {
+    max-height: calc(100dvh - 16px);
+    padding: 14px;
+  }
+  .modal:has(> .housing-dialog-body) > .modal-heading p {
+    display: none;
+  }
+  .housing-tabs {
+    min-height: 60px;
+  }
+  .housing-fields,
+  .housing-group-layout,
+  .housing-search-primary {
+    grid-template-columns: 1fr;
+  }
+  .housing-group-list {
+    max-height: 180px;
+  }
+  .housing-area-list li {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .housing-footer {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .housing-footer .housing-actions {
+    gap: 6px;
+  }
+  .housing-footer button {
+    flex: 1;
+    min-height: 44px;
+  }
+  .housing-summary > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .housing-summary dd {
+    text-align: left;
+  }
+  .housing-card {
+    padding: 12px;
+  }
+  .housing-comparison {
+    gap: 8px;
+  }
+  .housing-comparison dd {
+    font-size: 1.3rem;
+  }
+  .housing-published h2 {
+    font-size: 1.3rem;
+  }
+}

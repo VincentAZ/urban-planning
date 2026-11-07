@@ -40,6 +40,11 @@ import {
   fiscalOfferSchema,
   fiscalProjectIssues,
 } from "./fiscal";
+import {
+  housingAffordabilityScenarioSchema,
+  housingIncomeLimitCatalogSchema,
+  housingProjectIssues,
+} from "./housing";
 export {
   workforceScenarioSchema,
   workforceCaptureSchema,
@@ -512,8 +517,15 @@ export const scenarioSchema = z.object({
   flood: floodReferenceSchema.optional(),
   traffic: trafficScenarioSchema.optional(),
   fiscal: fiscalScenarioSchema.optional(),
+  affordability: housingAffordabilityScenarioSchema.optional(),
 });
 export const commandSchema = z.discriminatedUnion("type", [
+  z
+    .object({
+      type: z.literal("scenario.affordability"),
+      affordability: housingAffordabilityScenarioSchema.nullable(),
+    })
+    .strict(),
   z
     .object({
       type: z.literal("scenario.fiscal"),
@@ -648,9 +660,11 @@ export const projectSchema = z
       z.literal(10),
       z.literal(11),
       z.literal(12),
+      z.literal(13),
     ]),
     floodDatasets: floodDatasetCatalogSchema.optional(),
     fiscalStudy: fiscalStudySchema.optional(),
+    housingIncomeLimits: housingIncomeLimitCatalogSchema.optional(),
     baselineMigration: z
       .object({
         kind: z.literal("legacy-source-adoption"),
@@ -660,6 +674,10 @@ export const projectSchema = z
       .optional(),
   })
   .superRefine((project, context) => {
+    for (const message of housingProjectIssues(
+      project as import("./index").Project,
+    ))
+      context.addIssue({ code: "custom", message });
     for (const message of fiscalProjectIssues(
       project as import("./index").Project,
     ))
@@ -829,7 +847,8 @@ export const projectSchema = z
       baseline.workforce !== undefined ||
       baseline.accessibility !== undefined ||
       baseline.traffic !== undefined ||
-      baseline.fiscal !== undefined
+      baseline.fiscal !== undefined ||
+      baseline.affordability !== undefined
     )
       context.addIssue({
         code: "custom",

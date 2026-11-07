@@ -34,7 +34,7 @@ describe.skipIf(!process.env.TEST_DATABASE_URL)(
               "SELECT app_security_runtime_configuration() c",
             )
           ).rows[0].c.securityVersion,
-        ).toBe(20);
+        ).toBe(21);
         const outcome = await exerciseFloodApi(f);
         await exerciseFloodMethodApi(f);
         const web = new pg.Pool({ connectionString: fixture.webURL, max: 1 });

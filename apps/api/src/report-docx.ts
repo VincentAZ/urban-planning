@@ -1,4 +1,9 @@
 import {
+  housingReportInventory,
+  housingReportDisclosure,
+  assertHousingDocumentLimit,
+} from "./report-housing";
+import {
   trafficReportInventory,
   trafficReportDisclosure,
   trafficSubtotalDisclosure,
@@ -170,6 +175,7 @@ export async function renderStaffDocx(
 ): Promise<Buffer> {
   assertReportSnapshot(snapshot);
   assertFiscalDocumentLimit(snapshot);
+  assertHousingDocumentLimit(snapshot);
   assertRetailDocumentLimit(snapshot);
   assertWorkforceDocumentLimit(snapshot);
   assertAccessibilityDocumentLimit(snapshot);
@@ -179,6 +185,7 @@ export async function renderStaffDocx(
   const presentation = presentationReportOutline(snapshot);
   const activity = activityReportInventory(snapshot);
   const fiscal = fiscalReportInventory(snapshot);
+  const housing = housingReportInventory(snapshot);
   const retail = retailReportInventory(snapshot);
   const workforce = workforceReportInventory(snapshot);
   const accessibility = accessibilityReportInventory(snapshot);
@@ -411,6 +418,86 @@ export async function renderStaffDocx(
             true,
           ),
         ),
+      );
+  }
+  if (housing) {
+    children.push(
+      heading("Housing affordability", 1, true),
+      paragraph(housingReportDisclosure, true),
+      heading("Homes within each income ceiling", 2),
+      table(
+        [
+          "Income ceiling",
+          "Baseline",
+          "Proposal",
+          "Change",
+          "Known subtotal baseline / proposal",
+        ],
+        housing.summaryRows,
+        [3200, 1500, 1500, 1500, 2620],
+      ),
+      paragraph(
+        "Cumulative counts overlap; do not add them. Known subtotals describe only the evaluated homes and are not complete totals.",
+        true,
+      ),
+      heading("Lowest affordable income ceiling", 2),
+      table(
+        [
+          "Exclusive band",
+          "Baseline",
+          "Proposal",
+          "Known subtotal baseline / proposal",
+        ],
+        housing.bandRows,
+        [4100, 1600, 1600, 3020],
+      ),
+      heading("Completeness of the comparison", 2),
+      table(
+        [
+          "Side",
+          "Total homes",
+          "Evaluated",
+          "Unassigned",
+          "Unresolved assigned",
+          "Buildings with unknown units",
+        ],
+        housing.coverageRows,
+        [1500, 1500, 1500, 1700, 1900, 2220],
+      ),
+      ...housing.context.map((note) => paragraph(note, true)),
+    );
+    for (const panel of housing.panels)
+      children.push(
+        heading(panel.title, 2, true),
+        ...panel.context.map((note) => paragraph(note, true)),
+        table(
+          ["Cost component", "Monthly USD or inclusion"],
+          panel.costRows.map((row) => row.slice(0, 2)),
+          [4700, 5620],
+        ),
+        heading("Cost evidence", 3),
+        ...panel.costRows.map((row) => paragraph(`${row[0]}: ${row[2]}`, true)),
+        table(
+          ["Published ceiling", "Annual USD", "Cost comparison"],
+          panel.thresholdRows,
+          [4400, 2600, 3320],
+        ),
+      );
+    children.push(heading("Housing evidence and income limits", 2, true));
+    for (const evidence of housing.evidence)
+      children.push(
+        heading(evidence.title, 3),
+        table(
+          [
+            "Household size",
+            "Extremely low income",
+            "Very low income",
+            "Low income",
+          ],
+          evidence.rows,
+          [2000, 3000, 2660, 2660],
+        ),
+        ...evidence.notes.map((note) => paragraph(note, true)),
       );
   }
   if (fiscal) {

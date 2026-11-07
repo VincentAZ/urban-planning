@@ -19,6 +19,7 @@ export async function createCollaborationApi(
     workforceFixture?: boolean;
     accessibilityFixture?: boolean;
     floodFixture?: boolean;
+    housingFixture?: boolean;
     floodPartialFixture?: boolean;
     gisNativeFixture?: boolean;
     gisFixture?: boolean;
@@ -81,6 +82,7 @@ export async function createCollaborationApi(
           ? ["--flood-fixture"]
           : []),
         ...(options.floodPartialFixture ? ["--flood-partial"] : []),
+        ...(options.housingFixture ? ["--housing-fixture"] : []),
         ...(options.gisNativeFixture ? ["--gis-native"] : []),
         ...(options.gisFixture ? ["--gis-fixture"] : []),
         ...(options.trafficNativeFixture ? ["--traffic-native"] : []),

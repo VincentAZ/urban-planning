@@ -54,3 +54,4 @@ export * from "./accessibility";
 
 export * from "./flood";
 export * from "./fiscal";
+export * from "./housing";

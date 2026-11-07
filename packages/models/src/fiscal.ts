@@ -12,6 +12,8 @@ import {
   projectWithImportedAccessibility,
   projectWithImportedTraffic,
   projectWithImportedFlood,
+  projectWithImportedHousing,
+  projectWithHousingVersion,
   type Assumptions,
   type FiscalProfile,
   type FiscalStudy,
@@ -100,6 +102,9 @@ export function createFiscalStudy(input: {
     ...(project.floodDatasets
       ? { floodDatasets: structuredClone(project.floodDatasets) }
       : {}),
+    ...(project.housingIncomeLimits
+      ? { housingIncomeLimits: structuredClone(project.housingIncomeLimits) }
+      : {}),
     fiscalStudy: {
       version: 1,
       methodVersion: FISCAL_METHOD_VERSION,
@@ -123,9 +128,15 @@ export function createFiscalStudy(input: {
       },
     },
   };
-  const imported = projectWithImportedFlood(
-    projectWithImportedTraffic(
-      projectWithImportedAccessibility(projectWithImportedWorkforce(result)),
+  const imported = projectWithHousingVersion(
+    projectWithImportedHousing(
+      projectWithImportedFlood(
+        projectWithImportedTraffic(
+          projectWithImportedAccessibility(
+            projectWithImportedWorkforce(result),
+          ),
+        ),
+      ),
     ),
   );
   const issues = fiscalProjectIssues(imported, place);

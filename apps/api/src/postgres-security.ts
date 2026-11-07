@@ -189,6 +189,14 @@ export async function installPostgresSecurity(
       )
     ).replaceAll("__SCHEMA__", identifier(context.schema)),
   );
+  await client.query(
+    (
+      await readFile(
+        new URL("../migrations/021-housing-security.sql", import.meta.url),
+        "utf8",
+      )
+    ).replaceAll("__SCHEMA__", identifier(context.schema)),
+  );
 }
 
 /** Runtime startup check; never performs migrations or privilege changes. */
@@ -218,7 +226,7 @@ export async function assertPostgresRuntimeRole(
   ).rows[0];
   if (
     configuration.schema !== location.schema ||
-    configuration.securityVersion !== 20
+    configuration.securityVersion !== 21
   )
     throw new Error(
       "Runtime schema or database security migration does not match the configured application.",
@@ -229,6 +237,7 @@ export async function assertPostgresRuntimeRole(
     "app_media_jobs",
     "app_media_artifacts",
     "app_flood_sources",
+    "app_housing_sources",
     "app_identity_challenges",
     "app_identity_invitations",
     "app_identity_outbox",

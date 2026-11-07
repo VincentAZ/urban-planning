@@ -154,6 +154,7 @@ export function BuildingInspector({
   flood,
   hasFlood,
   onFlood,
+  onHousing,
 }: {
   building: Building;
   editor: BuildingEditorController;
@@ -165,6 +166,7 @@ export function BuildingInspector({
   flood?: FloodBuildingExposure;
   hasFlood?: boolean;
   onFlood?: () => void;
+  onHousing?: () => void;
 }) {
   const [removing, setRemoving] = useState(false);
   const totals = buildingProgramTotals(building),
@@ -193,6 +195,11 @@ export function BuildingInspector({
         </span>
       </div>
       <h2>{building.name}</h2>
+      {onHousing && (building.units === null || (building.units ?? 0) > 0) && (
+        <button type="button" onClick={onHousing}>
+          Review this building’s housing costs
+        </button>
+      )}
       {hasFlood && <FloodBuildingContext row={flood} onOpen={onFlood} />}
       <p className="building-help">
         {building.address || "Selected building footprint"}

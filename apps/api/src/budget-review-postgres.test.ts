@@ -103,7 +103,7 @@ describe.skipIf(!url)(
             ],
           )
         ).rows[0];
-        expect(row.c.securityVersion).toBe(20);
+        expect(row.c.securityVersion).toBe(21);
         const timezone = await fixture.admin.connect();
         try {
           await timezone.query("BEGIN");

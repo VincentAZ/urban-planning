@@ -174,3 +174,7 @@ The media checkpoint passes **1,685 tests in 201 files**, including restricted P
 | `tests/e2e`       | Browser workflow checks                                                             |
 
 Next work should continue toward the full plan: production national preprocessing and tiles, authoritative parcel/zoning/employment and environmental integrations, calibrated network/model runs, complete authoring and economic-development tools, AI, enterprise identity, and production operations. There is no runtime AI service, SAML/OIDC federation, or cloud deployment provisioned by this repository yet.
+
+### Housing affordability
+
+The [housing workbench contract](docs/HOUSING.md) documents complete rental/ownership costs, household-size-specific HUD limits, source preparation, immutable evidence and exports. Catalog preparation and registry installation are explicit operator steps; API startup does not install source packs. Local verification is recorded in the implementation status.

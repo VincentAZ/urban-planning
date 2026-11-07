@@ -9,6 +9,7 @@ import type {
   IdentityInvitationRecord,
   IdentityOutboxRecord,
 } from "./identity-types.js";
+import type { HousingSourceRecord } from "./housing-types";
 import type { FloodSourceRecord } from "./flood-types";
 import { randomUUID } from "node:crypto";
 import {
@@ -151,6 +152,7 @@ export interface CommentRecord {
 export interface PublishedRecord {
   fiscalStudy?: import("@urban/core").FiscalStudy;
   floodDataset?: import("@urban/core").FloodDataset;
+  housingIncomeLimits?: import("@urban/core").HousingIncomeLimitCatalog;
   id: string;
   organizationId: string;
   projectId: string;
@@ -213,6 +215,7 @@ export type ImportRecord = ImportRecordBase &
   );
 export interface DataState {
   floodSources: FloodSourceRecord[];
+  housingSources: HousingSourceRecord[];
   schemaVersion: 1;
   identityChallenges: IdentityChallengeRecord[];
   identityInvitations: IdentityInvitationRecord[];
@@ -259,6 +262,7 @@ export interface DataState {
 // Older documents acquire the default budget through the existing emptyState merge, without modifying projects or published baselines.
 export const emptyState = (): DataState => ({
   floodSources: [],
+  housingSources: [],
   schemaVersion: 1,
   identityChallenges: [],
   identityInvitations: [],

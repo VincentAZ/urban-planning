@@ -1,3 +1,4 @@
+import { housingFixture } from "../../../packages/models/src/housing-fixture";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -375,6 +376,60 @@ describe.skipIf(process.env.MEDIA_NATIVE_TESTS !== "1")(
           fiscal.project.fiscalStudy!.lineage.projectId,
         );
         expect(JSON.stringify(frozen)).not.toContain('"historyHash"');
+        await cleanRuntime();
+      },
+      NATIVE_TIMEOUT,
+    );
+
+    it(
+      "renders a frozen housing comparison with exact selected limits and authored costs",
+      async () => {
+        const housing = housingFixture();
+        const results = calculateImpact(
+          housing.place,
+          housing.scenario,
+          {},
+          { housingIncomeLimits: housing.project.housingIncomeLimits },
+        );
+        const frozen = createMediaScene({
+          projectId: housing.project.id,
+          projectVersion: 1,
+          place: housing.place,
+          scenario: housing.scenario,
+          results,
+          housingIncomeLimits: housing.project.housingIncomeLimits,
+          createdAt: results.computedAt,
+        });
+        const recipe = defaultMediaExportRecipe(frozen, "png");
+        const result = await run(
+          recipe,
+          new AbortController(),
+          async () => {},
+          frozen,
+        );
+        const { manifest, receipts } = verify(recipe, result, frozen);
+        const png = Buffer.from(result.files["output.png"]);
+        expect(png.subarray(0, 8).toString("hex")).toBe("89504e470d0a1a0a");
+        expect(receipts[0].pixelHash).toBe(sha(png));
+        expect(frozen.housingIncomeLimits).toEqual({
+          [housing.areaHash]: housing.pack,
+        });
+        expect(frozen.scenario.affordability).toEqual(
+          housing.scenario.affordability,
+        );
+        expect(manifest.sources).toContainEqual(
+          expect.objectContaining({
+            namespace: `housing-income-limits:${housing.areaHash}`,
+            source: housing.pack.sources[0],
+          }),
+        );
+        expect(manifest.sources).toContainEqual(
+          expect.objectContaining({
+            namespace: "housing-costs",
+            source: housing.source,
+          }),
+        );
+        expect(JSON.stringify(frozen)).not.toContain('"history"');
         await cleanRuntime();
       },
       NATIVE_TIMEOUT,

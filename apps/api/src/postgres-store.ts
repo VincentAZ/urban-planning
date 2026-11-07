@@ -46,6 +46,7 @@ const tables: Record<EntityName, string> = {
   mediaArtifacts: "app_media_artifacts",
   accessibilityJobs: "app_accessibility_jobs",
   floodSources: "app_flood_sources",
+  housingSources: "app_housing_sources",
   accessibilityArtifacts: "app_accessibility_artifacts",
   gisJobs: "app_gis_jobs",
   workforceArtifacts: "app_workforce_artifacts",
@@ -508,6 +509,7 @@ export class PostgresStore implements Store {
       floodEntities,
       mediaEntities,
       fiscalEntities,
+      housingEntities,
     ] = await Promise.all([
       readFile(
         new URL("../migrations/001-foundation.sql", import.meta.url),
@@ -552,6 +554,10 @@ export class PostgresStore implements Store {
         new URL("../migrations/020-fiscal-entities.sql", import.meta.url),
         "utf8",
       ),
+      readFile(
+        new URL("../migrations/021-housing-entities.sql", import.meta.url),
+        "utf8",
+      ),
     ]);
     const client = await this.pool.connect();
     const previouslySecured = this.secured;
@@ -570,6 +576,7 @@ export class PostgresStore implements Store {
       await client.query(floodEntities);
       await client.query(mediaEntities);
       await client.query(fiscalEntities);
+      await client.query(housingEntities);
       const installedSecurity = await client.query<{ installed: boolean }>(
         "SELECT to_regclass(format('%I.app_security_config',current_schema())) IS NOT NULL AS installed",
       );

@@ -38,6 +38,10 @@ import { resolveActivity, type ActivityResolution } from "./activity";
 import { resolveRetail } from "./retail";
 import { resolveFloodExposure, type ModelContext } from "./flood";
 import { resolveFiscalStudy } from "./fiscal";
+import {
+  resolveHousingAffordability,
+  HOUSING_AFFORDABILITY_DISCLOSURE,
+} from "./housing";
 
 const ASSUMPTION_SOURCE =
   "Editable scenario assumption; starter values are illustrative, not locally calibrated";
@@ -2742,6 +2746,113 @@ export function calculateImpact(
       ];
     }
   }
+  const affordability = scenario.affordability
+    ? resolveHousingAffordability(place, scenario, context)
+    : undefined;
+  if (affordability) {
+    const missing = (
+      side: typeof affordability.baseline,
+      inventory: Building[],
+    ) => {
+      const evaluated = new Map<string, number>();
+      for (const row of side.rows)
+        if (row.status === "ready")
+          evaluated.set(
+            row.buildingId,
+            (evaluated.get(row.buildingId) ?? 0) + row.units,
+          );
+      return [
+        ...new Set([
+          ...side.unknownUnitBuildingIds,
+          ...side.rows
+            .filter((r) => r.status !== "ready")
+            .map((r) => r.buildingId),
+          ...inventory
+            .filter(
+              (b) => b.units !== null && (evaluated.get(b.id) ?? 0) < b.units,
+            )
+            .map((b) => b.id),
+        ]),
+      ];
+    };
+    const baselineMissing = missing(affordability.baseline, place.buildings),
+      proposalMissing = missing(affordability.proposal, buildings);
+    const sourceIds = [
+      ...new Set([
+        ...scenario.affordability!.sources.map((s) => s.id),
+        ...[
+          ...scenario.affordability!.baselineGroups,
+          ...scenario.affordability!.proposalGroups,
+        ].flatMap(
+          (g) =>
+            context.housingIncomeLimits?.[g.areaHash]?.sources.map(
+              (s) => s.id,
+            ) ?? [],
+        ),
+      ]),
+    ];
+    for (const [key, suffix, label] of [
+      [
+        "extremelyLow",
+        "ExtremelyLow",
+        "Homes affordable at HUD extremely-low income limit",
+      ],
+      ["veryLow", "VeryLow", "Homes affordable at HUD very-low income limit"],
+      ["low", "Low", "Homes affordable at HUD low-income limit"],
+    ] as const) {
+      add(
+        `housing.affordable${suffix}`,
+        label,
+        "Housing",
+        "units",
+        affordability.baseline.cumulative[key].estimate,
+        affordability.proposal.cumulative[key].estimate,
+        "Sum of assigned homes where complete monthly housing costs × 12 ≤ published annual income limit × 0.30",
+        "Cumulative unit count at each group's explicitly selected household size and HUD area; categories overlap and must not be added together.",
+        {
+          status: affordability.status === "ready" ? "ready" : "incomplete",
+          method: "HUD income-limit housing cost screening",
+          methodVersion: affordability.methodVersion,
+          sourceIds,
+          coverage: {
+            baseline: {
+              knownSubtotal:
+                affordability.baseline.cumulative[key].knownSubtotal,
+              missingBuildingIds: baselineMissing,
+            },
+            scenario: {
+              knownSubtotal:
+                affordability.proposal.cumulative[key].knownSubtotal,
+              missingBuildingIds: proposalMissing,
+            },
+          },
+          inputs: [
+            input(
+              "Cost-to-income screening convention",
+              0.3,
+              "Declared housing-cost screening convention",
+            ),
+            input(
+              "Review",
+              affordability.reviewState,
+              "Authored group and geography review",
+            ),
+            input(
+              "Evaluated proposal homes",
+              affordability.proposal.evaluatedUnits,
+              "Complete reviewed groups",
+            ),
+            input(
+              "Unassigned proposal homes with known quantities",
+              affordability.proposal.unassignedUnits,
+              "Mapped building inventory",
+            ),
+          ],
+          caveat: HOUSING_AFFORDABILITY_DISCLOSURE,
+        },
+      );
+    }
+  }
   return {
     scenarioId: scenario.id,
     revision: scenario.revision,
@@ -2750,5 +2861,6 @@ export function calculateImpact(
     warnings,
     modelVersion: MODEL_VERSION,
     ...(fiscal ? { fiscal } : {}),
+    ...(affordability ? { affordability } : {}),
   };
 }

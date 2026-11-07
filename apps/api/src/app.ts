@@ -1,3 +1,14 @@
+import { HousingCatalog } from "./housing-catalog";
+import { registerHousingRoutes } from "./housing-routes";
+import {
+  projectHousingHashes,
+  housingGroups,
+  validateHousingProject,
+  validateHousingAuthority,
+  validateConfiguredHousing,
+  selectedHousingPacks,
+  assertHousingExport,
+} from "./housing-validation";
 import { registerFiscalRoutes } from "./fiscal-routes.js";
 import {
   assertFiscalPrivateUse,
@@ -21,7 +32,12 @@ import {
   validateFloodProject,
   assertFloodExport,
 } from "./flood-validation";
-import { projectWithFloodVersion } from "@urban/core";
+import {
+  projectWithFloodVersion as beforeHousingVersion,
+  projectWithHousingVersion,
+} from "@urban/core";
+const projectWithFloodVersion = (project: Project, place?: Place) =>
+  projectWithHousingVersion(beforeHousingVersion(project, place), place);
 import { baselineIdentity } from "@urban/core";
 import Fastify, { type FastifyRequest } from "fastify";
 import cookie from "@fastify/cookie";
@@ -86,6 +102,7 @@ import {
   exportAccessibilityCsv,
   exportFloodCsv,
   exportFiscalCsv,
+  exportHousingCsv,
   exportTrafficCsv,
   exportDocx,
   exportGeoJson,
@@ -192,6 +209,7 @@ export interface AppOptions {
   mediaService?: MediaJobService;
   mediaServiceFactory?: (store: Store) => MediaJobService;
   floodCatalog?: FloodCatalog;
+  housingCatalog?: HousingCatalog;
   identityMail?: IdentityMailRuntime;
   identityMailFactory?: (
     store: Store,
@@ -468,6 +486,13 @@ export async function buildApp(options: AppOptions = {}) {
   const floodCatalog =
     options.floodCatalog ?? new FloodCatalog(process.env.FLOOD_CATALOG);
   registerFloodRoutes(app, { store: repository, catalog: floodCatalog, auth });
+  const housingCatalog =
+    options.housingCatalog ?? new HousingCatalog(process.env.HOUSING_CATALOG);
+  registerHousingRoutes(app, {
+    store: repository,
+    catalog: housingCatalog,
+    auth,
+  });
   registerProjectCollaboration(app, { store: repository, auth });
   registerEngagementRoutes(app, { store: repository, auth });
   registerNationalRoutes(app, {
@@ -1166,6 +1191,8 @@ export async function buildApp(options: AppOptions = {}) {
     validateProjectExtents(project, place);
     await validateFloodProject(project, place);
     await validateConfiguredFlood(project, floodCatalog);
+    validateHousingProject(project);
+    await validateConfiguredHousing(project, housingCatalog);
     await validateVehicleReferences(
       projectVehicleReferences(project),
       place,
@@ -1177,6 +1204,7 @@ export async function buildApp(options: AppOptions = {}) {
       (state) => {
         const identity = auth(state, request, WRITE_ROLES);
         validateFloodAuthority(project, place, state.floodSources);
+        validateHousingAuthority(project, state.housingSources);
         const saved = {
           project,
           organizationId: identity.organization.id,
@@ -1207,6 +1235,9 @@ export async function buildApp(options: AppOptions = {}) {
         };
       },
       requestScope(request, {
+        housingSources: projectHousingHashes(project).length
+          ? { where: [{ id: projectHousingHashes(project) }] }
+          : { append: true },
         floodSources: projectFloodHashes(project).length
           ? { where: [{ id: projectFloodHashes(project) }] }
           : { append: true },
@@ -1371,6 +1402,12 @@ export async function buildApp(options: AppOptions = {}) {
     );
     validateProjectExtents(input.project, frozen);
     await validateFloodProject(input.project, frozen);
+    validateHousingProject(input.project);
+    await validateConfiguredHousing(
+      input.project,
+      housingCatalog,
+      frozenRecord.project,
+    );
     await validateConfiguredFlood(
       input.project,
       floodCatalog,
@@ -1467,6 +1504,11 @@ export async function buildApp(options: AppOptions = {}) {
           state.floodSources,
           record.project,
         );
+        validateHousingAuthority(
+          input.project,
+          state.housingSources,
+          record.project,
+        );
         validateFiscalRightsTransition(record.project, input.project);
         validateSourceRightsTransition(
           record.project,
@@ -1523,6 +1565,9 @@ export async function buildApp(options: AppOptions = {}) {
         };
       },
       requestScope(request, {
+        housingSources: projectHousingHashes(input.project).length
+          ? { where: [{ id: projectHousingHashes(input.project) }] }
+          : { append: true },
         floodSources: projectFloodHashes(input.project).length
           ? { where: [{ id: projectFloodHashes(input.project) }] }
           : { append: true },
@@ -1891,6 +1936,17 @@ export async function buildApp(options: AppOptions = {}) {
               record.project,
             );
           }
+          if (input.command.type === "scenario.affordability")
+            validateHousingAuthority(
+              {
+                ...record.project,
+                scenarios: record.project.scenarios.map((s) =>
+                  s.id === after.id ? after : s,
+                ),
+              },
+              state.housingSources,
+              record.project,
+            );
           validateScenarioExtent(after, record.baseline);
           validateRetailCommandForApi(
             record.baseline,
@@ -1952,6 +2008,26 @@ export async function buildApp(options: AppOptions = {}) {
           };
         },
         requestScope(request, {
+          housingSources:
+            input.command.type === "scenario.affordability" &&
+            input.command.affordability &&
+            housingGroups(input.command.affordability).some(
+              (g) => g.areaOrigin === "server-catalog",
+            )
+              ? {
+                  where: [
+                    {
+                      id: [
+                        ...new Set(
+                          housingGroups(input.command.affordability)
+                            .filter((g) => g.areaOrigin === "server-catalog")
+                            .map((g) => g.areaHash),
+                        ),
+                      ],
+                    },
+                  ],
+                }
+              : { append: true },
           floodSources:
             input.command.type === "scenario.flood" && input.command.flood
               ? { where: [{ id: input.command.flood.datasetHash }] }
@@ -2055,6 +2131,7 @@ export async function buildApp(options: AppOptions = {}) {
           raw.scenario,
           raw.project.floodDatasets,
           raw.project.fiscalStudy,
+          raw.project.housingIncomeLimits,
         )
       : calculateImpact(
           raw.place,
@@ -2063,6 +2140,7 @@ export async function buildApp(options: AppOptions = {}) {
           {
             floodDatasets: raw.project.floodDatasets,
             fiscalStudy: raw.project.fiscalStudy,
+            housingIncomeLimits: raw.project.housingIncomeLimits,
           },
         ),
   });
@@ -2085,6 +2163,7 @@ export async function buildApp(options: AppOptions = {}) {
             "accessibility-csv",
             "flood-csv",
             "fiscal-csv",
+            "housing-csv",
             "traffic-csv",
             "geojson",
             "docx",
@@ -2185,6 +2264,7 @@ export async function buildApp(options: AppOptions = {}) {
         );
         const snapshot = records.snapshot;
         assertFiscalExport(snapshot.project);
+        assertHousingExport(snapshot.project);
         assertFloodExport(snapshot.project);
         if (snapshot.scenario.flood) {
           const result = await exportFloodInWorker(snapshot, "records", {
@@ -2231,6 +2311,7 @@ export async function buildApp(options: AppOptions = {}) {
       }
       const rawSnapshot = await getRawSnapshot(request);
       assertFiscalExport(rawSnapshot.project);
+      assertHousingExport(rawSnapshot.project, rawSnapshot.scenario);
       assertFloodExport(rawSnapshot.project, rawSnapshot.scenario);
       if (rawSnapshot.scenario.flood) {
         const result = await exportFloodInWorker(rawSnapshot, format);
@@ -2312,6 +2393,14 @@ export async function buildApp(options: AppOptions = {}) {
             `attachment; filename="${base}-fiscal.csv"`,
           )
           .send(exportFiscalCsv(snapshot));
+      if (format === "housing-csv")
+        return reply
+          .header(
+            "Content-Disposition",
+            `attachment; filename="${base}-housing.csv"`,
+          )
+          .type("text/csv; charset=utf-8")
+          .send(exportHousingCsv(snapshot));
       if (format === "flood-csv")
         return reply
           .header(
@@ -2880,6 +2969,13 @@ export async function buildApp(options: AppOptions = {}) {
                 ),
               }
             : {}),
+          ...(scenario.affordability
+            ? {
+                housingIncomeLimits: structuredClone(
+                  selectedHousingPacks(record.project, scenario),
+                ),
+              }
+            : {}),
           ...(record.project.fiscalStudy
             ? { fiscalStudy: structuredClone(record.project.fiscalStudy) }
             : {}),
@@ -3010,6 +3106,9 @@ export async function buildApp(options: AppOptions = {}) {
           feedbackEnabled: snapshot.feedbackEnabled,
           engagement: publicationEngagement(snapshot),
           place: snapshot.baseline,
+          ...(snapshot.housingIncomeLimits
+            ? { housingIncomeLimits: snapshot.housingIncomeLimits }
+            : {}),
           ...(snapshot.fiscalStudy
             ? { fiscalStudy: snapshot.fiscalStudy }
             : {}),

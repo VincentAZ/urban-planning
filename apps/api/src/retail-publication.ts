@@ -1,3 +1,4 @@
+import { assertHousingPublication } from "./housing-validation";
 import { assertFiscalPublication } from "./fiscal-rights.js";
 import { assertFloodPublication } from "./flood-validation";
 import {
@@ -132,6 +133,7 @@ export function scenarioForPublication(
   assertFiscalPublication(project);
   assertTrafficPublication(scenario, project);
   assertFloodPublication(project, scenario);
+  assertHousingPublication(project, scenario);
   for (const evidence of accessibilityReferences(scenario.accessibility)) {
     const restricted = evidence.capture.sources.filter(
       (source) => source.rights && !source.rights.publicRedistribution,

@@ -204,7 +204,7 @@ describe.skipIf(!process.env.TEST_DATABASE_URL)(
         const config = await web.query(
           "SELECT app_security_runtime_configuration() AS c",
         );
-        expect(config.rows[0].c.securityVersion).toBe(20);
+        expect(config.rows[0].c.securityVersion).toBe(21);
       } finally {
         await app?.close();
         if (!app) await store.close();

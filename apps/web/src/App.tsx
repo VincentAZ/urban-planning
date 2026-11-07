@@ -1,3 +1,7 @@
+import {
+  HousingAffordabilityPanel,
+  HousingEvidenceSources,
+} from "./components/housing/HousingOverview";
 import { FiscalProfileEvidence } from "./components/fiscal/FiscalOverview";
 import { fiscalApi } from "./lib/fiscal-api";
 import { createFiscalStudyInWorker } from "./lib/fiscal-task";
@@ -152,7 +156,11 @@ import {
 } from "./components/accessibility/AccessibilityOverview";
 import { TrafficPanel } from "./components/traffic/TrafficEntry";
 import { TrafficSources } from "./components/traffic/TrafficOverview";
-import { planningSources } from "./lib/source-inventory";
+import {
+  planningSources,
+  housingSources,
+  housingSourceInventory,
+} from "./lib/source-inventory";
 import { useParcelEditor } from "./lib/useParcelEditor";
 import { useBuildingEditor } from "./lib/useBuildingEditor";
 import { activeBuildingPath } from "./lib/building-draft";
@@ -181,6 +189,11 @@ import {
   ShareDialog,
 } from "./components/Dialogs";
 
+const HousingAffordabilityDialog = lazy(() =>
+  import("./components/housing/HousingAffordabilityDialog").then((m) => ({
+    default: m.HousingAffordabilityDialog,
+  })),
+);
 const FiscalDialog = lazy(() =>
   import("./components/fiscal/FiscalDialog").then((module) => ({
     default: module.FiscalDialog,
@@ -238,6 +251,7 @@ type Dialog =
   | "compare"
   | "presentation"
   | "fiscal"
+  | "housing"
   | "retail"
   | "workforce"
   | "flood"
@@ -287,6 +301,7 @@ export default function App() {
     select,
     dispatch,
     attachFlood,
+    applyAffordability,
     updateFloodMethod,
     undo,
     redo,
@@ -523,8 +538,13 @@ export default function App() {
     () => ({
       floodDatasets: project?.floodDatasets,
       fiscalStudy: project?.fiscalStudy,
+      housingIncomeLimits: project?.housingIncomeLimits,
     }),
-    [project?.floodDatasets, project?.fiscalStudy],
+    [
+      project?.floodDatasets,
+      project?.fiscalStudy,
+      project?.housingIncomeLimits,
+    ],
   );
   const {
     results,
@@ -2195,6 +2215,7 @@ export default function App() {
                   }
                   hasFlood={!!scenario.flood}
                   onFlood={() => setDialog("flood")}
+                  onHousing={() => setDialog("housing")}
                   onClose={() => select(null)}
                   onReview={() =>
                     openReview(
@@ -2977,6 +2998,13 @@ export default function App() {
             className={`scorecard-scroll ${updating ? "updating" : ""}`}
             aria-busy={updating}
           >
+            {domain === "Housing" && (
+              <HousingAffordabilityPanel
+                scenario={scenario}
+                result={results?.affordability}
+                onOpen={() => setDialog("housing")}
+              />
+            )}
             {domain === "Environment" && (
               <FloodPanel
                 scenario={scenario}
@@ -3116,6 +3144,60 @@ export default function App() {
             "Legacy draft migrated: current source adopted. Original baseline results cannot be reconstructed."}
         </div>
       )}
+      {dialog === "housing" && (
+        <Suspense fallback={<div role="status">Loading housing evidence…</div>}>
+          <HousingAffordabilityDialog
+            key={`${project.id}:${scenario.id}:${session.user?.id ?? "guest"}:${session.organization?.id ?? "browser"}`}
+            place={place}
+            project={project}
+            scenario={scenario}
+            results={results ?? undefined}
+            canEdit={editable && !geometryDraft}
+            actor={session.user?.name ?? "Anonymous browser"}
+            accountScope={`${session.user?.id ?? "guest"}:${session.organization?.id ?? "browser"}`}
+            selectedBuildingId={selectedBuilding?.id}
+            onClose={() => setDialog(null)}
+            onApply={async (packs, affordability, signal) => {
+              if (
+                useWorkspace.getState().project !== project ||
+                useWorkspace.getState().place !== place ||
+                sessionLive.current.user?.id !== session.user?.id ||
+                sessionLive.current.organization?.id !==
+                  session.organization?.id ||
+                !editable
+              )
+                throw new Error(
+                  "The project or account changed. Review housing evidence again.",
+                );
+              await applyAffordability(packs, affordability, signal);
+              setDialog(null);
+              setToast(
+                "Housing evidence applied. Undo restores the previous review.",
+              );
+            }}
+            onRemove={() => {
+              dispatch(
+                { type: "scenario.affordability", affordability: null },
+                "Remove housing affordability evidence",
+              );
+              setDialog(null);
+            }}
+            onSelectBuilding={(id) => {
+              select(id);
+              setTool("explore");
+              const building = buildings.find((b) => b.id === id);
+              if (building)
+                setFocusLocation({
+                  position: buildingAnchor(building),
+                  requestId: crypto.randomUUID(),
+                });
+              setToast(
+                "Building highlighted on the map. Close the workbench when ready to inspect it.",
+              );
+            }}
+          />
+        </Suspense>
+      )}
       {dialog === "flood" && (
         <Suspense fallback={<div role="status">Loading flood evidence…</div>}>
           <FloodDialog
@@ -3251,15 +3333,22 @@ export default function App() {
         >
           <MetricDetail
             metric={metric}
+            sourceInventory={
+              metric.domain === "Housing" && scenario.affordability
+                ? housingSourceInventory(scenario, project.housingIncomeLimits)
+                : undefined
+            }
             place={{
               ...place,
               sources:
-                metric.domain === "Fiscal" && project.fiscalStudy
-                  ? project.fiscalStudy.profile.sources
-                  : metric.id === "environment.flood" && scenario.flood
-                    ? (project.floodDatasets?.[scenario.flood.datasetHash]
-                        ?.sources ?? [])
-                    : planningSources(place, scenario),
+                metric.domain === "Housing" && scenario.affordability
+                  ? housingSources(scenario, project.housingIncomeLimits)
+                  : metric.domain === "Fiscal" && project.fiscalStudy
+                    ? project.fiscalStudy.profile.sources
+                    : metric.id === "environment.flood" && scenario.flood
+                      ? (project.floodDatasets?.[scenario.flood.datasetHash]
+                          ?.sources ?? [])
+                      : planningSources(place, scenario),
             }}
             onAssumptions={() => {
               setMetric(null);
@@ -3268,6 +3357,10 @@ export default function App() {
             onFlood={() => {
               setMetric(null);
               setDialog("flood");
+            }}
+            onHousing={() => {
+              setMetric(null);
+              setDialog("housing");
             }}
             onFiscal={() => {
               setMetric(null);
@@ -3998,6 +4091,12 @@ export default function App() {
               </small>
             </div>
           ))}
+          {scenario.affordability && (
+            <HousingEvidenceSources
+              scenario={scenario}
+              packs={project.housingIncomeLimits}
+            />
+          )}
           {project.fiscalStudy && (
             <details className="fiscal-workbench">
               <summary>Fiscal profile sources and applicability</summary>

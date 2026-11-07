@@ -3,11 +3,16 @@ import {
   validateWorkspaceSnapshot,
 } from "./flood-validation";
 import { create } from "zustand";
+import { runHousingTask } from "./housing-task";
 import {
   applyCommand,
   FLOOD_METHOD_VERSION,
   floodMethodVersion,
-  projectWithFiscalVersion,
+  projectWithHousingVersion,
+  projectWithImportedHousing,
+  housingProjectIssues,
+  type HousingIncomeLimitCatalog,
+  type HousingAffordabilityScenario,
   fiscalProjectIssues,
   projectWithImportedFlood,
   type FloodDataset,
@@ -83,6 +88,11 @@ interface Workspace {
     signal?: AbortSignal,
   ) => Promise<void>;
   updateFloodMethod: (project: Project, scenario: Scenario) => void;
+  applyAffordability: (
+    catalog: HousingIncomeLimitCatalog,
+    affordability: HousingAffordabilityScenario,
+    signal?: AbortSignal,
+  ) => Promise<void>;
   undo: () => void;
   redo: () => void;
   select: (id: string | null) => void;
@@ -155,7 +165,8 @@ export const useWorkspace = create<Workspace>((set, get) => {
       command.type === "scenario.workforce" ||
       command.type === "scenario.traffic" ||
       command.type === "scenario.flood" ||
-      command.type === "scenario.fiscal"
+      command.type === "scenario.fiscal" ||
+      command.type === "scenario.affordability"
     )
       command = commandSchema.parse(command) as Command;
     if (get().place) {
@@ -206,7 +217,7 @@ export const useWorkspace = create<Workspace>((set, get) => {
     const supersededIds = new Set(
       project.undone.filter((e) => e.after.id === scenario.id).map((e) => e.id),
     );
-    const next = projectWithFiscalVersion(
+    const next = projectWithHousingVersion(
       {
         ...edited(project, after),
         history: [
@@ -221,6 +232,10 @@ export const useWorkspace = create<Workspace>((set, get) => {
     );
     if (command.type === "scenario.fiscal") {
       const issues = fiscalProjectIssues(next, get().place ?? undefined);
+      if (issues.length) throw new Error(issues.join(" "));
+    }
+    if (command.type === "scenario.affordability") {
+      const issues = housingProjectIssues(next);
       if (issues.length) throw new Error(issues.join(" "));
     }
     set({ project: next });
@@ -453,6 +468,42 @@ export const useWorkspace = create<Workspace>((set, get) => {
         project,
       );
     },
+    async applyAffordability(catalog, affordability, signal) {
+      const current = get();
+      if (
+        changingSnapshot ||
+        current.readOnly ||
+        !current.project ||
+        !current.place ||
+        current.project.activeScenarioId === "baseline"
+      )
+        throw new Error("This project is not editable.");
+      const project = await runHousingTask<Project>(
+        {
+          kind: "apply",
+          place: current.place,
+          project: current.project,
+          catalog,
+          affordability,
+        },
+        signal,
+      );
+      signal?.throwIfAborted();
+      if (
+        get().project !== current.project ||
+        get().place !== current.place ||
+        get().readOnly ||
+        changingSnapshot
+      )
+        throw new Error(
+          "The project changed while housing evidence was being prepared. Review it again.",
+        );
+      commit(
+        { type: "scenario.affordability", affordability },
+        "Apply reviewed housing affordability",
+        project,
+      );
+    },
     updateFloodMethod(expectedProject, expectedScenario) {
       const current = get();
       if (
@@ -592,7 +643,9 @@ export const useWorkspace = create<Workspace>((set, get) => {
       const project = {
         ...projectWithImportedTraffic(
           projectWithImportedFlood(
-            projectWithImportedWorkforce(snapshot.project),
+            projectWithImportedHousing(
+              projectWithImportedWorkforce(snapshot.project),
+            ),
           ),
         ),
         id: crypto.randomUUID(),

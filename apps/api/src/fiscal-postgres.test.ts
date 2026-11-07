@@ -255,7 +255,7 @@ describe.skipIf(!process.env.TEST_DATABASE_URL)(
               "SELECT app_security_runtime_configuration() c",
             )
           ).rows[0].c.securityVersion,
-        ).toBe(20);
+        ).toBe(21);
       } finally {
         await app.close();
         await web.end();

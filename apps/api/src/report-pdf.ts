@@ -1,4 +1,9 @@
 import {
+  housingReportInventory,
+  housingReportDisclosure,
+  assertHousingDocumentLimit,
+} from "./report-housing";
+import {
   trafficReportInventory,
   trafficReportDisclosure,
   trafficSubtotalDisclosure,
@@ -77,6 +82,7 @@ export async function renderStaffPdf(
 ): Promise<Buffer> {
   assertReportSnapshot(snapshot);
   assertFiscalDocumentLimit(snapshot);
+  assertHousingDocumentLimit(snapshot);
   assertRetailDocumentLimit(snapshot);
   assertWorkforceDocumentLimit(snapshot);
   assertAccessibilityDocumentLimit(snapshot);
@@ -86,6 +92,7 @@ export async function renderStaffPdf(
   const presentation = presentationReportOutline(snapshot);
   const activity = activityReportInventory(snapshot);
   const fiscal = fiscalReportInventory(snapshot);
+  const housing = housingReportInventory(snapshot);
   const retail = retailReportInventory(snapshot);
   const workforce = workforceReportInventory(snapshot);
   const accessibility = accessibilityReportInventory(snapshot);
@@ -502,6 +509,89 @@ export async function renderStaffPdf(
           );
         }
       }
+      if (housing) {
+        heading("Housing affordability", 22, true);
+        paragraph(housingReportDisclosure, 9);
+        heading("Homes within each income ceiling", 17);
+        table(
+          [
+            "Income ceiling",
+            "Baseline",
+            "Proposal",
+            "Change",
+            "Known subtotal baseline / proposal",
+          ],
+          housing.summaryRows,
+          [160, 75, 75, 75, 131],
+          8.5,
+        );
+        paragraph(
+          "Cumulative counts overlap; do not add them. Known subtotals describe only the evaluated homes and are not complete totals.",
+          9,
+        );
+        heading("Lowest affordable income ceiling", 17);
+        table(
+          [
+            "Exclusive band",
+            "Baseline",
+            "Proposal",
+            "Known subtotal baseline / proposal",
+          ],
+          housing.bandRows,
+          [205, 80, 80, 151],
+          8.5,
+        );
+        room(170);
+        heading("Completeness of the comparison", 17);
+        table(
+          [
+            "Side",
+            "Total homes",
+            "Evaluated",
+            "Unassigned",
+            "Unresolved assigned",
+            "Buildings with unknown units",
+          ],
+          housing.coverageRows,
+          [75, 75, 75, 85, 95, 111],
+          8,
+        );
+        housing.context.forEach((note) => paragraph(note, 9));
+        for (const panel of housing.panels) {
+          heading(panel.title, 17, true);
+          panel.context.forEach((note) => paragraph(note, 9));
+          table(
+            ["Cost component", "Monthly USD or inclusion"],
+            panel.costRows.map((row) => row.slice(0, 2)),
+            [235, 281],
+            9,
+          );
+          heading("Cost evidence", 14);
+          panel.costRows.forEach((row) => paragraph(`${row[0]}: ${row[2]}`, 9));
+          table(
+            ["Published ceiling", "Annual USD", "Cost comparison"],
+            panel.thresholdRows,
+            [220, 130, 166],
+            9,
+          );
+        }
+        heading("Housing evidence and income limits", 17, true);
+        for (const evidence of housing.evidence) {
+          heading(evidence.title, 14);
+          table(
+            [
+              "Household size",
+              "Extremely low income",
+              "Very low income",
+              "Low income",
+            ],
+            evidence.rows,
+            [100, 150, 133, 133],
+            8.5,
+          );
+          evidence.notes.forEach((note) => paragraph(note, 8.5));
+        }
+      }
       if (fiscal) {
         heading("Fiscal study and incentive comparison", 22, true);
         paragraph(fiscalReportDisclosure, 9);
@@ -836,7 +926,7 @@ export async function renderStaffPdf(
         if (source.url) paragraph(source.url, 8.5);
       });
       if (snapshot.maps) {
-        heading("Comparison map provenance", 14, Boolean(fiscal));
+        heading("Comparison map provenance", 14, Boolean(fiscal || housing));
         snapshot.maps.metadata.notes.forEach((note) => paragraph(note, 9));
         paragraph(
           `Shared displayed extent west, south, east, north: ${snapshot.maps.metadata.extent.join(", ")}. Analytical study extent: ${snapshot.maps.metadata.studyAreaExtent.join(", ")}. Projection origin: ${snapshot.maps.metadata.projection.origin.join(", ")}. Scale: ${snapshot.maps.metadata.projection.metersPerPixel} meters per pixel.`,

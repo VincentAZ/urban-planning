@@ -1,4 +1,16 @@
 import {
+  housingReportInventory,
+  requireHousingReport,
+  housingReportDisclosure,
+} from "./report-housing";
+import { assertHousingExport } from "./housing-validation";
+import {
+  housingAffordabilityCSV,
+  housingCostLabels,
+  housingLimitLabels,
+  HOUSING_INCOME_LIMIT_KEYS,
+} from "@urban/core";
+import {
   requireTrafficReport,
   trafficReportInventory,
   trafficReportDisclosure,
@@ -88,6 +100,14 @@ const csvCell = (value: unknown) => {
     text = `'${text}`;
   return `"${text.replace(/"/g, '""')}"`;
 };
+export function exportHousingCsv(snapshot: ReportSnapshot) {
+  const housing = requireHousingReport(snapshot);
+  return housingAffordabilityCSV(
+    snapshot.scenario,
+    housing.resolution,
+    housing.packs,
+  );
+}
 export function exportFiscalCsv(snapshot: ReportSnapshot) {
   const fiscal = requireFiscalReport(snapshot);
   return fiscalCashFlowCSV(fiscal.study, snapshot.scenario, fiscal.resolution);
@@ -239,6 +259,7 @@ export function exportAccessibilityCsv(snapshot: ReportSnapshot) {
 }
 export function exportCsv(snapshot: ReportSnapshot) {
   assertFiscalExport(snapshot.project);
+  housingReportInventory(snapshot);
   const headings = [
     "metric_id",
     "domain",
@@ -635,6 +656,7 @@ export function exportTrafficCsv(snapshot: ReportSnapshot) {
   );
 }
 export function exportGeoJson(snapshot: ReportSnapshot) {
+  const housing = housingReportInventory(snapshot);
   const fiscal = fiscalReportInventory(snapshot);
   const flood = floodReportInventory(snapshot);
   const buildings = materializeBuildings(snapshot.place, snapshot.scenario).map(
@@ -681,6 +703,16 @@ export function exportGeoJson(snapshot: ReportSnapshot) {
       inputHash: digest(snapshot),
       extent: snapshot.place.extentLabel,
       sources: reportPlanningSources(snapshot),
+      ...(housing
+        ? {
+            housing: {
+              controls: housing.controls,
+              incomeLimits: housing.packs,
+              results: housing.resolution,
+              interpretation: housingReportDisclosure,
+            },
+          }
+        : {}),
       ...(fiscal
         ? {
             fiscalStudy: fiscal.study,
@@ -797,6 +829,8 @@ export function exportRecords(
   sharing?: unknown,
 ) {
   assertFiscalExport(snapshot.project);
+  assertHousingExport(snapshot.project);
+  housingReportInventory(snapshot);
   return {
     schemaVersion: 1,
     generatedAt: snapshot.generatedAt,
@@ -817,6 +851,7 @@ export const exportDocx = renderStaffDocx;
 
 /** Static, typed result tables; users can inspect numeric cells without recomputing a different model in Excel. */
 export async function exportXlsx(snapshot: ReportSnapshot): Promise<Buffer> {
+  const housing = housingReportInventory(snapshot);
   const fiscal = fiscalReportInventory(snapshot);
   const buildingItems = buildingReportItems(snapshot, "workbook");
   const presentation = presentationReportOutline(snapshot);
@@ -1703,6 +1738,171 @@ export async function exportXlsx(snapshot: ReportSnapshot): Promise<Buffer> {
       summary.getColumn(column).numFmt = "#,##0.00;[Red]-#,##0.00";
     for (const column of [6, 7, 8, 9, 10, 11, 12])
       annual.getColumn(column).numFmt = "#,##0.00;[Red]-#,##0.00";
+  }
+  if (housing) {
+    const comparison = book.addWorksheet("Housing comparison");
+    comparison.columns = [
+      { header: "Income ceiling", key: "ceiling", width: 32 },
+      { header: "Baseline homes", key: "baseline", width: 20 },
+      { header: "Proposal homes", key: "proposal", width: 20 },
+      { header: "Change", key: "delta", width: 18 },
+      { header: "Baseline known subtotal", key: "baselineKnown", width: 26 },
+      { header: "Proposal known subtotal", key: "proposalKnown", width: 26 },
+    ];
+    for (const key of HOUSING_INCOME_LIMIT_KEYS)
+      comparison.addRow({
+        ceiling: housingLimitLabels[key],
+        baseline: housing.resolution.baseline.cumulative[key].estimate,
+        proposal: housing.resolution.proposal.cumulative[key].estimate,
+        delta: housing.resolution.delta[key],
+        baselineKnown:
+          housing.resolution.baseline.cumulative[key].knownSubtotal,
+        proposalKnown:
+          housing.resolution.proposal.cumulative[key].knownSubtotal,
+      });
+    const bands = book.addWorksheet("Housing exclusive bands");
+    bands.columns = comparison.columns.map((c) => ({
+      header: c.header as string,
+      key: c.key,
+      width: c.width,
+    }));
+    for (const key of [...HOUSING_INCOME_LIMIT_KEYS, "above-low"] as const) {
+      const b = housing.resolution.baseline.bands[key],
+        p = housing.resolution.proposal.bands[key];
+      bands.addRow({
+        ceiling:
+          key === "above-low"
+            ? "Above the low income ceiling"
+            : housingLimitLabels[key],
+        baseline: b.estimate,
+        proposal: p.estimate,
+        delta:
+          b.estimate === null || p.estimate === null
+            ? null
+            : p.estimate - b.estimate,
+        baselineKnown: b.knownSubtotal,
+        proposalKnown: p.knownSubtotal,
+      });
+    }
+    const coverage = book.addWorksheet("Housing coverage");
+    coverage.columns = [
+      { header: "Side", key: "side", width: 18 },
+      { header: "Total homes", key: "totalUnits", width: 18 },
+      { header: "Known homes", key: "knownUnits", width: 18 },
+      { header: "Assigned homes", key: "assignedUnits", width: 18 },
+      { header: "Evaluated homes", key: "evaluatedUnits", width: 18 },
+      { header: "Unassigned homes", key: "unassignedUnits", width: 22 },
+      {
+        header: "Unresolved assigned homes",
+        key: "unresolvedAssignedUnits",
+        width: 28,
+      },
+    ];
+    for (const side of ["baseline", "proposal"] as const)
+      coverage.addRow({ side, ...housing.resolution[side] });
+    const groups = book.addWorksheet("Housing cost groups");
+    groups.columns = [
+      { header: "Side", key: "side", width: 16 },
+      { header: "Group", key: "groupId", width: 30 },
+      { header: "Building", key: "buildingId", width: 30 },
+      { header: "Program component", key: "componentId", width: 28 },
+      { header: "Homes", key: "units", width: 12 },
+      { header: "Tenure", key: "tenure", width: 14 },
+      { header: "Household size", key: "householdSize", width: 18 },
+      { header: "Cost year", key: "costYear", width: 14 },
+      { header: "Status", key: "status", width: 18 },
+      { header: "Complete monthly cost · USD", key: "gross", width: 29 },
+      { header: "Known monthly cost · USD", key: "known", width: 29 },
+      { header: "Required annual income · USD", key: "income", width: 30 },
+      { header: "HUD area", key: "areaName", width: 45 },
+      { header: "HUD fiscal year", key: "fiscalYear", width: 18 },
+      { header: "Area source origin", key: "origin", width: 24 },
+      { header: "Income-limit pack SHA-256", key: "areaHash", width: 68 },
+      { header: "Minimum ceiling band", key: "minimumBand", width: 25 },
+    ];
+    const costs = book.addWorksheet("Housing cost components");
+    costs.columns = [
+      { header: "Side", key: "side", width: 16 },
+      { header: "Group", key: "group", width: 30 },
+      { header: "Component ID", key: "id", width: 28 },
+      { header: "Cost component", key: "label", width: 32 },
+      { header: "State", key: "state", width: 20 },
+      { header: "Separate monthly USD", key: "monthlyUsd", width: 25 },
+      { header: "Included in component", key: "includedIn", width: 28 },
+      { header: "Evidence type", key: "kind", width: 18 },
+      { header: "Evidence description", key: "description", width: 75 },
+      { header: "Source IDs", key: "sourceIds", width: 55 },
+    ];
+    for (const panel of housing.panels) {
+      const r = panel.row;
+      groups.addRow({
+        ...r,
+        side: panel.side,
+        origin: panel.group.areaOrigin,
+        gross: r.grossMonthlyCents === null ? null : r.grossMonthlyCents / 100,
+        known: r.knownMonthlyCents / 100,
+        income: r.requiredAnnualIncome,
+      });
+      for (const c of panel.group.costs)
+        costs.addRow({
+          side: panel.side,
+          group: panel.group.id,
+          id: c.id,
+          label: housingCostLabels[c.kind],
+          state: c.state,
+          monthlyUsd: c.state === "separate" ? c.monthlyCents / 100 : null,
+          includedIn: c.state === "included" ? c.includedIn : "",
+          ...c.provenance,
+          sourceIds: c.provenance.sourceIds.join(", "),
+        });
+    }
+    const limits = book.addWorksheet("HUD household limits");
+    limits.columns = [
+      { header: "Area", key: "area", width: 45 },
+      { header: "Fiscal year", key: "year", width: 14 },
+      { header: "Effective date", key: "effective", width: 18 },
+      { header: "Household size", key: "householdSize", width: 18 },
+      { header: "Extremely low · annual USD", key: "extremelyLow", width: 29 },
+      { header: "Very low · annual USD", key: "veryLow", width: 26 },
+      { header: "Low · annual USD", key: "low", width: 24 },
+      { header: "Pack SHA-256", key: "hash", width: 68 },
+    ];
+    for (const [hash, pack] of Object.entries(housing.packs))
+      for (const limit of pack.limits)
+        limits.addRow({
+          area: pack.area.name,
+          year: pack.fiscalYear,
+          effective: pack.effectiveDate,
+          ...limit,
+          hash,
+        });
+    const evidence = book.addWorksheet("Housing evidence");
+    evidence.columns = [
+      { header: "Section", key: "section", width: 34 },
+      { header: "Part", key: "part", width: 9 },
+      { header: "Text · join parts in order", key: "text", width: 110 },
+    ];
+    const addText = (section: string, text: string) => {
+      for (let start = 0, part = 1; start < text.length; start += 16000, part++)
+        evidence.addRow({
+          section,
+          part,
+          text: text.slice(start, start + 16000),
+        });
+    };
+    addText("Interpretation", housingReportDisclosure);
+    housing.context.forEach((note, i) => addText(`Context ${i + 1}`, note));
+    addText("Exact housing controls JSON", JSON.stringify(housing.controls));
+    addText("Exact income-limit packs JSON", JSON.stringify(housing.packs));
+    addText(
+      "Exact frozen housing results JSON",
+      JSON.stringify(housing.resolution),
+    );
+    for (const col of [10, 11, 12])
+      groups.getColumn(col).numFmt = "#,##0.00;[Red]-#,##0.00";
+    costs.getColumn(6).numFmt = "#,##0.00;[Red]-#,##0.00";
+    for (const col of [5, 6, 7])
+      limits.getColumn(col).numFmt = "#,##0;[Red]-#,##0";
   }
   const sources = book.addWorksheet("Sources");
   sources.columns = [

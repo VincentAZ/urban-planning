@@ -31,6 +31,13 @@ export * from "./accessibility-scenario";
 export * from "./flood";
 export * from "./fiscal";
 export * from "./fiscal-serialization";
+export * from "./housing";
+export * from "./housing-serialization";
+import {
+  housingAffordabilityScenarioSchema,
+  type HousingAffordabilityScenario,
+  type HousingIncomeLimitCatalog,
+} from "./housing";
 import {
   fiscalScenarioSchema,
   fiscalOfferSchema,
@@ -243,8 +250,13 @@ export interface Scenario {
   flood?: FloodReference;
   traffic?: TrafficScenario;
   fiscal?: FiscalScenario;
+  affordability?: HousingAffordabilityScenario;
 }
 export type Command =
+  | {
+      type: "scenario.affordability";
+      affordability: HousingAffordabilityScenario | null;
+    }
   | { type: "building.upsert"; building: Building; sources?: Source[] }
   | {
       type: "buildings.import";
@@ -319,7 +331,8 @@ export interface Project {
   history: HistoryEntry[];
   undone: HistoryEntry[];
   updatedAt: string;
-  schemaVersion: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+  schemaVersion: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
+  housingIncomeLimits?: HousingIncomeLimitCatalog;
   fiscalStudy?: FiscalStudy;
   floodDatasets?: FloodDatasetCatalog;
   baselineMigration?: {
@@ -362,6 +375,7 @@ export interface ModelResults {
   warnings: string[];
   modelVersion: string;
   fiscal?: import("./fiscal").FiscalResolution;
+  affordability?: import("./housing").HousingAffordabilityResolution;
 }
 export const landUseLabels: Record<LandUse, string> = {
   residential: "Single-family",
@@ -413,6 +427,14 @@ export function materializeRoads(place: Place, scenario: Scenario): Road[] {
   return [...byId.values()];
 }
 export function applyCommand(scenario: Scenario, command: Command): Scenario {
+  if (command.type === "scenario.affordability") {
+    if (scenario.id === "baseline")
+      throw new Error(
+        "The immutable baseline cannot adopt housing affordability evidence.",
+      );
+    if (command.affordability !== null)
+      housingAffordabilityScenarioSchema.parse(command.affordability);
+  }
   if (command.type === "scenario.fiscal") {
     if (scenario.id === "baseline")
       throw new Error("The fiscal reference baseline is immutable.");
@@ -546,6 +568,10 @@ export function applyCommand(scenario: Scenario, command: Command): Scenario {
     if (command.fiscal === null) delete result.fiscal;
     else result.fiscal = structuredClone(command.fiscal);
     if (command.offer) Object.assign(result.assumptions, command.offer);
+  }
+  if (command.type === "scenario.affordability") {
+    if (command.affordability === null) delete result.affordability;
+    else result.affordability = structuredClone(command.affordability);
   }
   if (command.type === "scenario.rename") result.name = command.name;
   if (command.type === "scenario.details") {

@@ -1,3 +1,5 @@
+import { assertHousingDocumentLimit } from "./report-housing";
+import { assertHousingExport } from "./housing-validation";
 import type { ModelResults } from "@urban/core";
 import { calculateImpact } from "@urban/models";
 import {
@@ -6,6 +8,7 @@ import {
   exportDocx,
   exportFloodCsv,
   exportFiscalCsv,
+  exportHousingCsv,
   exportGeoJson,
   exportPdf,
   exportRecords,
@@ -35,6 +38,7 @@ export type FloodExportFormat =
   | "accessibility-csv"
   | "flood-csv"
   | "fiscal-csv"
+  | "housing-csv"
   | "traffic-csv"
   | "geojson"
   | "xlsx"
@@ -70,6 +74,10 @@ export async function exportFloodTask(
   records?: FloodExportRecords,
 ): Promise<FloodExportResult> {
   assertFiscalExport(input.project);
+  assertHousingExport(
+    input.project,
+    format === "records" ? undefined : input.scenario,
+  );
   assertFloodExport(
     input.project,
     format === "records" ? undefined : input.scenario,
@@ -91,6 +99,7 @@ export async function exportFloodTask(
         {
           floodDatasets: input.project.floodDatasets,
           fiscalStudy: input.project.fiscalStudy,
+          housingIncomeLimits: input.project.housingIncomeLimits,
         },
       ),
   };
@@ -102,6 +111,7 @@ export async function exportFloodTask(
     assertTrafficDocumentLimit(snapshot);
     assertFloodDocumentLimit(snapshot);
     assertFiscalDocumentLimit(snapshot);
+    assertHousingDocumentLimit(snapshot);
     const baselineScenario = snapshot.project.scenarios.find(
       (s) => s.id === "baseline",
     );
@@ -150,6 +160,8 @@ export async function exportFloodTask(
       return csv(exportAccessibilityCsv(snapshot));
     case "flood-csv":
       return csv(exportFloodCsv(snapshot));
+    case "housing-csv":
+      return csv(exportHousingCsv(snapshot));
     case "fiscal-csv":
       return csv(exportFiscalCsv(snapshot));
     case "traffic-csv":

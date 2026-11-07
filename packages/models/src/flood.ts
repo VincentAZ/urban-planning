@@ -38,6 +38,7 @@ import {
 } from "./flood-geometry";
 
 export interface ModelContext {
+  housingIncomeLimits?: import("@urban/core").HousingIncomeLimitCatalog;
   floodDatasets?: FloodDatasetCatalog;
   fiscalStudy?: import("@urban/core").FiscalStudy;
 }

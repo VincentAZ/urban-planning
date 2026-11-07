@@ -1,3 +1,4 @@
+import { PublishedHousingAffordability } from "./housing/HousingOverview";
 import {
   PublishedFiscal,
   FiscalProfileEvidence,
@@ -80,7 +81,11 @@ import {
   PublishedWorkforce,
   WorkforceSources,
 } from "./workforce/WorkforceOverview";
-import { planningSources } from "../lib/source-inventory";
+import {
+  planningSources,
+  housingSources,
+  housingSourceInventory,
+} from "../lib/source-inventory";
 import { MetricDetail } from "./MetricDetail";
 import "./shared-view.css";
 import { PublicEngagement } from "./engagement/PublicEngagement";
@@ -103,6 +108,7 @@ export interface PublicSnapshot {
   feedbackEnabled: boolean;
   floodDataset?: FloodDataset;
   fiscalStudy?: import("@urban/core").FiscalStudy;
+  housingIncomeLimits?: import("@urban/core").HousingIncomeLimitCatalog;
   engagement?: EngagementState;
 }
 class SnapshotError extends Error {
@@ -310,6 +316,7 @@ export function SharedView({ snapshotId }: { snapshotId: string }) {
   const floodContext = useMemo(
     () => ({
       fiscalStudy: snapshot?.fiscalStudy,
+      housingIncomeLimits: snapshot?.housingIncomeLimits,
       floodDatasets:
         snapshot?.scenario.flood && snapshot.floodDataset
           ? { [snapshot.scenario.flood.datasetHash]: snapshot.floodDataset }
@@ -1324,18 +1331,34 @@ export function SharedView({ snapshotId }: { snapshotId: string }) {
         >
           <MetricDetail
             metric={metric}
+            sourceInventory={
+              metric.domain === "Housing" && snapshot.scenario.affordability
+                ? housingSourceInventory(
+                    snapshot.scenario,
+                    snapshot.housingIncomeLimits,
+                  )
+                : undefined
+            }
             place={
-              metric.domain === "Fiscal" && snapshot.fiscalStudy
+              metric.domain === "Housing" && snapshot.scenario.affordability
                 ? {
                     ...snapshot.place,
-                    sources: snapshot.fiscalStudy.profile.sources,
+                    sources: housingSources(
+                      snapshot.scenario,
+                      snapshot.housingIncomeLimits,
+                    ),
                   }
-                : metric.id === "environment.flood"
+                : metric.domain === "Fiscal" && snapshot.fiscalStudy
                   ? {
                       ...snapshot.place,
-                      sources: snapshot.floodDataset?.sources ?? [],
+                      sources: snapshot.fiscalStudy.profile.sources,
                     }
-                  : (disclosurePlace ?? snapshot.place)
+                  : metric.id === "environment.flood"
+                    ? {
+                        ...snapshot.place,
+                        sources: snapshot.floodDataset?.sources ?? [],
+                      }
+                    : (disclosurePlace ?? snapshot.place)
             }
             onFlood={
               snapshot.scenario.flood
@@ -1422,6 +1445,11 @@ export function SharedView({ snapshotId }: { snapshotId: string }) {
           <PublishedTraffic
             place={snapshot.place}
             scenario={snapshot.scenario}
+          />
+          <PublishedHousingAffordability
+            scenario={snapshot.scenario}
+            result={snapshot.results.affordability}
+            packs={snapshot.housingIncomeLimits}
           />
           <PublishedFiscal
             study={snapshot.fiscalStudy}

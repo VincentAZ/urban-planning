@@ -1,3 +1,9 @@
+import {
+  housingHTML,
+  assertHousingExportAllowed,
+  assertHousingProjectExportAllowed,
+  assertHousingResultExportAllowed,
+} from "./housing-export";
 import { floodHTML } from "./flood-export";
 import {
   fiscalHTML,
@@ -37,6 +43,18 @@ export function exportCSV(
     if (!context)
       throw new Error("The scorecard export needs the matching fiscal study.");
     assertFiscalResultExportAllowed(
+      context.place,
+      context.project,
+      context.scenario,
+      results,
+    );
+  }
+  if (results.affordability || context?.scenario.affordability) {
+    if (!context)
+      throw new Error(
+        "The scorecard export needs the matching housing evidence.",
+      );
+    assertHousingResultExportAllowed(
       context.place,
       context.project,
       context.scenario,
@@ -92,6 +110,7 @@ export function exportGeoJSON(
   context: ModelContext = {},
 ) {
   assertFiscalExportAllowed(context.fiscalStudy);
+  assertHousingExportAllowed(scenario, context.housingIncomeLimits);
   const geo = {
     type: "FeatureCollection",
     metadata: {
@@ -101,6 +120,23 @@ export function exportGeoJSON(
       scenarioId: scenario.id,
       revision: scenario.revision,
       sources: planningSources(place, scenario),
+      ...(scenario.affordability
+        ? {
+            housing: {
+              controls: scenario.affordability,
+              incomeLimits: Object.fromEntries(
+                [
+                  ...new Set(
+                    [
+                      ...scenario.affordability.baselineGroups,
+                      ...scenario.affordability.proposalGroups,
+                    ].map((g) => g.areaHash),
+                  ),
+                ].map((hash) => [hash, context.housingIncomeLimits?.[hash]]),
+              ),
+            },
+          }
+        : {}),
       ...(context.fiscalStudy
         ? { fiscalStudy: context.fiscalStudy, fiscalControls: scenario.fiscal }
         : {}),
@@ -297,7 +333,7 @@ export function reportHTML(
   context: ModelContext = {},
   floodResolution?: FloodResolution | null,
 ) {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(scenario.name)} — Urban Planning</title><style>@page{size:letter;margin:18mm}body{font:12px/1.55 Arial,sans-serif;color:#203f38;max-width:860px;margin:32px auto}h1{font-size:30px}h2{font-size:18px;margin-top:28px}.brand{letter-spacing:3px;font-size:11px;font-weight:bold}.muted{color:#62746c}.notice{background:#f5f1e5;padding:12px;border-left:3px solid #bb8b4f}table{border-collapse:collapse;width:100%;font-size:11px}th,td{padding:9px 7px;border-bottom:1px solid #ddd;text-align:left}thead{display:table-header-group}tr{break-inside:avoid}.method{break-inside:avoid;margin-bottom:20px}.image{width:100%;max-height:300px;object-fit:cover}footer{font-size:10px;border-top:1px solid #ddd;margin-top:30px;padding-top:12px}@media print{.print-button{display:none}body{margin:0}}button{padding:12px 22px;background:#18594e;color:white;border:0;border-radius:5px}</style></head><body><button class="print-button" onclick="window.print()">Print / Save as PDF</button><p class="brand">URBAN PLANNING / DECISION BRIEF</p><h1>${esc(scenario.name)}</h1><p>${esc(place.name)} · ${esc(place.city)}, ${esc(place.state)} ${esc(place.zip)}</p><p class="muted">${esc(place.extentLabel)} · Revision ${scenario.revision} · ${new Date().toLocaleDateString()} · ${scenario.horizon === 0 ? "Current conditions" : `${scenario.horizon}-year horizon`}</p>${image ? `<img class="image" alt="Scenario map" src="${esc(image)}">` : ""}<p>${esc(scenario.description || "A planning scenario exploring changes to the built environment.")}</p><div class="notice">Planning estimates. Inferred attributes and illustrative assumptions are identified below. This report is not an engineering study or an entitlement determination.</div><h2>Baseline and scenario outcomes</h2><table><thead><tr><th>Measure</th><th>Baseline</th><th>Scenario</th><th>Change</th><th>Status</th></tr></thead><tbody>${results.metrics.map((m) => `<tr><td>${esc(m.label)}<br><span class="muted">${esc(m.unit)}</span></td><td>${m.baseline === null ? "—" : esc(Math.round(m.baseline * 100) / 100)}</td><td>${m.value === null ? "—" : esc(Math.round(m.value * 100) / 100)}</td><td>${m.delta === null ? "—" : esc(Math.round(m.delta * 100) / 100)}</td><td>${esc(m.status)}</td></tr>`).join("")}</tbody></table><h2>Methodology & assumptions</h2>${results.metrics.map((m) => `<div class="method"><h3>${esc(m.label)}</h3><p>${esc(m.explanation)}</p><p><strong>Formula:</strong> ${esc(m.formula)}</p><p>${esc(m.method)} · ${esc(m.methodVersion)} · ${esc(m.geography)}</p>${m.caveat ? `<p class="notice">${esc(m.caveat)}</p>` : ""}${metricCoverageHTML(m)}<ul>${m.inputs.map((i) => `<li>${esc(i.name)}: ${esc(i.value)} (${esc(i.source)})</li>`).join("")}</ul></div>`).join("")}${buildingProgramHTML(place, scenario)}${activityHTML(place, scenario)}${fiscalHTML(place, scenario, results, context.fiscalStudy)}${retailHTML(place, scenario, results.modelVersion)}${workforceHTML(scenario)}${accessibilityHTML(scenario)}${trafficHTML(scenario, trafficStatus)}${floodHTML(place, scenario, context, floodResolution)}<h2>Source inventory</h2>${planningSources(
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(scenario.name)} — Urban Planning</title><style>@page{size:letter;margin:18mm}body{font:12px/1.55 Arial,sans-serif;color:#203f38;max-width:860px;margin:32px auto}h1{font-size:30px}h2{font-size:18px;margin-top:28px}.brand{letter-spacing:3px;font-size:11px;font-weight:bold}.muted{color:#62746c}.notice{background:#f5f1e5;padding:12px;border-left:3px solid #bb8b4f}table{border-collapse:collapse;width:100%;font-size:11px}th,td{padding:9px 7px;border-bottom:1px solid #ddd;text-align:left}thead{display:table-header-group}tr{break-inside:avoid}.method{break-inside:avoid;margin-bottom:20px}.image{width:100%;max-height:300px;object-fit:cover}footer{font-size:10px;border-top:1px solid #ddd;margin-top:30px;padding-top:12px}@media print{.print-button{display:none}body{margin:0}}button{padding:12px 22px;background:#18594e;color:white;border:0;border-radius:5px}</style></head><body><button class="print-button" onclick="window.print()">Print / Save as PDF</button><p class="brand">URBAN PLANNING / DECISION BRIEF</p><h1>${esc(scenario.name)}</h1><p>${esc(place.name)} · ${esc(place.city)}, ${esc(place.state)} ${esc(place.zip)}</p><p class="muted">${esc(place.extentLabel)} · Revision ${scenario.revision} · ${new Date().toLocaleDateString()} · ${scenario.horizon === 0 ? "Current conditions" : `${scenario.horizon}-year horizon`}</p>${image ? `<img class="image" alt="Scenario map" src="${esc(image)}">` : ""}<p>${esc(scenario.description || "A planning scenario exploring changes to the built environment.")}</p><div class="notice">Planning estimates. Inferred attributes and illustrative assumptions are identified below. This report is not an engineering study or an entitlement determination.</div><h2>Baseline and scenario outcomes</h2><table><thead><tr><th>Measure</th><th>Baseline</th><th>Scenario</th><th>Change</th><th>Status</th></tr></thead><tbody>${results.metrics.map((m) => `<tr><td>${esc(m.label)}<br><span class="muted">${esc(m.unit)}</span></td><td>${m.baseline === null ? "—" : esc(Math.round(m.baseline * 100) / 100)}</td><td>${m.value === null ? "—" : esc(Math.round(m.value * 100) / 100)}</td><td>${m.delta === null ? "—" : esc(Math.round(m.delta * 100) / 100)}</td><td>${esc(m.status)}</td></tr>`).join("")}</tbody></table><h2>Methodology & assumptions</h2>${results.metrics.map((m) => `<div class="method"><h3>${esc(m.label)}</h3><p>${esc(m.explanation)}</p><p><strong>Formula:</strong> ${esc(m.formula)}</p><p>${esc(m.method)} · ${esc(m.methodVersion)} · ${esc(m.geography)}</p>${m.caveat ? `<p class="notice">${esc(m.caveat)}</p>` : ""}${metricCoverageHTML(m)}<ul>${m.inputs.map((i) => `<li>${esc(i.name)}: ${esc(i.value)} (${esc(i.source)})</li>`).join("")}</ul></div>`).join("")}${buildingProgramHTML(place, scenario)}${activityHTML(place, scenario)}${fiscalHTML(place, scenario, results, context.fiscalStudy)}${housingHTML(place, { housingIncomeLimits: context.housingIncomeLimits }, scenario, results)}${retailHTML(place, scenario, results.modelVersion)}${workforceHTML(scenario)}${accessibilityHTML(scenario)}${trafficHTML(scenario, trafficStatus)}${floodHTML(place, scenario, context, floodResolution)}<h2>Source inventory</h2>${planningSources(
     place,
     scenario,
   )
@@ -315,6 +351,7 @@ export async function exportProject(
   results: ModelResults,
 ) {
   assertFiscalExportAllowed(project.fiscalStudy);
+  assertHousingProjectExportAllowed(project);
   const identity = await baselineIdentity(place);
   download(
     "urban-planning-project.json",

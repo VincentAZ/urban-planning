@@ -27,6 +27,13 @@ import { USER_RETAIL_SOURCE } from "./retail";
 import type { Place, Scenario, Source, ModelResults } from "./index";
 import type { FloodDatasetCatalog } from "./flood";
 import type { PresentationCamera } from "./presentation";
+import {
+  housingIncomeLimitCatalogSchema,
+  housingAffordabilityResolutionSchema,
+  housingAffordabilityResolutionInputHash,
+  housingSourcePermissionIssues,
+  type HousingIncomeLimitCatalog,
+} from "./housing";
 
 export const MEDIA_METHOD_VERSION = "media-export-1.0.0" as const;
 export const MEDIA_CAMERA_METHOD_VERSION = "mercator-smoothstep-1.0.0" as const;
@@ -64,6 +71,7 @@ export interface MediaSceneBinding {
   datasetsHash: string;
   sourcesHash: string;
   fiscalProfileHash?: string;
+  housingIncomeLimitsHash?: string;
 }
 /** One saved scenario only. Never include project history, access lists, sessions or comments. */
 export interface MediaScene {
@@ -75,6 +83,7 @@ export interface MediaScene {
   results: ModelResults;
   floodDatasets?: FloodDatasetCatalog;
   fiscalProfile?: FiscalProfile;
+  housingIncomeLimits?: HousingIncomeLimitCatalog;
   sources: MediaSource[];
   sceneHash: string;
 }
@@ -296,6 +305,7 @@ export const mediaSceneBindingSchema: z.ZodType<MediaSceneBinding> = z
     datasetsHash: sha,
     sourcesHash: sha,
     fiscalProfileHash: sha.optional(),
+    housingIncomeLimitsHash: sha.optional(),
   })
   .strict();
 const metricSchema = z
@@ -372,10 +382,16 @@ export const mediaSceneSchema: z.ZodType<MediaScene> = z
         warnings: z.array(z.string()),
         modelVersion: z.string(),
         fiscal: z.lazy(() => fiscalResolutionSchema).optional(),
+        affordability: z
+          .lazy(() => housingAffordabilityResolutionSchema)
+          .optional(),
       })
       .strict(),
     floodDatasets: z.lazy(() => floodDatasetCatalogSchema).optional(),
     fiscalProfile: z.lazy(() => fiscalProfileSchema).optional(),
+    housingIncomeLimits: z
+      .lazy(() => housingIncomeLimitCatalogSchema)
+      .optional(),
     sources: z
       .array(
         z
@@ -503,10 +519,28 @@ export function mediaSceneSources(
   scenario: Scenario,
   datasets?: FloodDatasetCatalog,
   fiscalProfile?: FiscalProfile,
+  housingIncomeLimits?: HousingIncomeLimitCatalog,
 ): MediaSource[] {
   const groups: [string, Source[]][] = [
     ["planning-baseline", place.sources],
     ["planning-scenario", scenario.sources ?? []],
+    ["housing-costs", scenario.affordability?.sources ?? []],
+    ...[
+      ...new Set(
+        [
+          ...(scenario.affordability?.baselineGroups ?? []),
+          ...(scenario.affordability?.proposalGroups ?? []),
+        ].map((g) => g.areaHash),
+      ),
+    ]
+      .sort()
+      .map(
+        (key) =>
+          [
+            `housing-income-limits:${key}`,
+            housingIncomeLimits?.[key]?.sources ?? [],
+          ] as [string, Source[]],
+      ),
     ...(fiscalProfile
       ? [["fiscal-profile", fiscalProfile.sources] as [string, Source[]]]
       : []),
@@ -587,6 +621,9 @@ function bindingFor(
     ...(input.fiscalProfile
       ? { fiscalProfileHash: fiscalProfileHash(input.fiscalProfile) }
       : {}),
+    ...(input.housingIncomeLimits
+      ? { housingIncomeLimitsHash: mediaContentHash(input.housingIncomeLimits) }
+      : {}),
   };
 }
 /** Caller supplies a validated, authorized saved snapshot and computed matching results. Run expensive validation in the bounded preparation worker. */
@@ -598,6 +635,7 @@ export function createMediaScene(input: {
   results: ModelResults;
   floodDatasets?: FloodDatasetCatalog;
   fiscalStudy?: FiscalStudy;
+  housingIncomeLimits?: HousingIncomeLimitCatalog;
   createdAt: string;
 }): MediaScene {
   const selected = input.scenario.flood
@@ -607,12 +645,30 @@ export function createMediaScene(input: {
     !input.scenario.flood || selected,
     "selected flood dataset is unavailable.",
   );
+  const housingKeys = [
+    ...new Set(
+      [
+        ...(input.scenario.affordability?.baselineGroups ?? []),
+        ...(input.scenario.affordability?.proposalGroups ?? []),
+      ].map((g) => g.areaHash),
+    ),
+  ].sort();
+  ensure(
+    housingKeys.every((key) => input.housingIncomeLimits?.[key]),
+    "selected housing income-limit pack is unavailable.",
+  );
+  const selectedHousing = input.scenario.affordability
+    ? Object.fromEntries(
+        housingKeys.map((key) => [key, input.housingIncomeLimits![key]]),
+      )
+    : undefined;
   const data = {
     createdAt: input.createdAt,
     place: input.place,
     scenario: input.scenario,
     results: input.results,
     ...(input.fiscalStudy ? { fiscalProfile: input.fiscalStudy.profile } : {}),
+    ...(selectedHousing ? { housingIncomeLimits: selectedHousing } : {}),
     ...(selected
       ? { floodDatasets: { [input.scenario.flood!.datasetHash]: selected } }
       : {}),
@@ -621,6 +677,7 @@ export function createMediaScene(input: {
       input.scenario,
       selected ? { [input.scenario.flood!.datasetHash]: selected } : undefined,
       input.fiscalStudy?.profile,
+      selectedHousing,
     ),
   };
   const body = {
@@ -665,6 +722,7 @@ export function assertMediaScene(value: unknown): asserts value is MediaScene {
         scenario,
         parsed.floodDatasets,
         parsed.fiscalProfile,
+        parsed.housingIncomeLimits,
       ),
     ) === canonicalJSON(parsed.sources),
     "source inventory does not match the scene.",
@@ -684,6 +742,34 @@ export function assertMediaScene(value: unknown): asserts value is MediaScene {
     "fiscal results do not match their source profile.",
   );
   const keys = Object.keys(parsed.floodDatasets ?? {});
+  const housingKeys = [
+    ...new Set(
+      [
+        ...(scenario.affordability?.baselineGroups ?? []),
+        ...(scenario.affordability?.proposalGroups ?? []),
+      ].map((g) => g.areaHash),
+    ),
+  ].sort();
+  ensure(
+    canonicalJSON(Object.keys(parsed.housingIncomeLimits ?? {}).sort()) ===
+      canonicalJSON(housingKeys),
+    "only selected housing income-limit packs may be included.",
+  );
+  ensure(
+    !scenario.affordability ||
+      (!!results.affordability &&
+        results.affordability.inputHash ===
+          housingAffordabilityResolutionInputHash(
+            parsed.place,
+            scenario,
+            parsed.housingIncomeLimits,
+          )),
+    "housing results are missing or do not match the exact scenario and packs.",
+  );
+  ensure(
+    !!scenario.affordability === !!results.affordability,
+    "housing results require the matching scenario evidence.",
+  );
   ensure(
     scenario.flood
       ? keys.length === 1 && keys[0] === scenario.flood.datasetHash
@@ -700,6 +786,13 @@ export function assertMediaScene(value: unknown): asserts value is MediaScene {
 }
 /** This is a private export permission check, not publication authorization. Retained-history rights checks remain server responsibilities. */
 export function assertMediaExportRights(scene: MediaScene) {
+  const housingSources = scene.sources
+    .filter((s) => s.namespace.startsWith("housing-"))
+    .map((s) => s.source);
+  ensure(
+    housingSourcePermissionIssues(housingSources, "export").length === 0,
+    "housing sources require explicit private export permission.",
+  );
   for (const { namespace, source } of scene.sources) {
     const rights = source.rights;
     ensure(

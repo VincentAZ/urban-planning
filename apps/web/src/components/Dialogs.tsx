@@ -1,3 +1,4 @@
+import { exportHousingCSV } from "../lib/housing-export";
 import { exportFiscalCSV } from "../lib/fiscal-export";
 import {
   floodComparisonScenarios,
@@ -80,8 +81,9 @@ export function CompareDialog({
     () => ({
       floodDatasets: project.floodDatasets,
       fiscalStudy: project.fiscalStudy,
+      housingIncomeLimits: project.housingIncomeLimits,
     }),
-    [project.floodDatasets, project.fiscalStudy],
+    [project.floodDatasets, project.fiscalStudy, project.housingIncomeLimits],
   );
   const calculation = useImpactComparison(place, scenarios, context);
   const results = calculation.values?.map((value) => value.results) ?? [];
@@ -298,6 +300,7 @@ export function ExportDialog({
     scenario,
     catalog: project.floodDatasets,
     fiscalStudy: project.fiscalStudy,
+    housingIncomeLimits: project.housingIncomeLimits,
   });
   const exportLive = useRef(true);
   useEffect(() => {
@@ -311,6 +314,7 @@ export function ExportDialog({
     scenario,
     catalog: project.floodDatasets,
     fiscalStudy: project.fiscalStudy,
+    housingIncomeLimits: project.housingIncomeLimits,
   };
   function checkExportScope() {
     if (
@@ -318,7 +322,8 @@ export function ExportDialog({
       exportScope.current.place !== place ||
       exportScope.current.scenario !== scenario ||
       exportScope.current.catalog !== project.floodDatasets ||
-      exportScope.current.fiscalStudy !== project.fiscalStudy
+      exportScope.current.fiscalStudy !== project.fiscalStudy ||
+      exportScope.current.housingIncomeLimits !== project.housingIncomeLimits
     )
       throw new Error(
         "The scenario changed while preparing the export. Please export the current revision again.",
@@ -471,6 +476,7 @@ export function ExportDialog({
                   {
                     floodDatasets: project.floodDatasets,
                     fiscalStudy: project.fiscalStudy,
+                    housingIncomeLimits: project.housingIncomeLimits,
                   },
                   floodResolution,
                 ),
@@ -593,6 +599,30 @@ export function ExportDialog({
             <ArrowRight size={16} />
           </button>
         )}
+        {scenario.affordability && (
+          <button
+            type="button"
+            disabled={!!busy || !results.affordability}
+            onClick={() =>
+              run("housing-csv", async () => {
+                checkExportScope();
+                if (cloudVersion !== null && !hasUnsavedChanges)
+                  await serverExport("housing-csv");
+                else exportHousingCSV(place, project, scenario, results);
+              })
+            }
+          >
+            <FileText size={24} />
+            <div>
+              <strong>Housing affordability · CSV</strong>
+              <span>
+                Complete unit groups, cost components, published limits,
+                coverage and source evidence
+              </span>
+            </div>
+            <ArrowRight size={16} />
+          </button>
+        )}
         {project.fiscalStudy && (
           <button
             type="button"
@@ -666,6 +696,7 @@ export function ExportDialog({
                   {
                     floodDatasets: project.floodDatasets,
                     fiscalStudy: project.fiscalStudy,
+                    housingIncomeLimits: project.housingIncomeLimits,
                   },
                   floodResolution,
                 );
@@ -688,6 +719,7 @@ export function ExportDialog({
             exportGeoJSON(place, scenario, {
               floodDatasets: project.floodDatasets,
               fiscalStudy: project.fiscalStudy,
+              housingIncomeLimits: project.housingIncomeLimits,
             })
           }
         >

@@ -1,3 +1,4 @@
+import { assertHousingStorageChanges } from "./housing-storage";
 import { assertMediaStorageChanges } from "./media-storage.js";
 import { assertFiscalStorageChanges } from "./fiscal-storage.js";
 import { assertBudgetStorageChanges } from "./budget-storage.js";
@@ -562,6 +563,36 @@ export class FileStore implements Store {
               .all(collection, org)
               .map((r) => JSON.parse(String(r.header))),
         );
+        assertHousingStorageChanges(changes, scope, (collection, id) => {
+          const raw = database
+            .prepare(
+              "SELECT collection,entity_id,ordinal,header,payload,baseline_hash,organization_id,project_id FROM records WHERE collection=? AND entity_id=?",
+            )
+            .get(collection, id) as Record<string, unknown> | undefined;
+          if (!raw)
+            return collection === "housingSources"
+              ? changes.upserts.find(
+                  (r) => r.collection === collection && r.id === id,
+                )
+              : undefined;
+          return {
+            collection: collection as import("./store-scope").EntityName,
+            id,
+            ordinal: Number(raw.ordinal),
+            header: JSON.parse(String(raw.header)),
+            payload: raw.payload ? JSON.parse(String(raw.payload)) : null,
+            indexes: {
+              id,
+              ...(raw.organization_id
+                ? { organizationId: String(raw.organization_id) }
+                : {}),
+              ...(raw.project_id ? { projectId: String(raw.project_id) } : {}),
+            },
+            ...(raw.baseline_hash
+              ? { baselineHash: String(raw.baseline_hash) }
+              : {}),
+          };
+        });
         assertFloodStorageChanges(
           changes,
           scope,

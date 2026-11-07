@@ -39,7 +39,11 @@ async function execute(task: any): Promise<unknown> {
       task.place,
       task.scenario,
       {},
-      { floodDatasets: task.floodDatasets, fiscalStudy: task.fiscalStudy },
+      {
+        floodDatasets: task.floodDatasets,
+        fiscalStudy: task.fiscalStudy,
+        housingIncomeLimits: task.housingIncomeLimits,
+      },
     );
   if (task.kind === "export")
     return (await import("./flood-export-task")).exportFloodTask(

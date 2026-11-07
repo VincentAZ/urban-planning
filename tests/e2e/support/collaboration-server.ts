@@ -1,3 +1,8 @@
+import { housingFixture } from "../../../packages/models/src/housing-fixture";
+import {
+  HousingCatalog,
+  installHousingCatalog,
+} from "../../../apps/api/src/housing-catalog";
 import { enableReviewedBudgetForFixture } from "../../../apps/api/src/budget-test-fixture.js";
 import { floodDatasetHash } from "../../../packages/core/src/index";
 import { floodFixture } from "../../fixtures/flood";
@@ -102,6 +107,7 @@ const fixture: Place = {
   loadedAt: "2026-11-05T00:00:00.000Z",
   extentLabel: "Synthetic collaboration QA reference area",
 };
+if (modes.includes("--housing-fixture")) fixture.buildings[0].units = 10;
 // An optional real bundle keeps full-geometry account regression isolated from
 // the developer's retained projects without shrinking or transforming its source.
 const flood = modes.includes("--flood-fixture") ? await floodFixture() : null;
@@ -143,6 +149,18 @@ const floodCatalog = flood
     ])
   : undefined;
 if (floodCatalog) await installFloodCatalog(store, floodCatalog);
+const housing = modes.includes("--housing-fixture") ? housingFixture() : null;
+const housingCatalog = housing
+  ? new HousingCatalog(undefined, [
+      {
+        id: housing.areaHash,
+        pack: housing.pack,
+        registeredAt: "2026-11-06T00:00:00.000Z",
+        sourceManifestHash: "a".repeat(64),
+      },
+    ])
+  : undefined;
+if (housingCatalog) await installHousingCatalog(store, housingCatalog);
 // Explicit process-local sink exercises encryption, leases and validity checks without sending email.
 // Tokens are accessible only to the parent test process over private IPC, never an HTTP route.
 const identityInbox: IdentityMailContent[] = [];
@@ -274,6 +292,7 @@ if (
   });
 const app = await buildApp({
   floodCatalog,
+  housingCatalog,
   identityMail: modes.includes("--identity-disabled")
     ? undefined
     : identityMail,

@@ -1,3 +1,4 @@
+import { housingOpenApiPaths } from "./housing-openapi";
 import { fiscalOpenApiPaths } from "./fiscal-openapi.js";
 import { mediaOpenApiPaths } from "./media-openapi.js";
 import { budgetOpenApiPaths } from "./budget-openapi.js";
@@ -95,6 +96,7 @@ export const openApiDocument = {
     ...fiscalOpenApiPaths,
     ...identityOpenApiPaths,
     ...floodOpenApiPaths,
+    ...housingOpenApiPaths,
     "/projects/{projectId}/imports/capabilities": {
       get: {
         summary:
@@ -768,6 +770,7 @@ export const openApiDocument = {
                 "traffic-csv",
                 "accessibility-csv",
                 "fiscal-csv",
+                "housing-csv",
                 "flood-csv",
                 "xlsx",
                 "geojson",

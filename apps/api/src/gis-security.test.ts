@@ -300,7 +300,7 @@ describe.skipIf(!process.env.TEST_DATABASE_URL)(
       try {
         expect(
           (await assertPostgresRuntimeRole(c, "web")).securityVersion,
-        ).toBe(20);
+        ).toBe(21);
       } finally {
         c.release();
       }

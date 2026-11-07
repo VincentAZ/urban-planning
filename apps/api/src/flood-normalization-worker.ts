@@ -261,6 +261,7 @@ export function calculateFloodImpactInWorker(
   scenario: Scenario,
   floodDatasets: FloodDatasetCatalog | undefined,
   fiscalStudy?: import("@urban/core").FiscalStudy,
+  housingIncomeLimits?: import("@urban/core").HousingIncomeLimitCatalog,
 ): Promise<ModelResults> {
   return run({
     kind: "model",
@@ -268,6 +269,7 @@ export function calculateFloodImpactInWorker(
     scenario,
     floodDatasets,
     ...(fiscalStudy ? { fiscalStudy } : {}),
+    ...(housingIncomeLimits ? { housingIncomeLimits } : {}),
   });
 }
 export function exportFloodInWorker(

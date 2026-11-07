@@ -281,11 +281,11 @@ describe.skipIf(!connection)("project accessibility SQL boundary", () => {
       [row.id, JSON.stringify(row.header), JSON.stringify(row.payload)],
     );
   }
-  it("requires version20 FORCE RLS and keeps auth/prep/budget out of accessibility records", async () => {
+  it("requires version 21 FORCE RLS and keeps auth/prep/budget out of accessibility records", async () => {
     const c = await web.connect();
     try {
       expect((await assertPostgresRuntimeRole(c, "web")).securityVersion).toBe(
-        20,
+        21,
       );
     } finally {
       c.release();

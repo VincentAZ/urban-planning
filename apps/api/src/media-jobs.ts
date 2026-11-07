@@ -1,3 +1,4 @@
+import { selectedHousingPacks } from "./housing-validation";
 import { prepareMediaSceneInWorker } from "./media-scene-worker.js";
 import { assertMediaPrivateExport } from "./media-rights.js";
 import { randomUUID, createHash } from "node:crypto";
@@ -442,6 +443,14 @@ export class MediaJobService {
             projectVersion: captured.p.version,
             place: captured.p.baseline,
             scenario: captured.scenario,
+            ...(captured.scenario.affordability
+              ? {
+                  housingIncomeLimits: selectedHousingPacks(
+                    captured.p.project,
+                    captured.scenario,
+                  ),
+                }
+              : {}),
             ...(captured.p.project.fiscalStudy
               ? { fiscalStudy: captured.p.project.fiscalStudy }
               : {}),

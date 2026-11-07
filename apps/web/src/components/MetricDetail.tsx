@@ -1,6 +1,7 @@
 import { ArrowUpRight, BookOpen, ExternalLink } from "lucide-react";
 import type { MetricResult, Place } from "@urban/core";
 import { formatMetric } from "@urban/models";
+import type { SourceInventoryRecord } from "../lib/source-inventory";
 export function MetricDetail({
   metric,
   place,
@@ -9,6 +10,8 @@ export function MetricDetail({
   onAccessibility,
   onFlood,
   onFiscal,
+  onHousing,
+  sourceInventory,
 }: {
   metric: MetricResult;
   place: Place;
@@ -17,7 +20,16 @@ export function MetricDetail({
   onAccessibility?: () => void;
   onFlood?: () => void;
   onFiscal?: () => void;
+  onHousing?: () => void;
+  sourceInventory?: SourceInventoryRecord[];
 }) {
+  const sources =
+    sourceInventory ??
+    place.sources.map((source, i) => ({
+      key: `${source.id}:${i}`,
+      namespace: "",
+      source,
+    }));
   return (
     <div className="metric-detail">
       <div className="eyebrow">
@@ -27,6 +39,11 @@ export function MetricDetail({
         {formatMetric(metric.value, metric.unit)} <span>{metric.unit}</span>
       </div>
       <p>{metric.explanation}</p>
+      {onHousing && metric.domain === "Housing" && (
+        <button type="button" className="button primary" onClick={onHousing}>
+          Review unit-level housing affordability
+        </button>
+      )}
       {onFiscal && metric.domain === "Fiscal" && (
         <button type="button" className="button primary" onClick={onFiscal}>
           Review fiscal study and annual cash flows
@@ -108,25 +125,47 @@ export function MetricDetail({
           source is claimed.
         </p>
       ) : (
-        metric.sourceIds.map((id) => {
-          const s = place.sources.find((x) => x.id === id);
-          return s && /^https?:\/\//i.test(s.url) ? (
-            <a
-              className="source-link"
-              key={id}
-              href={s.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {s.name}
-              <span>
-                {s.vintage} <ExternalLink size={13} />
-              </span>
-            </a>
-          ) : (
-            <p className="muted" key={id}>
-              {id}
-            </p>
+        [...new Set(metric.sourceIds)].flatMap((id) => {
+          const matches = sources.filter((record) => record.source.id === id);
+          if (!matches.length)
+            return (
+              <p className="muted" key={id}>
+                {id}
+              </p>
+            );
+          return matches.map(({ source: s, key, namespace }) =>
+            /^https?:\/\//i.test(s.url) ? (
+              <a
+                className="source-link"
+                key={key}
+                href={s.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>
+                  {namespace && (
+                    <small>
+                      {namespace}
+                      <br />
+                    </small>
+                  )}
+                  {s.name}
+                </span>
+                <span>
+                  {s.vintage} <ExternalLink size={13} />
+                </span>
+              </a>
+            ) : (
+              <p className="muted" key={key}>
+                {namespace && (
+                  <small>
+                    {namespace}
+                    <br />
+                  </small>
+                )}
+                {s.name} · {s.vintage} · {s.id}
+              </p>
+            ),
           );
         })
       )}

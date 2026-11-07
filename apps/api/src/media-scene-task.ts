@@ -15,6 +15,7 @@ export function prepareMediaScene(input: {
   scenario: Scenario;
   floodDatasets?: FloodDatasetCatalog;
   fiscalStudy?: import("@urban/core").FiscalStudy;
+  housingIncomeLimits?: import("@urban/core").HousingIncomeLimitCatalog;
   createdAt: string;
 }) {
   assertMediaMetadataPrivacy(input);
@@ -22,7 +23,11 @@ export function prepareMediaScene(input: {
     input.place,
     input.scenario,
     {},
-    { floodDatasets: input.floodDatasets, fiscalStudy: input.fiscalStudy },
+    {
+      floodDatasets: input.floodDatasets,
+      fiscalStudy: input.fiscalStudy,
+      housingIncomeLimits: input.housingIncomeLimits,
+    },
   );
   try {
     const scene = createMediaScene({ ...input, results });

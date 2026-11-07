@@ -1,3 +1,4 @@
+import { selectedHousingPacks } from "./housing-validation";
 import { createHash } from "node:crypto";
 import {
   canonicalJSON,
@@ -44,6 +45,13 @@ export const reportSources = (snapshot: ReportSnapshot) => {
   const evidence = [
     ["fiscal profile", snapshot.project.fiscalStudy?.profile.sources ?? []],
     [
+      "housing income limits",
+      Object.values(
+        selectedHousingPacks(snapshot.project, snapshot.scenario) ?? {},
+      ).flatMap((pack) => pack.sources),
+    ],
+    ["housing costs", snapshot.scenario.affordability?.sources ?? []],
+    [
       "flood",
       (snapshot.scenario.flood
         ? snapshot.project.floodDatasets?.[snapshot.scenario.flood.datasetHash]
@@ -86,6 +94,14 @@ export const reportDigest = (snapshot: ReportSnapshot) =>
         place: snapshot.place,
         scenario: snapshot.scenario,
         model: snapshot.results.modelVersion,
+        ...(snapshot.scenario.affordability
+          ? {
+              housingIncomeLimits: selectedHousingPacks(
+                snapshot.project,
+                snapshot.scenario,
+              ),
+            }
+          : {}),
         ...(snapshot.project.fiscalStudy
           ? { fiscalStudy: snapshot.project.fiscalStudy }
           : {}),
@@ -456,6 +472,14 @@ export function sourceReferences(
     metric.domain === "Fiscal"
       ? (snapshot.project.fiscalStudy?.profile.sources ?? [])
       : [];
+  const housingSources = metric.id.startsWith("housing.affordable")
+    ? [
+        ...Object.values(
+          selectedHousingPacks(snapshot.project, snapshot.scenario) ?? {},
+        ).flatMap((pack) => pack.sources),
+        ...(snapshot.scenario.affordability?.sources ?? []),
+      ]
+    : [];
   const floodSources =
     metric.id === "environment.flood" && snapshot.scenario.flood
       ? (snapshot.project.floodDatasets?.[snapshot.scenario.flood.datasetHash]
@@ -467,6 +491,9 @@ export function sourceReferences(
           const index = sources.findIndex((source) => source.id === id);
           const flood = floodSources.find((source) => source.id === id);
           const fiscal = fiscalSources.find((source) => source.id === id);
+          const housing = housingSources.find((source) => source.id === id);
+          if (housing)
+            return `${housing.name} (housing evidence source ${id}; see Housing affordability)${index >= 0 ? `; planning inventory [${index + 1}] has the same source ID` : ""}`;
           if (fiscal)
             return `${fiscal.name} (fiscal profile source ${id}; see Fiscal study and incentive comparison)${index >= 0 ? `; planning inventory [${index + 1}] has the same source ID` : ""}`;
           if (flood)

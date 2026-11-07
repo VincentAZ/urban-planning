@@ -12,6 +12,7 @@ export const collections = [
   "mediaJobs",
   "mediaArtifacts",
   "floodSources",
+  "housingSources",
   "accessibilityJobs",
   "accessibilityArtifacts",
   "identityChallenges",

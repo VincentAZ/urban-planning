@@ -106,6 +106,7 @@ export function publishedHeader(record: PublishedRecord): PublishedHeader {
     results: _r,
     floodDataset: _f,
     fiscalStudy: _fs,
+    housingIncomeLimits: _housing,
     ...metadata
   } = record;
   return {
@@ -185,6 +186,9 @@ export function encodeRecord(
         results: record.results,
         ...(record.floodDataset ? { floodDataset: record.floodDataset } : {}),
         ...(record.fiscalStudy ? { fiscalStudy: record.fiscalStudy } : {}),
+        ...(record.housingIncomeLimits
+          ? { housingIncomeLimits: record.housingIncomeLimits }
+          : {}),
       };
     }
   }
@@ -192,6 +196,11 @@ export function encodeRecord(
     const { sealed, ...metadata } = record;
     header = metadata;
     payload = { sealed };
+  }
+  if (collection === "housingSources") {
+    const { pack, ...metadata } = record;
+    header = metadata;
+    payload = { pack };
   }
   if (collection === "floodSources") {
     const { dataset, ...metadata } = record;
@@ -472,6 +481,7 @@ export async function loadScopedState(
       if (
         name === "fiscalProfiles" ||
         name === "floodSources" ||
+        name === "housingSources" ||
         name === "identityOutbox" ||
         name === "workforceArtifacts" ||
         name === "accessibilityArtifacts" ||
