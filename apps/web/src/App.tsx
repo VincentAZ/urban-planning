@@ -4,6 +4,7 @@ import {
 } from "./components/housing/HousingOverview";
 import { FiscalProfileEvidence } from "./components/fiscal/FiscalOverview";
 import { fiscalApi } from "./lib/fiscal-api";
+import { useVehicleTracks } from "./lib/vehicle-tracks";
 import { createFiscalStudyInWorker } from "./lib/fiscal-task";
 import { FloodPanel, FloodSources } from "./components/flood/FloodEvidence";
 import {
@@ -534,6 +535,7 @@ export default function App() {
     (s) => s.id === project.activeScenarioId,
   );
   const baseline = project?.scenarios.find((s) => s.id === "baseline");
+  const vehicleTracks = useVehicleTracks(scenario?.traffic);
   const modelContext = useMemo(
     () => ({
       floodDatasets: project?.floodDatasets,
@@ -2592,6 +2594,7 @@ export default function App() {
           >
             <CityMap
               place={place}
+              vehicleTracks={vehicleTracks}
               scenario={
                 activityEditor.draft
                   ? activityEditor.previewScenario!
@@ -2914,9 +2917,11 @@ export default function App() {
               <span className={playing ? "tiny-dot" : ""} />
               {!layers.includes("agents")
                 ? "Activity hidden"
-                : playing
-                  ? "Illustrative activity · sampled vehicles"
-                  : "Illustrative activity paused"}
+                : !vehicleTracks
+                  ? "Vehicles appear after a saved traffic simulation"
+                  : playing
+                    ? "SUMO traffic run · playing"
+                    : "SUMO traffic run · paused"}
             </span>
           </div>
           <div className="map-disclosure">

@@ -49,12 +49,11 @@ import "maplibre-gl/dist/maplibre-gl.css";
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
 import "./map/city-map.css";
 import {
-  createAgents,
-  sampleAgents,
-  createVehicleBuffers,
-  updateVehicleBuffers,
+  createTrackBuffers,
+  updateTrackBuffers,
   footways,
   type VehicleBuffers,
+  type VehicleTracks,
 } from "./map/motion";
 import { captureMapImage } from "./map/capture";
 import { MapExportFence, type MapExportHandle } from "./map/export-frame";
@@ -152,6 +151,10 @@ export type {
   MapNeighborhoodSummary,
 } from "./map/neighborhood-drawing";
 
+const clock = (seconds: number) => {
+  const minutes = Math.round(seconds / 60);
+  return `${Math.floor(minutes / 60) % 24}:${String(minutes % 60).padStart(2, "0")}`;
+};
 export interface CityMapProps
   extends RoadDrawingProps,
     ParcelDrawingProps,
@@ -173,6 +176,8 @@ export interface CityMapProps
   compareScenario?: Scenario | null;
   /** Captured baseline on the left; scenario remains the proposal on the right. */
   revealScenario?: Scenario;
+  /** Executed SUMO vehicles from the scenario's saved traffic run. */
+  vehicleTracks?: { baseline: VehicleTracks | null; proposal: VehicleTracks } | null;
   revealPercent?: number;
   onRevealPercentChange?: (percent: number) => void;
   captureRef?: MutableRefObject<(() => Promise<string>) | null>;
@@ -393,21 +398,14 @@ export function CityMap(props: CityMapProps) {
     [beforeRoads],
   );
   const showAgents = layers.includes("agents");
-  const agentPool = useMemo(() => createAgents(roads, 3), [roads]);
-  const agents = useMemo(
-    () => showAgents ? sampleAgents(agentPool, scenario.assumptions.vehicleMultiplier) : [],
-    [agentPool, scenario.assumptions.vehicleMultiplier, showAgents],
-  );
-  const vehicleBuffers = useMemo(() => createVehicleBuffers(agents), [agents]);
-  const beforeAgentPool = useMemo(() => createAgents(beforeRoads, 3), [beforeRoads]);
-  const beforeAgents = useMemo(
-    () => showAgents && props.revealScenario
-      ? sampleAgents(beforeAgentPool, props.revealScenario.assumptions.vehicleMultiplier)
-      : [],
-    [beforeAgentPool, showAgents, props.revealScenario],
-  );
+  const agents = showAgents ? (props.vehicleTracks?.proposal ?? null) : null;
+  const vehicleBuffers = useMemo(() => createTrackBuffers(agents), [agents]);
+  const beforeAgents =
+    showAgents && props.revealScenario
+      ? (props.vehicleTracks?.baseline ?? null)
+      : null;
   const beforeVehicleBuffers = useMemo(
-    () => createVehicleBuffers(beforeAgents),
+    () => createTrackBuffers(beforeAgents),
     [beforeAgents],
   );
   const beforeBuffersRef = useRef<VehicleBuffers | null>(null);
@@ -995,10 +993,10 @@ export function CityMap(props: CityMapProps) {
           : [];
       const allLayers = [
         ...staticLayers,
-        ...vehicleLayer(buffers, "illustrative-vehicles"),
+        ...vehicleLayer(buffers, "simulated-vehicles"),
         ...vehicleLayer(
           buffers ? beforeBuffersRef.current : null,
-          "before-illustrative-vehicles",
+          "before-simulated-vehicles",
         ),
         ...(!propsRef.current.neighborhoodDraft &&
         !propsRef.current.buildingDraft &&
@@ -1510,12 +1508,8 @@ export function CityMap(props: CityMapProps) {
       ),
     ];
     staticLayersRef.current = staticLayers;
-    updateVehicleBuffers(vehicleBuffers, agents, elapsedRef.current);
-    updateVehicleBuffers(
-      beforeVehicleBuffers,
-      beforeAgents,
-      elapsedRef.current,
-    );
+    updateTrackBuffers(vehicleBuffers, agents, elapsedRef.current);
+    updateTrackBuffers(beforeVehicleBuffers, beforeAgents, elapsedRef.current);
     setLayers(staticLayers, reducedGraphics ? null : vehicleBuffers);
     exportDrawRef.current.zoom = zoom;
     exportDrawRef.current.view = view;
@@ -1580,7 +1574,7 @@ export function CityMap(props: CityMapProps) {
       reducedMotion ||
       reducedGraphics ||
       !showAgents ||
-      (!agents.length && !beforeAgents.length)
+      (!agents && !beforeAgents)
     )
       return;
     let frame = 0,
@@ -1591,12 +1585,8 @@ export function CityMap(props: CityMapProps) {
         Math.min(0.12, (now - last) / 1000) * Math.min(speed, 60);
       last = now;
       if (now - lastDraw > 40) {
-        updateVehicleBuffers(vehicleBuffers, agents, elapsedRef.current);
-        updateVehicleBuffers(
-          beforeVehicleBuffers,
-          beforeAgents,
-          elapsedRef.current,
-        );
+        updateTrackBuffers(vehicleBuffers, agents, elapsedRef.current);
+        updateTrackBuffers(beforeVehicleBuffers, beforeAgents, elapsedRef.current);
         setLayers(staticLayersRef.current, vehicleBuffers);
         lastDraw = now;
       }
@@ -2034,7 +2024,9 @@ export function CityMap(props: CityMapProps) {
           ? "Reduced graphics"
           : !layers.includes("agents")
             ? "Activity hidden"
-            : `${agents.length} illustrative vehicles`}
+            : agents
+              ? `${agents.vehicles.length.toLocaleString()} SUMO-simulated vehicles · ${clock(agents.beginSeconds)}–${clock(agents.endSeconds)}`
+              : "No saved traffic simulation"}
       </div>
       <div className="city-map-attribution">
         <a

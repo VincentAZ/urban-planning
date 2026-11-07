@@ -475,12 +475,9 @@ export function AssumptionsEditor({
               "%",
             )}
             <p className="notice">
-              Change this percentage to show fewer or more moving cars: 50% is
-              lighter traffic, 100% is the default, 200% is heavier, and 0%
-              hides the cars. Save assumptions to apply. The map samples up to
-              12 cars per road and 650 overall, with no further increase above
-              300%. This also scales estimated trip ends; it does not change
-              demand in Traffic simulation runs. Household vehicle counts have
+              This coefficient scales estimated trip ends. Map vehicles come
+              only from a saved Traffic simulation run, and this setting does
+              not change that run's demand. Household vehicle counts have
               separate references and targets in People.
             </p>
             {field("averageTripMiles", "Average trip distance", 1, "mi", 0.1)}

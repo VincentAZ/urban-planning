@@ -378,6 +378,43 @@ def detectors(network, counts, period, side):
     return path, entries, predictions
 
 
+TRACK_STEP = 2
+
+
+def vehicle_tracks(side, period):
+    # Compact the executed SUMO floating-car positions (lon/lat, heading
+    # clockwise from north) for map playback over the study period only.
+    # A vehicle absent for a step (e.g. inserted later) starts a new segment.
+    fcd = OUT/(side+'-fcd.xml')
+    begin, end = period['beginSeconds'], period['endSeconds']
+    segments, open_segments = [], {}
+    for _, step in ET.iterparse(fcd):
+        if step.tag != 'timestep':
+            continue
+        t = float(step.get('time'))
+        if begin <= t <= end:
+            seen = set()
+            for v in step.findall('vehicle'):
+                vid = v.get('id')
+                seen.add(vid)
+                segment = open_segments.get(vid)
+                if segment is None or t - segment['last'] > TRACK_STEP + 1e-6:
+                    segment = {'id':vid,'t0':t,'last':t,'lonlat':[],'angle':[]}
+                    open_segments[vid] = segment
+                    segments.append(segment)
+                segment['last'] = t
+                segment['lonlat'] += [round(float(v.get('x')),6), round(float(v.get('y')),6)]
+                segment['angle'].append(round(float(v.get('angle'))))
+            for vid in [k for k in open_segments if k not in seen]:
+                del open_segments[vid]
+        step.clear()
+    fcd.unlink()
+    for segment in segments:
+        del segment['last']
+    write_json(OUT/(side+'-tracks.json'), {'version':1,'side':side,'beginSeconds':begin,'endSeconds':end,
+        'stepSeconds':TRACK_STEP,'vehicles':segments})
+
+
 def simulate(side, network, net_path, vehicles, route_file):
     period = REQUEST['period']
     additional, entries, predictions = detectors(network,REQUEST['counts'],period,side)
@@ -388,7 +425,10 @@ def simulate(side, network, net_path, vehicles, route_file):
         '--tripinfo-output',str(OUT/(side+'-trips.xml')), '--tripinfo-output.write-unfinished','true',
         '--tripinfo-output.write-undeparted','true', '--vehroute-output',str(OUT/(side+'-routes.xml')),
         '--vehroute-output.write-unfinished','true','--vehroute-output.exit-times','true',
-        '--statistic-output',str(OUT/(side+'-statistics.xml'))], side+'-sumo')
+        '--statistic-output',str(OUT/(side+'-statistics.xml')),
+        '--fcd-output',str(OUT/(side+'-fcd.xml')), '--fcd-output.geo','true',
+        '--fcd-output.attributes','x,y,angle', '--device.fcd.period',str(TRACK_STEP)], side+'-sumo')
+    vehicle_tracks(side, period)
     stats = xml(OUT/(side+'-statistics.xml'))
     def statint(tag, field):
         node = stats.find(tag)

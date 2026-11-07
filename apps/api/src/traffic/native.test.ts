@@ -244,6 +244,16 @@ describe.skipIf(process.env.RUN_NATIVE_TRAFFIC_TESTS !== "1")(
       });
       expect(result.files["baseline-routes.xml"].length).toBeGreaterThan(100);
       expect(result.resources.peakMemoryBytes).toBeGreaterThan(0);
+      // Executed floating-car tracks for map playback, raw FCD discarded.
+      expect(result.files["baseline-fcd.xml"]).toBeUndefined();
+      const tracks = JSON.parse(result.files["proposal-tracks.json"].toString());
+      expect(tracks).toMatchObject({ version: 1, side: "proposal", stepSeconds: 2 });
+      expect(tracks.vehicles.length).toBeGreaterThan(0);
+      for (const vehicle of tracks.vehicles) {
+        expect(vehicle.lonlat).toHaveLength(vehicle.angle.length * 2);
+        expect(Math.abs(vehicle.lonlat[0])).toBeLessThanOrEqual(180);
+        expect(Math.abs(vehicle.lonlat[1])).toBeLessThanOrEqual(90);
+      }
     }, 30000);
     it("applies explicit service passenger inference while retaining restrictive access and native connectors", async () => {
       const cases = [
