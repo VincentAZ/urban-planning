@@ -117,7 +117,45 @@ export class TrafficCatalog {
     string,
     Promise<VerifiedTrafficCommutePreset[]>
   >();
+  private prohibited = new Map<string, Promise<[string, string][]>>();
   constructor(readonly registryPath: string) {}
+  /** Edge pairs whose every native connection excludes passenger cars (e.g.
+   * bike-only turns). The JSON inventory omits connection-level permissions,
+   * so generated routes use this to avoid turns SUMO would reject.
+   */
+  async passengerProhibitedTurns(
+    place: Place,
+    preparedId?: string,
+  ): Promise<[string, string][]> {
+    const { entry } = await this.forPlace(place, preparedId);
+    const key = canonicalJSON(entry);
+    if (!this.prohibited.has(key))
+      this.prohibited.set(
+        key,
+        (async () => {
+          const xml = await readFile(
+            join(await this.confined(entry.networkDirectory), "network.net.xml"),
+            "utf8",
+          );
+          const pairs = new Map<string, boolean>();
+          for (const match of xml.matchAll(/<connection ([^>]*)>/g)) {
+            const a = Object.fromEntries(
+              [...match[1].matchAll(/(\w+)="([^"]*)"/g)].map((m) => [m[1], m[2]]),
+            );
+            if (!a.from || a.from.startsWith(":")) continue;
+            const car =
+              (a.allow === undefined || a.allow.split(" ").includes("passenger")) &&
+              !(a.disallow ?? "").split(" ").includes("passenger");
+            const pair = `${a.from}\0${a.to}`;
+            pairs.set(pair, (pairs.get(pair) ?? false) || car);
+          }
+          return [...pairs]
+            .filter(([, car]) => !car)
+            .map(([pair]) => pair.split("\0") as [string, string]);
+        })(),
+      );
+    return this.prohibited.get(key)!;
+  }
   private async registry() {
     this.entries ??= (async () => {
       const parsed = trafficRegistrySchema.parse(

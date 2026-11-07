@@ -17,10 +17,23 @@ export interface VehicleTracks {
 export interface VehicleBuffers {
   /** Vehicles on the road at the current simulated second. */
   count: number;
+  /** Centre [lon, lat, z] per vehicle. */
   positions: Float64Array;
+  /** Heading in degrees, counter-clockwise from north. */
   angles: Float32Array;
-  icons: string[];
+  /** Two-point tail→head path per vehicle, drawn as a rounded car body. */
+  paths: Float64Array;
+  startIndices: Uint32Array;
+  colors: Uint8Array;
 }
+const carLengthMeters = 4.5;
+// Saturated paint so cars stand out against the light street surfaces.
+const paint: [number, number, number][] = [
+  [200, 58, 50], [32, 92, 160], [30, 36, 42],
+  [232, 160, 30], [40, 130, 90], [120, 70, 150],
+];
+/** Playback opens 20 minutes into the period, once the roads have filled. */
+const playbackStartSeconds = 1200;
 
 export function createTrackBuffers(tracks: VehicleTracks | null): VehicleBuffers {
   const capacity = tracks?.vehicles.length ?? 0;
@@ -28,14 +41,17 @@ export function createTrackBuffers(tracks: VehicleTracks | null): VehicleBuffers
     count: 0,
     positions: new Float64Array(capacity * 3),
     angles: new Float32Array(capacity),
-    icons: new Array<string>(capacity).fill("0"),
+    paths: new Float64Array(capacity * 6),
+    startIndices: Uint32Array.from({ length: capacity }, (_, i) => i * 2),
+    colors: new Uint8Array(capacity * 4),
   };
 }
 
 /** Simulated clock for playback: loops the study period at playback seconds. */
 export function simulatedSecond(tracks: VehicleTracks, playbackSeconds: number): number {
   const span = Math.max(tracks.stepSeconds, tracks.endSeconds - tracks.beginSeconds);
-  return tracks.beginSeconds + (((playbackSeconds % span) + span) % span);
+  const offset = playbackSeconds + Math.min(playbackStartSeconds, span / 2);
+  return tracks.beginSeconds + (((offset % span) + span) % span);
 }
 
 /** Packs the vehicles present at `playbackSeconds` into the front of the
@@ -59,12 +75,21 @@ export function updateTrackBuffers(
     const j = Math.min(i + 1, last);
     const slot = buffers.count++;
     const p = vehicle.lonlat;
-    buffers.positions[slot * 3] = p[i * 2] + (p[j * 2] - p[i * 2]) * f;
-    buffers.positions[slot * 3 + 1] = p[i * 2 + 1] + (p[j * 2 + 1] - p[i * 2 + 1]) * f;
+    const lon = p[i * 2] + (p[j * 2] - p[i * 2]) * f;
+    const lat = p[i * 2 + 1] + (p[j * 2 + 1] - p[i * 2 + 1]) * f;
+    buffers.positions[slot * 3] = lon;
+    buffers.positions[slot * 3 + 1] = lat;
     buffers.positions[slot * 3 + 2] = 0.1;
-    // Shortest-arc heading blend; deck.gl angles run counter-clockwise.
+    // Shortest-arc heading blend; SUMO headings run clockwise from north.
     const turn = ((vehicle.angle[j] - vehicle.angle[i] + 540) % 360) - 180;
-    buffers.angles[slot] = -(vehicle.angle[i] + turn * f);
-    buffers.icons[slot] = String(index % 6);
+    const heading = vehicle.angle[i] + turn * f;
+    buffers.angles[slot] = -heading;
+    const radians = (heading * Math.PI) / 180;
+    const half = carLengthMeters / 2;
+    const dLon = (Math.sin(radians) * half) / (111320 * Math.cos((lat * Math.PI) / 180));
+    const dLat = (Math.cos(radians) * half) / 110574;
+    buffers.paths.set([lon - dLon, lat - dLat, 0.1, lon + dLon, lat + dLat, 0.1], slot * 6);
+    const [r, g, b] = paint[index % paint.length];
+    buffers.colors.set([r, g, b, 255], slot * 4);
   }
 }

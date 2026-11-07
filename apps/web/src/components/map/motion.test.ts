@@ -28,14 +28,15 @@ describe("SUMO track playback", () => {
     expect(empty.count).toBe(0);
   });
 
-  it("loops playback over the study period", () => {
-    expect(simulatedSecond(tracks, 0)).toBe(25200);
-    expect(simulatedSecond(tracks, 13)).toBe(25203);
+  it("opens partway into the period and loops over it", () => {
+    // A 10 s period opens at its midpoint (the 20-minute offset is capped).
+    expect(simulatedSecond(tracks, 0)).toBe(25205);
+    expect(simulatedSecond(tracks, 13)).toBe(25208);
   });
 
   it("interpolates executed positions and converts heading to deck.gl", () => {
     const buffers = createTrackBuffers(tracks);
-    updateTrackBuffers(buffers, tracks, 1);
+    updateTrackBuffers(buffers, tracks, 6); // simulated 25201
     expect(buffers.count).toBe(1);
     expect(buffers.positions[0]).toBeCloseTo(-111.995, 9);
     expect(buffers.positions[1]).toBeCloseTo(33, 9);
@@ -44,7 +45,7 @@ describe("SUMO track playback", () => {
 
   it("shows only vehicles on the road at that second and blends heading across north", () => {
     const buffers = createTrackBuffers(tracks);
-    updateTrackBuffers(buffers, tracks, 7);
+    updateTrackBuffers(buffers, tracks, 2); // simulated 25207
     // "a" arrived after its last sample at 25204; "b" is halfway between samples.
     expect(buffers.count).toBe(1);
     expect(buffers.positions[1]).toBeCloseTo(33.105, 9);

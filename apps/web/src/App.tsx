@@ -536,6 +536,10 @@ export default function App() {
   );
   const baseline = project?.scenarios.find((s) => s.id === "baseline");
   const vehicleTracks = useVehicleTracks(scenario?.traffic);
+  // Match the clock to the simulated morning peak when a run loads.
+  useEffect(() => {
+    if (vehicleTracks) setTimeOfDay(8);
+  }, [vehicleTracks]);
   const modelContext = useMemo(
     () => ({
       floodDatasets: project?.floodDatasets,

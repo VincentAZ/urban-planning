@@ -37,7 +37,12 @@ export type TrafficAuthenticate = (
 export interface TrafficServiceOptions {
   enabled: boolean;
   catalog?: Pick<TrafficCatalog, "forPlace" | "initialRequest"> &
-    Partial<Pick<TrafficCatalog, "choices" | "commutePresets">>;
+    Partial<
+      Pick<
+        TrafficCatalog,
+        "choices" | "commutePresets" | "passengerProhibitedTurns"
+      >
+    >;
   runtime?: Pick<TrafficRuntime, "runPair" | "available">;
   archiveDirectory: string;
   capacity?: TrafficCapacityDeclaration;

@@ -26,7 +26,7 @@ export function TrafficPanel({
         Open traffic workbench <ArrowRight size={15} />
       </button>
       <small>
-        Illustrative city activity is separate from assigned traffic.
+        Saved simulations play their SUMO vehicles on the map.
       </small>
     </section>
   );

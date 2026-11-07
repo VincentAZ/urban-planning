@@ -31,12 +31,14 @@ it is the only prepared area with every workbench's data.
 6. **Economy.** Open the fiscal workbench and the retail gaps.
 7. **Workforce and jobs access.** Run car/walk 15/30/45-minute reach (Valhalla).
 8. **GIS import.** Import a GeoJSON, zipped shapefile or DXF footprint.
-9. **Traffic.** Mobility → Open traffic workbench → review the inputs → **Run paired traffic
-   analysis** (SUMO) → Results → **Save traffic capture to scenario**. Close the workbench.
-   The map now plays the executed SUMO vehicles: the label says "N SUMO-simulated vehicles ·
-   7:00–8:00". Use the 1–60× speed control and the Before/After reveal (baseline vs proposal
-   run). Set the time control to **8:00 AM · Morning** first so the
-   on-screen clock matches the simulated period, and zoom to street level to see the cars.
+9. **Traffic.** Mobility → Open traffic workbench → **Quick run: simulate rush hour**. It
+   generates about 2,000 synthetic car trips inside the ZIP, runs SUMO on the real street
+   network (about 1–2 minutes), saves the result to the scenario and closes the workbench.
+   The map then plays the executed vehicles: the label says "N SUMO-simulated vehicles ·
+   7:00–8:00", the clock switches to 8:00 AM and playback opens at 7:20. Zoom to street
+   level, try 5–15× speed and Before/After (baseline vs proposal run).
+   Say: "synthetic rush-hour demand, real microscopic simulation". The trips are authored,
+   not observed.
 10. **Present.** Edit a tour, then present it.
 11. **Outputs.** PDF/Word staff report, XLSX/CSV/GeoJSON, a 4K still and an MP4 fly-through.
 

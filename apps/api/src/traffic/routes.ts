@@ -193,7 +193,8 @@ export function registerTrafficRoutes(
       let commutePresets: TrafficContext["commutePresets"];
       let signalTimingEligibility: TrafficContext["signalTimingEligibility"];
       let network: TrafficContext["network"] = null,
-        initialRequest: TrafficContext["initialRequest"] = null;
+        initialRequest: TrafficContext["initialRequest"] = null,
+        passengerProhibitedTurns: TrafficContext["passengerProhibitedTurns"];
       if (service.options.catalog && capabilities.prepared) {
         try {
           const retained = (
@@ -218,8 +219,14 @@ export function registerTrafficRoutes(
             ).map(trafficCommutePresetView);
           signalTimingEligibility =
             await trafficSignalTimingEligibility(retained);
-          if (!configuration)
-            initialRequest = await service.options.catalog.initialRequest(
+          if (service.options.catalog.passengerProhibitedTurns)
+            passengerProhibitedTurns =
+              await service.options.catalog.passengerProhibitedTurns(
+                record.baseline,
+                selectedId,
+              );
+          // Always offered so the quick run can start from fresh inputs.
+          initialRequest = await service.options.catalog.initialRequest(
               record.baseline,
               params(request).projectId,
               selectedId,
@@ -239,6 +246,7 @@ export function registerTrafficRoutes(
         configuration,
         network,
         initialRequest,
+        ...(passengerProhibitedTurns ? { passengerProhibitedTurns } : {}),
         ...(signalTimingEligibility ? { signalTimingEligibility } : {}),
         ...(commutePresets ? { commutePresets } : {}),
       };

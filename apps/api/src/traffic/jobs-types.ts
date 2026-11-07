@@ -195,6 +195,8 @@ export interface TrafficContext {
   configuration: TrafficConfigurationRecord | null;
   network: TrafficNetwork | null;
   initialRequest: TrafficExperimentRequest | null;
+  /** Edge pairs no passenger car may use (connection-level permissions). */
+  passengerProhibitedTurns?: [string, string][];
   signalTimingEligibility?: import("./signal-effects.js").TrafficSignalTimingEligibility;
 }
 export interface TrafficJobResult {

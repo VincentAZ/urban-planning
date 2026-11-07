@@ -1,4 +1,3 @@
-import { carIconAtlas, carIconMapping } from "./map/car-icons";
 import { FloodLegend } from "./flood/FloodEvidence";
 import {
   floodMapParts,
@@ -22,7 +21,7 @@ import {
   LightingEffect,
   type Layer,
 } from "@deck.gl/core";
-import { IconLayer, PathLayer, PolygonLayer, TextLayer } from "@deck.gl/layers";
+import { PathLayer, PolygonLayer, TextLayer } from "@deck.gl/layers";
 import { Compass, Minus, Plus, RotateCcw, TriangleAlert } from "lucide-react";
 import {
   studyAreaPolygons,
@@ -276,6 +275,7 @@ export function CityMap(props: CityMapProps) {
   const propsRef = useRef(props);
   propsRef.current = props;
   const [ready, setReady] = useState(false);
+
   const [error, setError] = useState<string | null>(null);
   const [hover, setHover] = useState<{
     x: number;
@@ -969,23 +969,21 @@ export function CityMap(props: CityMapProps) {
       ): Layer[] =>
         buffers && buffers.count && propsRef.current.layers.includes("agents")
           ? [
-              new IconLayer({
+              new PathLayer({
                 id,
                 data: {
                   length: buffers.count,
+                  startIndices: buffers.startIndices,
                   attributes: {
-                    getPosition: { value: buffers.positions, size: 3 },
-                    getAngle: { value: buffers.angles, size: 1 },
+                    getPath: { value: buffers.paths, size: 3 },
+                    getColor: { value: buffers.colors, size: 4, normalized: true },
                   },
                 },
-                iconAtlas: carIconAtlas,
-                iconMapping: carIconMapping,
-                getIcon: (_, { index }) => buffers.icons[index],
-                getSize: 4.8,
-                sizeUnits: "meters",
-                sizeMinPixels: 0,
-                sizeMaxPixels: 48,
-                billboard: false,
+                _pathType: "open",
+                getWidth: 2.4,
+                // Keep simulated cars legible when zoomed out for the demo.
+                widthMinPixels: 5,
+                capRounded: true,
                 pickable: false,
                 parameters: { depthWriteEnabled: false },
               }),

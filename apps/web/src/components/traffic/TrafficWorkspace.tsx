@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Check, Download, RefreshCw, Save } from "lucide-react";
+import { Check, Download, RefreshCw, Save, Zap } from "lucide-react";
 import {
   trafficRoadEditsHash,
   trafficPlanningSources,
@@ -32,6 +32,7 @@ import {
 import type { TrafficDraftValue } from "../../lib/traffic-draft";
 import { inspectTrafficCommuteLedger } from "../../lib/traffic-commute-ledger-client";
 import { planningSourcesCurrent } from "../../lib/traffic-planning-draft";
+import { quickTrafficDemand } from "../../lib/traffic-quick-demand";
 import { Modal } from "../Modal";
 import { TrafficDialog } from "./TrafficDialog";
 import { PublishedTraffic } from "./TrafficOverview";
@@ -104,6 +105,7 @@ export default function TrafficWorkspace(props: TrafficWorkspaceProps) {
     [refreshIndex, setRefreshIndex] = useState(0),
     [reviewDirty, setReviewDirty] = useState(false);
   const [adoptedRevision, setAdoptedRevision] = useState<number | null>(null);
+  const [quickStatus, setQuickStatus] = useState("");
   const [requestedPreparedId, setRequestedPreparedId] = useState<string>();
   const mounted = useRef(true),
     actionController = useRef<AbortController | null>(null),
@@ -761,6 +763,109 @@ export default function TrafficWorkspace(props: TrafficWorkspaceProps) {
       if (valid()) download(`traffic-${selected.id}-${file.name}`, blob);
     });
   }
+  /** Demo shortcut: synthetic demand → save → SUMO run → save to scenario → close. */
+  async function quickRun() {
+    const network = context?.network,
+      base = context?.initialRequest;
+    if (
+      !canMutate ||
+      !connection ||
+      !network ||
+      !base ||
+      !capabilities?.enabled ||
+      !capabilities.configured
+    )
+      throw new Error(
+        capabilities?.reason ??
+          "Save the project to your account before running traffic.",
+      );
+    const projectId = connection.projectId;
+    try {
+      await perform("quick", async (signal, valid) => {
+        setQuickStatus("Generating rush-hour trips on the real street network…");
+        const request = structuredClone(base);
+        request.demand = quickTrafficDemand(
+          network,
+          request.period,
+          request.demand.sources[0],
+          {
+            seed: request.seed,
+            prohibited: context.passengerProhibitedTurns,
+            bounds: place.bounds,
+          },
+        );
+        const source = request.demand.sources[0];
+        const saved = await trafficApi.save(
+          projectId,
+          {
+            preparedId: context.capabilities.prepared?.id,
+            scenarioId: scenario.id,
+            expectedVersion: connection.version,
+            expectedRevision: scenario.revision,
+            expectedConfigurationId:
+              context.latestConfigurationId ?? configuration?.id ?? null,
+            idempotencyKey: crypto.randomUUID(),
+            request,
+            sourceDeclarations: [
+              {
+                sourceId: source.id,
+                name: source.name,
+                url: source.url,
+                vintage: source.vintage,
+                license: source.license,
+                privateUseConfirmed: true,
+                publicRedistribution: true,
+              },
+            ],
+            uploadBindings: [],
+            mappingReviews: [],
+            scopeAcknowledged: true,
+          },
+          signal,
+        );
+        let { job } = await trafficApi.start(
+          projectId,
+          {
+            configurationId: saved.configuration.id,
+            expectedVersion: connection.version,
+            expectedRevision: scenario.revision,
+            idempotencyKey: crypto.randomUUID(),
+          },
+          signal,
+        );
+        while (pending(job)) {
+          if (valid()) {
+            upsert(job);
+            setQuickStatus(
+              `${stageNames[job.stage]}${job.progress ? ` · ${Math.round(job.progress)}%` : ""}…`,
+            );
+          }
+          await new Promise((done) => setTimeout(done, 2000));
+          ({ job } = await trafficApi.job(projectId, job.id, signal));
+        }
+        if (valid()) upsert(job);
+        if (job.status !== "completed")
+          throw new Error(
+            job.error?.message ?? "The traffic simulation did not complete.",
+          );
+        setQuickStatus("Saving the simulation to this scenario…");
+        const response = await trafficApi.adopt(
+          projectId,
+          job.id,
+          {
+            scenarioId: scenario.id,
+            expectedVersion: connection.version,
+            expectedRevision: scenario.revision,
+          },
+          signal,
+        );
+        await props.onAdopt(response);
+      });
+      props.onClose();
+    } finally {
+      if (mounted.current) setQuickStatus("");
+    }
+  }
   function invoke(action: () => Promise<unknown>) {
     void action().catch(() => {});
   }
@@ -786,6 +891,25 @@ export default function TrafficWorkspace(props: TrafficWorkspaceProps) {
               : "Select a retained network explicitly. Earlier configurations and runs keep their original network."}
           </small>
         </label>
+      )}
+      {canMutate && context?.network && capabilities?.enabled && (
+        <div className="traffic-quick-run">
+          <button
+            type="button"
+            className="button primary"
+            disabled={!!busy || loading || hasUnsavedChanges}
+            onClick={() => invoke(quickRun)}
+          >
+            <Zap size={14} />
+            Quick run: simulate rush hour
+          </button>
+          <small>
+            {quickStatus ||
+              (hasUnsavedChanges
+                ? "Save the project first."
+                : "Simulates ~2,000 car trips (7–8 AM) with SUMO on the real street network and shows them on the map. Takes about a minute.")}
+          </small>
+        </div>
       )}
       <div className="traffic-actions">
         <button
