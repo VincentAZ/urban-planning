@@ -255,8 +255,8 @@ The development adapter uses SQLite transactions. PostgreSQL serializes budget c
 corepack pnpm exec tsc --noEmit -p apps/api/tsconfig.json
 corepack pnpm exec vitest run apps/api/src
 TEST_DATABASE_URL=postgresql://urban:urban-local-development-only@127.0.0.1:54329/urban_planning corepack pnpm exec vitest run apps/api/src/postgres-store.test.ts
-corepack pnpm exec tsx apps/api/qa-report.ts
-corepack pnpm exec tsx apps/api/qa-engagement-report.ts
+corepack pnpm exec tsx apps/api/qa/report.ts
+corepack pnpm exec tsx apps/api/qa/engagement-report.ts
 ```
 
 The database integration suite creates and removes only a uniquely named test schema. It checks spatial functions, migration idempotence, concurrent writes, rollback, and connection restart. The report QA script creates normal and long-text internal examples under `.local/report-qa-v2`; these are not application fixtures or customer data. It uses the actual PDF/Word generator and deterministic geometry renderer. Native rendering uses `@resvg/resvg-js` and bundled licensed DejaVu fonts (`apps/api/assets/fonts/`), with system-font lookup disabled. Keep those assets with the API deployment. The engagement QA helper writes separate synthetic normal/long-text PDF/CSV cases under `.local/engagement-report-qa/`; these are internal layout fixtures, not public responses.

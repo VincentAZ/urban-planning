@@ -1,6 +1,6 @@
 /**
  * Repeat the aggregate-store workload on private copies of retained data.
- * Run: node --import tsx apps/api/qa-storage.ts --samples 20
+ * Run: node --import tsx apps/api/qa/storage.ts --samples 20
  * Optional: --source .local/api-state.json
  * Measures local storage components, not HTTP/model validation or production throughput.
  * Emits scalar evidence only and deletes temporary copies containing private data.
@@ -21,18 +21,18 @@ import { availableParallelism, loadavg } from "node:os";
 import { join, resolve } from "node:path";
 import { performance } from "node:perf_hooks";
 import type { Place } from "@urban/core";
-import { FileStore, type StorageDiagnostics } from "./src/file-store.js";
+import { FileStore, type StorageDiagnostics } from "../src/file-store.js";
 import {
   authorize,
   emptyState,
   findProject,
   type DataState,
   type SessionRecord,
-} from "./src/store.js";
-import { findProjectHeader, projectAccess } from "./src/project-access.js";
-import { publicationEngagement } from "./src/engagement.js";
-import { collections, type StoreScope } from "./src/store-scope.js";
-import { digest, stateFingerprint } from "./src/storage-core.js";
+} from "../src/store.js";
+import { findProjectHeader, projectAccess } from "../src/project-access.js";
+import { publicationEngagement } from "../src/engagement.js";
+import { collections, type StoreScope } from "../src/store-scope.js";
+import { digest, stateFingerprint } from "../src/storage-core.js";
 
 const args = process.argv.slice(2);
 function option(name: string, fallback: string) {

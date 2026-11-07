@@ -1,9 +1,9 @@
 import { mkdir, writeFile } from "node:fs/promises";
-import { engagementReportFixture } from "./engagement-report-fixture";
+import { engagementReportFixture } from "../src/engagement-report-fixture";
 import {
   exportEngagementCsv,
   renderEngagementPdf,
-} from "./src/engagement-report";
+} from "../src/engagement-report";
 
 const directory = ".local/engagement-report-qa";
 await mkdir(directory, { recursive: true });

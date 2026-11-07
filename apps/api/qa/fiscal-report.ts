@@ -1,15 +1,15 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { fiscalReportFixture } from "./src/fiscal-report-fixture";
+import { fiscalReportFixture } from "../src/fiscal-report-fixture";
 import {
   exportPdf,
   exportDocx,
   exportXlsx,
   exportFiscalCsv,
-} from "./src/exports";
-import { renderReportMapPair } from "./src/report-maps";
+} from "../src/exports";
+import { renderReportMapPair } from "../src/report-maps";
 import { calculateImpact } from "@urban/models";
-import type { ReportSnapshot } from "./src/exports";
+import type { ReportSnapshot } from "../src/exports";
 
 // Isolated deterministic QA: no API, storage adapter, credentials or environment-file reads.
 const directory = ".local/qa/fiscal/reports";

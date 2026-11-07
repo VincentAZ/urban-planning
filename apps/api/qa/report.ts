@@ -1,9 +1,9 @@
 import { mkdir, writeFile } from "node:fs/promises";
-import { PlaceCatalog } from "./src/places.js";
+import { PlaceCatalog } from "../src/places.js";
 import { createProject, buildingPreset, calculateImpact } from "@urban/models";
 import { applyCommand } from "@urban/core";
-import { exportPdf, exportDocx, type ReportSnapshot } from "./src/exports.js";
-import { renderReportMapPair } from "./src/report-maps.js";
+import { exportPdf, exportDocx, type ReportSnapshot } from "../src/exports.js";
+import { renderReportMapPair } from "../src/report-maps.js";
 
 const directory = ".local/report-qa-v2";
 await mkdir(directory, { recursive: true });

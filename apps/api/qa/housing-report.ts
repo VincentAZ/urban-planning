@@ -1,13 +1,13 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { housingReportFixture } from "./src/housing-report-fixture";
+import { housingReportFixture } from "../src/housing-report-fixture";
 import {
   exportPdf,
   exportDocx,
   exportXlsx,
   exportHousingCsv,
-} from "./src/exports";
-import { renderReportMapPair } from "./src/report-maps";
+} from "../src/exports";
+import { renderReportMapPair } from "../src/report-maps";
 // Isolated authored fixture: no API, storage adapter, credentials or .env reads.
 const directory = ".local/qa/housing/reports";
 await mkdir(directory, { recursive: true });

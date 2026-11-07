@@ -1,6 +1,6 @@
 import { inflateSync } from "node:zlib";
 import { describe, expect, it } from "vitest";
-import { engagementReportFixture } from "../engagement-report-fixture";
+import { engagementReportFixture } from "./engagement-report-fixture";
 import {
   assertEngagementReport,
   engagementReportLimits,
