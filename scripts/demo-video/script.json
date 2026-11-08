@@ -1,0 +1,90 @@
+{
+  "voice": "af_heart",
+  "speed": 1.0,
+  "beatGapSeconds": 0.35,
+  "title": {
+    "line1": "One proposal. Two lenses.",
+    "line2": "Downtown Phoenix · ZIP 85004 · recorded live from the working product"
+  },
+  "end": {
+    "line1": "Real data. Real computation. Documented assumptions.",
+    "line2": "We'd love your feedback."
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "beats": [
+        "Every downtown project raises two sets of questions.",
+        "The planning office asks whether it works for the streets and the neighbors.",
+        "Economic development asks what it does for jobs and the tax base.",
+        "Here's one proposal, answered for both."
+      ]
+    },
+    {
+      "id": "place",
+      "beats": [
+        "This is ZIP code 85004, in downtown Phoenix, built from captured public data.",
+        "Census figures for the neighborhood sit right alongside it, with their margins of error.",
+        "Switch between 3D, plan, and satellite.",
+        "Click any building, and its sources are right there."
+      ]
+    },
+    {
+      "id": "proposal",
+      "beats": [
+        "Now the proposal. Pick an apartment building, drop it on this open lot, and apply it.",
+        "Give this street a protected bike lane.",
+        "Every edit can be undone, and the before-and-after slider shows exactly what changed, on the same map."
+      ]
+    },
+    {
+      "id": "scorecard",
+      "beats": [
+        "The scorecard updates with every change.",
+        "This building adds forty-eight homes, and the trips they generate show up right away.",
+        "Click a number to see its formula, its inputs, and where they came from.",
+        "Starting values are labeled illustrative until your team replaces them with local figures."
+      ]
+    },
+    {
+      "id": "planner",
+      "lens": "For the planning office",
+      "beats": [
+        "For the planning office, attach FEMA's effective flood map, and every building is screened.",
+        "Here, no homes fall in FEMA's Special Flood Hazard Area. That's a footprint screen, not a flood prediction.",
+        "Then housing. Search HUD's fiscal 2026 income limits for Phoenix.",
+        "These are the published limits by household size, so each group of homes can be followed through its full monthly cost."
+      ]
+    },
+    {
+      "id": "economic",
+      "lens": "For economic development",
+      "beats": [
+        "For economic development: who can actually reach this site?",
+        "A real routing run measures the commute shed by car at fifteen, thirty, and forty-five minutes.",
+        "It reports Census education and occupation estimates for the people inside it, along with coverage and uncertainty.",
+        "A fiscal study starts from your jurisdiction's own levy and service costs, each one cited.",
+        "Retail gaps compare cited resident demand with local sales, one category at a time, and say so when a number is only an assumption."
+      ]
+    },
+    {
+      "id": "traffic",
+      "beats": [
+        "Now the question everyone asks: traffic.",
+        "One click generates about two thousand synthetic car trips for the morning rush, and simulates them on the real street network.",
+        "It runs right here on this machine, and the result is saved to the scenario.",
+        "Synthetic rush-hour demand, real microscopic simulation.",
+        "These are the vehicles from that run, not an animation.",
+        "Zoom in, and you can follow individual cars along Central Avenue."
+      ]
+    },
+    {
+      "id": "report",
+      "beats": [
+        "When it's time for the hearing, everything exports: Word, Excel, and GIS files.",
+        "The staff report has before-and-after maps, the scorecard, and the evidence.",
+        "One proposal, and one set of numbers both offices can work from."
+      ]
+    }
+  ]
+}
