@@ -989,7 +989,8 @@ export default function App() {
         projectId: response.project.id,
         organizationId: response.organizationId,
         version: response.version,
-        savedRevision: projectRevisionKey(response.project),
+        // The server stamps its own updatedAt, so key on the submitted revision.
+        savedRevision: projectRevisionKey(project),
       };
       const current = useWorkspace.getState();
       if (current.project?.id === project.id) {
