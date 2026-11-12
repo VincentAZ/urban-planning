@@ -19,9 +19,9 @@ and watch the homes, jobs, trips, flood exposure, commute shed, and real microsc
 
 <br>
 
-![Downtown Phoenix (ZIP 85004) in 3D with SUMO-simulated rush-hour vehicles on North Central Avenue](docs/images/traffic-3d.jpg)
+[![Watch the 3-minute demo: downtown Phoenix (ZIP 85004) in 3D with SUMO-simulated rush-hour vehicles](docs/images/demo-video-thumb.jpg)](https://github.com/VincentAZ/urban-planning/releases/download/demo-2026-11/urban-planning-demo.mp4)
 
-<sub>ZIP 85004, downtown Phoenix. The colored dashes on Central Avenue are vehicles from a real SUMO run, not an animation.</sub>
+<sub>▶ <a href="https://github.com/VincentAZ/urban-planning/releases/download/demo-2026-11/urban-planning-demo.mp4"><b>Watch the demo</b></a> (3 min, MP4, <a href="https://github.com/VincentAZ/urban-planning/releases/download/demo-2026-11/urban-planning-demo.srt">subtitles</a>), recorded live from the working product. The colored dashes on Central Avenue are vehicles from a real SUMO run, not an animation.</sub>
 
 </div>
 
