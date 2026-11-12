@@ -15,6 +15,7 @@ and watch the homes, jobs, trips, flood exposure, commute shed, and real microsc
 ![SUMO](https://img.shields.io/badge/SUMO-traffic%20sim-2E7D32)
 ![Valhalla](https://img.shields.io/badge/Valhalla-routing-6A1B9A)
 ![Free](https://img.shields.io/badge/price-%240%20for%20everyone-2E7D32)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 
 <br>
 
@@ -164,6 +165,12 @@ The [implementation status ledger](docs/IMPLEMENTATION_STATUS.md) tracks exactly
 | Evidence: [flood](docs/FLOOD.md) · [housing](docs/HOUSING.md) · [fiscal](docs/FISCAL.md) | |
 | Platform: [storage](docs/STORAGE.md) · [GIS import](docs/GIS_RUNTIME.md) · [media](docs/MEDIA.md) · [budget](docs/BUDGET.md) · [capacity](docs/NATIVE_CAPACITY.md) | |
 | Plan & status | [implementation plan](docs/IMPLEMENTATION_PLAN.md) · [status ledger](docs/IMPLEMENTATION_STATUS.md) |
+
+## License
+
+The original application code is open source under the [MIT License](LICENSE), copyright © 2026 Vincent Serpico.
+
+Data and third-party components keep their own licenses and terms. The MIT grant does not relicense OpenStreetMap data (ODbL, © OpenStreetMap contributors), Census/HUD/FEMA/FHWA source data, Esri or MapTiler imagery, the DejaVu fonts, or the SUMO, Valhalla, and GDAL engines. Keep the attributions shown in the app and in each prepared bundle.
 
 <div align="center">
 <br>
